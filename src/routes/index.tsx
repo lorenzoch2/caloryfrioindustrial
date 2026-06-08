@@ -85,7 +85,7 @@ function MarketingPage() {
     <main
       style={{
         minHeight: '100vh',
-        background: 'var(--ink)',
+        background: 'var(--bg)',
         position: 'relative',
       }}
     >
@@ -94,12 +94,12 @@ function MarketingPage() {
         <div style={{
           position: 'absolute', top: '-15%', right: '-10%',
           width: 700, height: 700, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(79,115,168,0.12) 0%, transparent 65%)',
+          background: 'radial-gradient(circle, rgba(79,115,168,0.10) 0%, transparent 65%)',
         }} />
         <div style={{
           position: 'absolute', bottom: '-10%', left: '-10%',
           width: 500, height: 500, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(79,115,168,0.08) 0%, transparent 65%)',
+          background: 'radial-gradient(circle, rgba(79,115,168,0.07) 0%, transparent 65%)',
         }} />
       </div>
 
@@ -147,9 +147,8 @@ function MarketingPage() {
               src="/logo.png"
               alt="Calor & Frío Industrial"
               style={{
-                width: 'clamp(160px, 22vw, 220px)',
-                filter: 'brightness(0) invert(1)',
-                opacity: 0.95,
+                width: 'clamp(200px, 26vw, 300px)',
+                mixBlendMode: 'multiply',
               }}
             />
           </div>
@@ -163,7 +162,7 @@ function MarketingPage() {
               fontSize: '0.7rem',
               letterSpacing: '0.25em',
               textTransform: 'uppercase',
-              color: 'var(--steel-lt)',
+              color: 'var(--steel-dk)',
               marginBottom: '1.25rem',
             }}
           >
@@ -179,13 +178,13 @@ function MarketingPage() {
               fontSize: 'clamp(3rem, 8vw, 6.5rem)',
               lineHeight: 1.0,
               letterSpacing: '-0.01em',
-              color: 'var(--cream)',
+              color: 'var(--ink)',
               marginBottom: '1.75rem',
             }}
           >
             Calor & Frío
             <br />
-            <em style={{ color: 'var(--steel-lt)', fontStyle: 'italic' }}>Industrial</em>
+            <em style={{ color: 'var(--steel)', fontStyle: 'italic' }}>Industrial</em>
           </h1>
 
           {/* Sub */}
@@ -196,7 +195,7 @@ function MarketingPage() {
               fontWeight: 300,
               fontSize: 'clamp(0.9rem, 2vw, 1.05rem)',
               letterSpacing: '0.06em',
-              color: 'rgba(244,243,240,0.55)',
+              color: 'var(--text-mut)',
               marginBottom: '3rem',
               lineHeight: 1.8,
             }}
@@ -264,7 +263,7 @@ function MarketingPage() {
             fontSize: '0.68rem',
             letterSpacing: '0.22em',
             textTransform: 'uppercase',
-            color: 'var(--steel-lt)',
+            color: 'var(--steel-dk)',
           }}>
             Lo que hacemos
           </p>
@@ -279,7 +278,7 @@ function MarketingPage() {
           }}
         >
           {/* Card 1 */}
-          <div className="service-card" style={{ background: 'var(--ink)' }}>
+          <div className="service-card" style={{ background: 'var(--surface)' }}>
             <div style={{ marginBottom: '1.5rem' }}>
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--steel)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"/>
@@ -291,7 +290,7 @@ function MarketingPage() {
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 500,
               fontSize: '1.6rem',
-              color: 'var(--cream)',
+              color: 'var(--ink)',
               marginBottom: '0.85rem',
               letterSpacing: '0.01em',
             }}>
@@ -300,7 +299,7 @@ function MarketingPage() {
             <p style={{
               fontSize: '0.82rem',
               lineHeight: 1.8,
-              color: 'rgba(244,243,240,0.5)',
+              color: 'var(--text-mut)',
               letterSpacing: '0.03em',
             }}>
               Diagnóstico y orientación técnica especializada para optimizar sus sistemas térmicos industriales con criterio profesional.
@@ -308,7 +307,7 @@ function MarketingPage() {
           </div>
 
           {/* Card 2 */}
-          <div className="service-card" style={{ background: 'var(--ink)' }}>
+          <div className="service-card" style={{ background: 'var(--surface)' }}>
             <div style={{ marginBottom: '1.5rem' }}>
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--steel)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -319,7 +318,7 @@ function MarketingPage() {
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 500,
               fontSize: '1.6rem',
-              color: 'var(--cream)',
+              color: 'var(--ink)',
               marginBottom: '0.85rem',
               letterSpacing: '0.01em',
             }}>
@@ -328,7 +327,7 @@ function MarketingPage() {
             <p style={{
               fontSize: '0.82rem',
               lineHeight: 1.8,
-              color: 'rgba(244,243,240,0.5)',
+              color: 'var(--text-mut)',
               letterSpacing: '0.03em',
             }}>
               Formación técnica orientada a equipos de trabajo para el correcto manejo y mantenimiento de sistemas de calor y frío.
@@ -336,7 +335,7 @@ function MarketingPage() {
           </div>
 
           {/* Card 3 */}
-          <div className="service-card" style={{ background: 'var(--ink)' }}>
+          <div className="service-card" style={{ background: 'var(--surface)' }}>
             <div style={{ marginBottom: '1.5rem' }}>
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--steel)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
@@ -346,7 +345,7 @@ function MarketingPage() {
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 500,
               fontSize: '1.6rem',
-              color: 'var(--cream)',
+              color: 'var(--ink)',
               marginBottom: '0.85rem',
               letterSpacing: '0.01em',
             }}>
@@ -355,7 +354,7 @@ function MarketingPage() {
             <p style={{
               fontSize: '0.82rem',
               lineHeight: 1.8,
-              color: 'rgba(244,243,240,0.5)',
+              color: 'var(--text-mut)',
               letterSpacing: '0.03em',
             }}>
               Soluciones completas en gestión térmica industrial: desde el diseño hasta la puesta en marcha y el soporte continuo.
@@ -388,11 +387,11 @@ function MarketingPage() {
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 300,
             fontSize: 'clamp(1.6rem, 4vw, 2.6rem)',
-            color: 'var(--cream)',
+            color: 'var(--ink)',
             lineHeight: 1.15,
           }}>
             ¿Listo para optimizar<br />
-            <em style={{ color: 'var(--steel-lt)' }}>su operación térmica?</em>
+            <em style={{ color: 'var(--steel)' }}>su operación térmica?</em>
           </p>
         </div>
 
@@ -438,16 +437,16 @@ function MarketingPage() {
             src="/logo.png"
             alt="Calor & Frío Industrial"
             style={{
-              height: 36,
-              filter: 'brightness(0) invert(1)',
-              opacity: 0.6,
+              height: 40,
+              mixBlendMode: 'multiply',
+              opacity: 0.9,
             }}
           />
           <span style={{
             fontFamily: "'Montserrat', sans-serif",
             fontSize: '0.65rem',
             letterSpacing: '0.15em',
-            color: 'rgba(244,243,240,0.35)',
+            color: 'var(--text-faint)',
             textTransform: 'uppercase',
           }}>
             Servicios Térmicos Integrales
@@ -461,12 +460,12 @@ function MarketingPage() {
             rel="noopener noreferrer"
             aria-label="Instagram"
             style={{
-              color: 'rgba(244,243,240,0.4)',
+              color: 'var(--text-faint)',
               transition: 'color 0.2s ease',
               display: 'flex',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--steel-lt)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(244,243,240,0.4)')}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--steel)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-faint)')}
           >
             <IconInstagram />
           </a>
@@ -476,12 +475,12 @@ function MarketingPage() {
             rel="noopener noreferrer"
             aria-label="WhatsApp"
             style={{
-              color: 'rgba(244,243,240,0.4)',
+              color: 'var(--text-faint)',
               transition: 'color 0.2s ease',
               display: 'flex',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--steel-lt)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(244,243,240,0.4)')}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--steel)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-faint)')}
           >
             <IconWhatsApp />
           </a>
@@ -489,12 +488,12 @@ function MarketingPage() {
             href="mailto:contacto@cyfindustrial.com"
             aria-label="Email"
             style={{
-              color: 'rgba(244,243,240,0.4)',
+              color: 'var(--text-faint)',
               transition: 'color 0.2s ease',
               display: 'flex',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--steel-lt)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(244,243,240,0.4)')}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--steel)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-faint)')}
           >
             <IconMail />
           </a>
@@ -503,7 +502,7 @@ function MarketingPage() {
         <p style={{
           fontFamily: "'Montserrat', sans-serif",
           fontSize: '0.63rem',
-          color: 'rgba(244,243,240,0.2)',
+          color: 'var(--text-faint)',
           letterSpacing: '0.08em',
           width: '100%',
           textAlign: 'center',
