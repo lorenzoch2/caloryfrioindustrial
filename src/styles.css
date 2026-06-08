@@ -1,15 +1,20 @@
 @import "tailwindcss" source("../");
 
 :root {
-  --ink:       #14181f;
-  --ink-soft:  #2c3240;
-  --steel:     #4f73a8;
-  --steel-lt:  #6b8fc4;
-  --steel-dk:  #3a5880;
-  --cream:     #f4f3f0;
-  --cream-dk:  #e8e6e0;
-  --rule:      rgba(79,115,168,0.25);
-  --glow:      rgba(79,115,168,0.18);
+  /* Light, minimalist HVAC palette — derived from the logo */
+  --ink:       #14181f;            /* logo black — primary text */
+  --ink-soft:  #3b4250;            /* secondary text */
+  --steel:     #4f73a8;            /* logo blue — primary accent */
+  --steel-lt:  #6b8fc4;            /* lighter blue */
+  --steel-dk:  #3a5880;            /* deeper blue — accent text on light */
+  --cream:     #f4f3f0;            /* light tone */
+  --bg:        #f6f5f2;            /* page background (matches logo backdrop) */
+  --bg-tint:   #eef1f6;            /* faint cool wash for elevated bands */
+  --surface:   #ffffff;            /* cards / elevated surfaces */
+  --text-mut:  rgba(20,24,31,0.58);/* muted body text */
+  --text-faint:rgba(20,24,31,0.38);/* faint captions */
+  --rule:      rgba(20,24,31,0.10);/* hairlines */
+  --glow:      rgba(79,115,168,0.12);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,8 +22,8 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--ink);
-  color: var(--cream);
+  background: var(--bg);
+  color: var(--ink);
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
   overflow-x: hidden;
@@ -32,7 +37,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.03;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
 }
 
@@ -69,22 +74,23 @@ body::before {
 
 .btn-primary {
   background: var(--steel);
-  color: var(--cream);
-  box-shadow: 0 4px 20px rgba(79,115,168,0.35);
+  color: #fff;
+  box-shadow: 0 6px 22px rgba(79,115,168,0.28);
 }
 .btn-primary:hover {
-  background: var(--steel-lt);
-  box-shadow: 0 6px 28px rgba(79,115,168,0.55);
+  background: var(--steel-dk);
+  box-shadow: 0 10px 30px rgba(79,115,168,0.38);
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--cream);
-  border: 1px solid rgba(244,243,240,0.28);
+  color: var(--ink);
+  border: 1px solid rgba(20,24,31,0.18);
 }
 .btn-ghost:hover {
-  background: rgba(244,243,240,0.06);
-  border-color: rgba(244,243,240,0.5);
+  background: rgba(20,24,31,0.04);
+  border-color: var(--steel);
+  color: var(--steel-dk);
 }
 
 /* ─── SERVICE CARD ─── */
@@ -92,9 +98,9 @@ body::before {
   position: relative;
   padding: 2.5rem 2rem;
   border: 1px solid var(--rule);
-  background: rgba(255,255,255,0.025);
+  background: var(--surface);
   overflow: hidden;
-  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 .service-card::before {
   content: '';
@@ -105,8 +111,18 @@ body::before {
   transition: opacity 0.4s ease;
 }
 .service-card:hover {
-  border-color: rgba(79,115,168,0.55);
-  background: rgba(79,115,168,0.07);
+  border-color: rgba(79,115,168,0.45);
+  background: var(--surface);
   transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(20,24,31,0.08);
 }
 .service-card:hover::before { opacity: 1; }
+
+/* ─── SECTION LABEL DIVIDER ─── */
+.rule {
+  display: inline-block;
+  width: 48px;
+  height: 1px;
+  background: var(--steel);
+  opacity: 0.6;
+}
