@@ -166,7 +166,7 @@ function MarketingPage() {
               marginBottom: '1.25rem',
             }}
           >
-            Servicios Térmicos Integrales
+            Soluciones Térmicas Integrales
           </p>
 
           {/* Headline */}
@@ -200,7 +200,7 @@ function MarketingPage() {
               lineHeight: 1.8,
             }}
           >
-            Asesorías · Capacitaciones · Servicios Térmicos Integrales
+            Asesorías · Capacitaciones · Servicios
           </p>
 
           {/* CTA buttons */}
@@ -232,7 +232,7 @@ function MarketingPage() {
               Instagram
             </a>
             <a
-              href="mailto:contacto@cyfindustrial.com"
+              href="mailto:contacto@caloryfrioindustrial.cl"
               className="btn btn-ghost"
             >
               <IconMail />
@@ -349,7 +349,7 @@ function MarketingPage() {
               marginBottom: '0.85rem',
               letterSpacing: '0.01em',
             }}>
-              Servicios Integrales
+              Servicios
             </h3>
             <p style={{
               fontSize: '0.82rem',
@@ -410,7 +410,7 @@ function MarketingPage() {
             className="btn btn-ghost"
           >
             <IconMail />
-            contacto@cyfindustrial.com
+            contacto@caloryfrioindustrial.cl
           </a>
         </div>
       </section>
@@ -449,7 +449,7 @@ function MarketingPage() {
             color: 'var(--text-faint)',
             textTransform: 'uppercase',
           }}>
-            Servicios Térmicos Integrales
+            Soluciones Térmicas Integrales
           </span>
         </div>
 
@@ -485,7 +485,7 @@ function MarketingPage() {
             <IconWhatsApp />
           </a>
           <a
-            href="mailto:contacto@cyfindustrial.com"
+            href="mailto:contacto@caloryfrioindustrial.cl"
             aria-label="Email"
             style={{
               color: 'var(--text-faint)',
@@ -509,7 +509,7 @@ function MarketingPage() {
           paddingTop: '0.5rem',
           borderTop: '1px solid rgba(79,115,168,0.1)',
         }}>
-          © {new Date().getFullYear()} Calor & Frío Industrial. Todos los derechos reservados.
+          © {new Date().getFullYear()} Calor y Frío Industrial SpA. Todos los derechos reservados.
         </p>
       </footer>
     </main>

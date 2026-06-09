@@ -6,8 +6,8 @@ export const Route = createRootRoute({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'Calor & Frío Industrial — Servicios Térmicos Integrales' },
-      { name: 'description', content: 'Asesorías, Capacitaciones y Servicios Térmicos Integrales para la industria.' },
+      { title: 'Calor & Frío Industrial — Soluciones Térmicas Integrales' },
+      { name: 'description', content: 'Asesorías, Capacitaciones y Servicios.' },
     ],
     links: [
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
