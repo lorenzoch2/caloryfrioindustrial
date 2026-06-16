@@ -87,6 +87,11 @@ type ServiceId = 'asesorias' | 'capacitaciones' | 'servicios'
 
 function MarketingPage() {
   const [openGallery, setOpenGallery] = useState<ServiceId>('asesorias')
+  const [galleryIndexByService, setGalleryIndexByService] = useState<Record<ServiceId, number>>({
+    asesorias: 0,
+    capacitaciones: 0,
+    servicios: 0,
+  })
 
   const services: Array<{
     id: ServiceId
@@ -130,6 +135,7 @@ function MarketingPage() {
   ]
 
   const activeService = services.find(service => service.id === openGallery) ?? services[0]
+  const currentGalleryIndex = galleryIndexByService[openGallery] ?? 0
   return (
     <main
       style={{
@@ -348,7 +354,17 @@ function MarketingPage() {
 
           <div className="service-panel carousel-enter" id="service-panel" role="tabpanel" aria-label={activeService.title}>
             <div className="service-panel-grid">
-              <GalleryCarousel images={getServiceImages(openGallery)} label={openGallery} />
+              <GalleryCarousel
+                images={getServiceImages(openGallery)}
+                label={openGallery}
+                currentIndex={currentGalleryIndex}
+                onCurrentIndexChange={(index) => {
+                  setGalleryIndexByService(prev => ({
+                    ...prev,
+                    [openGallery]: index,
+                  }))
+                }}
+              />
               <div className="service-panel-copy">
                 <div style={{ marginBottom: '1.5rem' }}>{activeService.icon}</div>
                 <p className="service-panel-eyebrow">Lo que hacemos</p>

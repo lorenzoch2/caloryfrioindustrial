@@ -1,8 +1,10 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
 interface GalleryCarouselProps {
   images: string[]
   label: string
+  currentIndex: number
+  onCurrentIndexChange: (index: number) => void
 }
 
 const iconPrev = (
@@ -17,14 +19,14 @@ const iconNext = (
   </svg>
 )
 
-export function GalleryCarousel({ images, label }: GalleryCarouselProps) {
-  const [current, setCurrent] = useState(0)
+export function GalleryCarousel({ images, label, currentIndex, onCurrentIndexChange }: GalleryCarouselProps) {
+  const current = images.length === 0 ? 0 : Math.min(currentIndex, images.length - 1)
 
   const goTo = useCallback((index: number) => {
     const len = images.length
     if (len === 0) return
-    setCurrent(((index % len) + len) % len)
-  }, [images.length])
+    onCurrentIndexChange(((index % len) + len) % len)
+  }, [images.length, onCurrentIndexChange])
 
   const goNext = useCallback(() => goTo(current + 1), [goTo, current])
   const goPrev = useCallback(() => goTo(current - 1), [goTo, current])
@@ -71,7 +73,7 @@ export function GalleryCarousel({ images, label }: GalleryCarouselProps) {
             <button
               key={i}
               className={`carousel-dot${i === current ? ' active' : ''}`}
-              onClick={() => setCurrent(i)}
+              onClick={() => onCurrentIndexChange(i)}
               aria-label={`Ir a foto ${i + 1}`}
             />
           ))}
