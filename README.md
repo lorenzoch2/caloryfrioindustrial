@@ -21,3 +21,8 @@ Or with the Netlify CLI for full platform emulation:
 ```bash
 netlify dev --port 8889
 ```
+
+## Notes
+
+- Carousel images live in `public/images/{asesorias,capacitaciones,servicios}/`.
+- `src/images/` is unused.

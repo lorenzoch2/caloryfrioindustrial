@@ -1,4 +1,7 @@
+import { useState, type ReactNode } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { GalleryCarousel } from '../components/GalleryCarousel'
+import { getServiceImages } from '../lib/images'
 
 export const Route = createFileRoute('/')({
   component: MarketingPage,
@@ -80,7 +83,53 @@ function OrbDecor({ size = 420 }: { size?: number }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
+type ServiceId = 'asesorias' | 'capacitaciones' | 'servicios'
+
 function MarketingPage() {
+  const [openGallery, setOpenGallery] = useState<ServiceId>('asesorias')
+
+  const services: Array<{
+    id: ServiceId
+    title: string
+    icon: ReactNode
+    description: string
+  }> = [
+    {
+      id: 'asesorias',
+      title: 'Asesorías',
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--steel)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+      ),
+      description: 'Diagnóstico y orientación técnica especializada para optimizar sus sistemas térmicos industriales con criterio profesional.',
+    },
+    {
+      id: 'capacitaciones',
+      title: 'Capacitaciones',
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--steel)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+        </svg>
+      ),
+      description: 'Formación técnica orientada a equipos de trabajo para el correcto manejo y mantenimiento de sistemas de calor y frío.',
+    },
+    {
+      id: 'servicios',
+      title: 'Servicios',
+      icon: (
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--steel)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+      ),
+      description: 'Soluciones completas en gestión térmica industrial: desde el diseño hasta la puesta en marcha y el soporte continuo.',
+    },
+  ]
+
+  const activeService = services.find(service => service.id === openGallery) ?? services[0]
   return (
     <main
       style={{
@@ -269,96 +318,44 @@ function MarketingPage() {
           </p>
         </div>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-            gap: '1px',
-            background: 'var(--rule)',
-          }}
-        >
-          {/* Card 1 */}
-          <div className="service-card" style={{ background: 'var(--surface)' }}>
-            <div style={{ marginBottom: '1.5rem' }}>
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--steel)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="8" x2="12" y2="12"/>
-                <line x1="12" y1="16" x2="12.01" y2="16"/>
-              </svg>
-            </div>
-            <h3 style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 500,
-              fontSize: '1.6rem',
-              color: 'var(--ink)',
-              marginBottom: '0.85rem',
-              letterSpacing: '0.01em',
-            }}>
-              Asesorías
-            </h3>
-            <p style={{
-              fontSize: '0.82rem',
-              lineHeight: 1.8,
-              color: 'var(--text-mut)',
-              letterSpacing: '0.03em',
-            }}>
-              Diagnóstico y orientación técnica especializada para optimizar sus sistemas térmicos industriales con criterio profesional.
-            </p>
+        <div className="service-switcher">
+          <div className="service-tabs" role="tablist" aria-label="Servicios">
+            {services.map((service, index) => (
+              <button
+                key={service.id}
+                type="button"
+                role="tab"
+                aria-selected={openGallery === service.id}
+                aria-controls="service-panel"
+                tabIndex={openGallery === service.id ? 0 : -1}
+                className={`service-tab${openGallery === service.id ? ' active' : ''}`}
+                onClick={() => setOpenGallery(service.id)}
+                onKeyDown={e => {
+                  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    e.preventDefault()
+                    setOpenGallery(services[(index + 1) % services.length].id)
+                  }
+                  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    e.preventDefault()
+                    setOpenGallery(services[(index - 1 + services.length) % services.length].id)
+                  }
+                }}
+              >
+                {service.title}
+              </button>
+            ))}
           </div>
 
-          {/* Card 2 */}
-          <div className="service-card" style={{ background: 'var(--surface)' }}>
-            <div style={{ marginBottom: '1.5rem' }}>
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--steel)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-              </svg>
+          <div className="service-panel carousel-enter" id="service-panel" role="tabpanel" aria-label={activeService.title}>
+            <div className="service-panel-grid">
+              <GalleryCarousel images={getServiceImages(openGallery)} label={openGallery} />
+              <div className="service-panel-copy">
+                <div style={{ marginBottom: '1.5rem' }}>{activeService.icon}</div>
+                <p className="service-panel-eyebrow">Lo que hacemos</p>
+                <h3>{activeService.title}</h3>
+                <p>{activeService.description}</p>
+              </div>
             </div>
-            <h3 style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 500,
-              fontSize: '1.6rem',
-              color: 'var(--ink)',
-              marginBottom: '0.85rem',
-              letterSpacing: '0.01em',
-            }}>
-              Capacitaciones
-            </h3>
-            <p style={{
-              fontSize: '0.82rem',
-              lineHeight: 1.8,
-              color: 'var(--text-mut)',
-              letterSpacing: '0.03em',
-            }}>
-              Formación técnica orientada a equipos de trabajo para el correcto manejo y mantenimiento de sistemas de calor y frío.
-            </p>
-          </div>
-
-          {/* Card 3 */}
-          <div className="service-card" style={{ background: 'var(--surface)' }}>
-            <div style={{ marginBottom: '1.5rem' }}>
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--steel)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-            </div>
-            <h3 style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 500,
-              fontSize: '1.6rem',
-              color: 'var(--ink)',
-              marginBottom: '0.85rem',
-              letterSpacing: '0.01em',
-            }}>
-              Servicios
-            </h3>
-            <p style={{
-              fontSize: '0.82rem',
-              lineHeight: 1.8,
-              color: 'var(--text-mut)',
-              letterSpacing: '0.03em',
-            }}>
-              Soluciones completas en gestión térmica industrial: desde el diseño hasta la puesta en marcha y el soporte continuo.
-            </p>
           </div>
         </div>
       </section>
@@ -464,8 +461,6 @@ function MarketingPage() {
               transition: 'color 0.2s ease',
               display: 'flex',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--steel)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-faint)')}
           >
             <IconInstagram />
           </a>
@@ -479,8 +474,6 @@ function MarketingPage() {
               transition: 'color 0.2s ease',
               display: 'flex',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--steel)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-faint)')}
           >
             <IconWhatsApp />
           </a>
@@ -492,8 +485,6 @@ function MarketingPage() {
               transition: 'color 0.2s ease',
               display: 'flex',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--steel)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-faint)')}
           >
             <IconMail />
           </a>

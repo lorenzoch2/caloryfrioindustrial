@@ -30,10 +30,11 @@ src/
 
 ## Key Decisions
 
-- **Single-file page**: All content lives in `src/routes/index.tsx`. No separate components — intentionally compact.
+- **Route-first page**: The main page lives in `src/routes/index.tsx`, with reusable UI extracted only where it improves clarity.
 - **CSS custom properties over Tailwind tokens**: Brand colors (`--steel`, `--ink`, `--cream`) are in `:root` inside `styles.css` and used inline in JSX.
 - **Logo rendering**: Logo PNG is rendered with `filter: brightness(0) invert(1)` to produce a white version on the dark background.
 - **No external icon library**: SVG icons are inlined as small React components to avoid bundle weight.
+- **Carousel images**: Static images live in `public/images/{asesorias,capacitaciones,servicios}/` and are mapped in `src/lib/images.ts`.
 - **Fonts**: `Cormorant Garamond` (display) + `Montserrat` (UI/body) via Google Fonts in `__root.tsx`.
 
 ## Color Palette
