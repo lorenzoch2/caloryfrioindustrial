@@ -262,10 +262,19 @@ a:focus-visible {
   grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
   align-items: stretch;
 }
+.service-panel-grid--copy-only {
+  grid-template-columns: 1fr;
+}
 .service-panel-grid .carousel {
   min-height: 100%;
   border-top: 0;
   border-right: 1px solid var(--rule);
+}
+.service-panel-grid--copy-only .service-panel-copy {
+  width: 100%;
+}
+.service-panel-grid--copy-only .carousel {
+  display: none;
 }
 .service-panel-copy {
   padding: 2rem;

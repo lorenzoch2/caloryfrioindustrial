@@ -24,5 +24,14 @@ netlify dev --port 8889
 
 ## Notes
 
-- Carousel images live in `public/images/{asesorias,capacitaciones,servicios}/`.
-- `src/images/` is unused.
+- Carousel images live in `src/assets/images/{asesorias,capacitaciones,servicios}/`.
+- The carousel is driven by `import.meta.glob`, so adding or removing files updates the gallery automatically.
+
+## Recommended Image Size
+
+- Aspect ratio: `16:9` or `4:3`
+- Ideal size: `1600 x 900 px` for horizontal photos, `1200 x 900 px` for more square photos
+- Recommended weight: under `300-500 KB`
+- Supported formats: `jpg`, `jpeg`, `png`, `webp`, `avif`, `gif`, `svg`
+
+- If a service folder has no images, its carousel section is hidden.

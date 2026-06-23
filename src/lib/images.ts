@@ -1,23 +1,21 @@
 export type ServiceId = 'asesorias' | 'capacitaciones' | 'servicios'
 
-const serviceImages: Record<ServiceId, string[]> = {
-  asesorias: [
-    '/images/asesorias/placeholder-01.svg',
-    '/images/asesorias/placeholder-02.svg',
-    '/images/asesorias/placeholder-03.svg',
-  ],
-  capacitaciones: [
-    '/images/capacitaciones/placeholder-01.svg',
-    '/images/capacitaciones/placeholder-02.svg',
-  ],
-  servicios: [
-    '/images/servicios/placeholder-01.svg',
-    '/images/servicios/placeholder-02.svg',
-    '/images/servicios/placeholder-03.svg',
-    '/images/servicios/placeholder-04.svg',
-  ],
+const imageModules = import.meta.glob('../assets/images/**/*.{jpg,jpeg,png,webp,avif,gif,svg}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>
+
+const serviceFolders: Record<ServiceId, string> = {
+  asesorias: '../assets/images/asesorias',
+  capacitaciones: '../assets/images/capacitaciones',
+  servicios: '../assets/images/servicios',
 }
 
 export function getServiceImages(id: ServiceId): string[] {
-  return serviceImages[id]
+  const folder = serviceFolders[id]
+
+  return Object.keys(imageModules)
+    .filter(path => path.startsWith(`${folder}/`))
+    .sort((a, b) => a.localeCompare(b, 'es'))
+    .map(path => imageModules[path])
 }

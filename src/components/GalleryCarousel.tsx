@@ -43,7 +43,7 @@ export function GalleryCarousel({ images, label, currentIndex, onCurrentIndexCha
   if (images.length === 0) {
     return (
       <div className="carousel-empty">
-        <p>Sin imágenes aún — agregue fotos en <code>src/images/{label}/</code></p>
+        <p>Sin imágenes aún — agregue fotos en <code>src/assets/images/{label}/</code></p>
       </div>
     )
   }
