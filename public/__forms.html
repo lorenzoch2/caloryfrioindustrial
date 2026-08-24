@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Definición de formularios — Calor &amp; Frío Industrial</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <!--
+      Este archivo existe sólo para que Netlify detecte el formulario en tiempo
+      de build. La página real se renderiza en el servidor, así que su HTML no
+      participa del escaneo de formularios de Netlify.
+
+      Los campos aquí deben coincidir exactamente con los de
+      `src/components/ContactForm.tsx`. Un campo que falte en este archivo se
+      descarta sin aviso al recibir el envío.
+    -->
+    <form name="contacto" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contacto" />
+      <input name="bot-field" />
+      <input name="nombre" type="text" />
+      <input name="organizacion" type="text" />
+      <input name="email" type="email" />
+      <input name="telefono" type="tel" />
+      <input name="tipo" type="text" />
+      <textarea name="mensaje"></textarea>
+    </form>
+  </body>
+</html>

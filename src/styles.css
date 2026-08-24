@@ -74,8 +74,10 @@ body::before {
 .btn:focus-visible,
 .btn-gallery:focus-visible,
 .service-tab:focus-visible,
+.carousel:focus-visible,
 .carousel-btn:focus-visible,
 .carousel-dot:focus-visible,
+.site-nav-link:focus-visible,
 a:focus-visible {
   outline: 2px solid var(--steel);
   outline-offset: 2px;
@@ -109,16 +111,45 @@ a:focus-visible {
   height: 1px;
   background: var(--steel);
   opacity: 0.6;
+  flex: 0 0 auto;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.section-heading h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--steel-dk);
 }
 
 /* ─── CAROUSEL ENTRANCE ─── */
+/*
+  No animar `max-height`. La versión anterior iba de 0 a 600px con fill-mode
+  `both`, así que el tope de 600px quedaba aplicado de forma permanente y con
+  `overflow: hidden` recortaba el panel: a 375px de ancho necesita 616px y a
+  320px necesita 667px, cortando el final de la descripción del servicio.
+  Animar opacidad y desplazamiento no impone altura alguna.
+*/
 @keyframes carouselSlideIn {
-  from { opacity: 0; max-height: 0; }
-  to   { opacity: 1; max-height: 600px; }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .carousel-enter {
-  overflow: hidden;
   animation: carouselSlideIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up,
+  .carousel-enter {
+    animation: none;
+  }
 }
 
 /* ─── CAROUSEL ─── */
@@ -335,14 +366,6 @@ a:focus-visible {
   object-fit: cover;
   border-radius: 4px;
 }
-.about-copy h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 3.8vw, 3.2rem);
-  font-weight: 500;
-  line-height: 1.08;
-  color: var(--ink);
-  margin-bottom: 1rem;
-}
 .about-copy p {
   font-size: 0.92rem;
   line-height: 1.9;
@@ -408,27 +431,335 @@ a:focus-visible {
   background: #fff;
 }
 
+/* ─── CREDENCIALES Y ANTECEDENTES ─── */
+.cred-intro {
+  font-size: 0.9rem;
+  line-height: 1.85;
+  color: var(--text-mut);
+  max-width: 62ch;
+  margin-bottom: 2.5rem;
+}
+.cred-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.cred-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  box-shadow: 0 18px 40px rgba(20,24,31,0.06);
+  padding: 2rem;
+}
+.cred-card h3,
+.cred-sectores h3,
+.cred-ficha h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.9rem;
+}
+.cred-lead {
+  font-size: 0.86rem;
+  line-height: 1.8;
+  color: var(--text-mut);
+  margin-bottom: 1.5rem;
+}
+.cred-lead strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.cred-list-row + .cred-list-row {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+.cred-list dt {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.cred-list dd {
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--text-mut);
+  margin-top: 0.2rem;
+}
+.cred-note {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.74rem;
+  line-height: 1.7;
+  color: var(--text-faint);
+}
+
+.cred-sectores {
+  background: var(--bg-tint);
+  border: 1px solid var(--rule);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+.cred-sectores ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.cred-sectores li {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+.cred-ficha {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  box-shadow: 0 18px 40px rgba(20,24,31,0.06);
+  padding: 2rem;
+}
+.cred-ficha dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 2.5rem;
+}
+.cred-ficha dl > div {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.cred-ficha dt {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  align-self: center;
+}
+.cred-ficha dd {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--ink);
+  align-self: center;
+}
+
+/* ─── CONTACTO ─── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 3rem;
+  align-items: start;
+}
+.contact-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.contact-title em {
+  color: var(--steel);
+  font-style: italic;
+}
+.contact-copy {
+  font-size: 0.86rem;
+  line-height: 1.8;
+  color: var(--text-mut);
+  margin-bottom: 1.75rem;
+  max-width: 42ch;
+}
+.contact-channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 2rem;
+}
+.contact-details > div {
+  display: flex;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--rule);
+}
+.contact-details dt {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  min-width: 5.5rem;
+}
+.contact-details dd {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.contact-form-wrap {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  box-shadow: 0 18px 40px rgba(20,24,31,0.06);
+  padding: 2rem;
+}
+.contact-form-wrap h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+}
+.contact-form {
+  display: grid;
+  gap: 1rem;
+}
+.contact-form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+/* Honeypot: fuera de la vista sin `display:none`, que algunos bots detectan. */
+.contact-form-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.contact-field {
+  display: grid;
+  gap: 0.35rem;
+}
+.contact-field > span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.contact-field > span em {
+  color: var(--steel);
+  font-style: normal;
+}
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.65rem 0.8rem;
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.contact-field textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus {
+  outline: none;
+  border-color: var(--steel);
+  box-shadow: 0 0 0 3px rgba(79,115,168,0.14);
+}
+.contact-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+.contact-form-actions .btn[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+  transform: none;
+}
+.contact-form-status {
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: var(--steel-dk);
+  flex: 1 1 12rem;
+}
+.contact-form-status a {
+  color: var(--steel-dk);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 980px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .cred-ficha dl {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
 @media (max-width: 860px) {
   .about-block {
     grid-template-columns: 1fr;
   }
-}
-
-@media (max-width: 640px) {
-  .site-nav {
-    top: 0.75rem;
-    right: 0.75rem;
-    left: 0.75rem;
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 860px) {
   .service-panel-grid {
     grid-template-columns: 1fr;
   }
   .service-panel-grid .carousel {
     border-right: 0;
     border-bottom: 1px solid var(--rule);
+  }
+  .cred-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  /*
+    Cinco destinos no caben en una fila a 375px y el menú se apilaba en dos
+    filas flotando permanentemente sobre el contenido. Una sola fila
+    desplazable mantiene la altura fija sea cual sea el número de secciones.
+  */
+  .site-nav {
+    top: 0.75rem;
+    right: 0.75rem;
+    left: 0.75rem;
+    max-width: none;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .site-nav-link {
+    flex: 0 0 auto;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.64rem;
+  }
+  .contact-form-row {
+    grid-template-columns: 1fr;
+  }
+  .cred-card,
+  .cred-sectores,
+  .cred-ficha,
+  .contact-form-wrap {
+    padding: 1.5rem;
+  }
+  .cred-ficha dl > div {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
   }
 }

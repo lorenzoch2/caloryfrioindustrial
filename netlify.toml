@@ -1,16 +1,19 @@
 [build]
   command = "vite build"
   publish = "dist/client"
+
 [dev]
   command = "npm run dev"
   targetPort = 3000
   port = 8888
 
-[[redirects]]
-  from = "/**"
-  to = "/"
-  status = 200
+# Sin regla de redirect: el enrutamiento lo resuelve el handler SSR de TanStack
+# Start, que ya devuelve 404 en rutas inexistentes. La regla anterior
+# (`from = "/**"`) además nunca se aplicó: el comodín de Netlify es `/*`, no `/**`.
 
+# Nota: estas cabeceras sólo alcanzan a los archivos estáticos del CDN. La
+# respuesta HTML la emite la función SSR y no pasa por aquí — verificado contra
+# producción. Falta emitirlas desde el servidor; ver el plan de trabajo.
 [[headers]]
   for = "/*"
   [headers.values]

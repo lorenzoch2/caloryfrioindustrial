@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, type KeyboardEvent } from 'react'
 
 interface GalleryCarouselProps {
   images: string[]
@@ -31,14 +31,15 @@ export function GalleryCarousel({ images, label, currentIndex, onCurrentIndexCha
   const goNext = useCallback(() => goTo(current + 1), [goTo, current])
   const goPrev = useCallback(() => goTo(current - 1), [goTo, current])
 
-  useEffect(() => {
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === 'ArrowLeft') goPrev()
-      if (e.key === 'ArrowRight') goNext()
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [goPrev, goNext])
+  // Las flechas se atienden en el propio carrusel, no en `window`: escuchando
+  // globalmente, ← y → cambiaban la foto desde cualquier punto de la página,
+  // incluso con la galería fuera de pantalla.
+  function onKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
+    e.preventDefault()
+    if (e.key === 'ArrowLeft') goPrev()
+    else goNext()
+  }
 
   if (images.length === 0) {
     return (
@@ -49,7 +50,14 @@ export function GalleryCarousel({ images, label, currentIndex, onCurrentIndexCha
   }
 
   return (
-    <div className="carousel">
+    <div
+      className="carousel"
+      role="group"
+      aria-roledescription="carrusel"
+      aria-label={`Galería de ${label}`}
+      tabIndex={0}
+      onKeyDown={onKeyDown}
+    >
       <div className="carousel-viewport">
         <img
           className="carousel-img"

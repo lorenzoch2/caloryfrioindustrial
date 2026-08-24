@@ -1,7 +1,10 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { GalleryCarousel } from '../components/GalleryCarousel'
+import { ContactForm } from '../components/ContactForm'
 import { getAboutImage, getServiceImages } from '../lib/images'
+import { company, domicilioLinea } from '../lib/company'
+import { capacidadOperativa, formacionTecnica, sectoresExperiencia } from '../lib/credenciales'
 
 export const Route = createFileRoute('/')({
   component: MarketingPage,
@@ -43,6 +46,21 @@ function IconArrowUp() {
       <path d="M12 19V5" />
       <path d="m5 12 7-7 7 7" />
     </svg>
+  )
+}
+
+// ─── Section heading ─────────────────────────────────────────────────────────
+
+/**
+ * Rótulo de sección. Es un <h2> real, no un <p> con estilos: la jerarquía de
+ * encabezados es lo que leen los buscadores y los lectores de pantalla.
+ */
+function SectionHeading({ children, marginBottom }: { children: ReactNode; marginBottom?: string }) {
+  return (
+    <div className="section-heading" style={marginBottom ? { marginBottom } : undefined}>
+      <span className="rule" />
+      <h2>{children}</h2>
+    </div>
   )
 }
 
@@ -94,9 +112,18 @@ function OrbDecor({ size = 420 }: { size?: number }) {
 
 type ServiceId = 'asesorias' | 'capacitaciones' | 'servicios'
 
+const navSections = [
+  { id: 'top', label: 'Inicio' },
+  { id: 'about', label: 'Nosotros' },
+  { id: 'services', label: 'Servicios' },
+  { id: 'credenciales', label: 'Credenciales' },
+  { id: 'contact', label: 'Contacto' },
+]
+
 function MarketingPage() {
   const [openGallery, setOpenGallery] = useState<ServiceId>('asesorias')
   const [showBackToTop, setShowBackToTop] = useState(false)
+  const tabRefs = useRef<Partial<Record<ServiceId, HTMLButtonElement | null>>>({})
   const [galleryIndexByService, setGalleryIndexByService] = useState<Record<ServiceId, number>>({
     asesorias: 0,
     capacitaciones: 0,
@@ -173,10 +200,16 @@ function MarketingPage() {
       }}
     >
       <nav className="site-nav" aria-label="Secciones">
-        <button type="button" className="site-nav-link" onClick={() => scrollToSection('top')}>Inicio</button>
-        <button type="button" className="site-nav-link" onClick={() => scrollToSection('about')}>Sobre Nosotros</button>
-        <button type="button" className="site-nav-link" onClick={() => scrollToSection('services')}>Servicios</button>
-        <button type="button" className="site-nav-link" onClick={() => scrollToSection('contact')}>Contacto</button>
+        {navSections.map(section => (
+          <button
+            key={section.id}
+            type="button"
+            className="site-nav-link"
+            onClick={() => scrollToSection(section.id)}
+          >
+            {section.label}
+          </button>
+        ))}
       </nav>
 
       {showBackToTop && (
@@ -315,19 +348,7 @@ function MarketingPage() {
           margin: '0 auto',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-          <span className="rule" />
-          <p style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 500,
-            fontSize: '0.68rem',
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: 'var(--steel-dk)',
-          }}>
-            Sobre Nosotros
-          </p>
-        </div>
+        <SectionHeading>Sobre Nosotros</SectionHeading>
 
         <div className="about-block">
           {aboutImage && (
@@ -356,20 +377,7 @@ function MarketingPage() {
           margin: '0 auto',
         }}
       >
-        {/* Section label */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '3.5rem' }}>
-          <span className="rule" />
-          <p style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 500,
-            fontSize: '0.68rem',
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: 'var(--steel-dk)',
-          }}>
-            Lo que hacemos
-          </p>
-        </div>
+        <SectionHeading marginBottom="3.5rem">Lo que hacemos</SectionHeading>
 
         <div className="service-switcher">
           <div className="service-tabs" role="tablist" aria-label="Servicios">
@@ -378,20 +386,25 @@ function MarketingPage() {
                 key={service.id}
                 type="button"
                 role="tab"
+                ref={node => { tabRefs.current[service.id] = node }}
                 aria-selected={openGallery === service.id}
                 aria-controls="service-panel"
                 tabIndex={openGallery === service.id ? 0 : -1}
                 className={`service-tab${openGallery === service.id ? ' active' : ''}`}
                 onClick={() => setOpenGallery(service.id)}
                 onKeyDown={e => {
-                  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                    e.preventDefault()
-                    setOpenGallery(services[(index + 1) % services.length].id)
-                  }
-                  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                    e.preventDefault()
-                    setOpenGallery(services[(index - 1 + services.length) % services.length].id)
-                  }
+                  const step =
+                    e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 :
+                    e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 :
+                    0
+                  if (step === 0) return
+
+                  e.preventDefault()
+                  // Con roving tabindex la pestaña saliente pasa a tabIndex -1, así que
+                  // hay que mover el foco explícitamente o se pierde en el <body>.
+                  const next = services[(index + step + services.length) % services.length].id
+                  setOpenGallery(next)
+                  tabRefs.current[next]?.focus()
                 }}
               >
                 {service.title}
@@ -427,6 +440,100 @@ function MarketingPage() {
       </section>
 
       {/* ════════════════════════════════════
+          CREDENCIALES Y ANTECEDENTES
+          Bloque orientado a evaluación por terceros: mandantes industriales y
+          comisiones evaluadoras de licitaciones públicas.
+      ════════════════════════════════════ */}
+      <section
+        id="credenciales"
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          padding: 'clamp(4rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem)',
+          maxWidth: 1100,
+          margin: '0 auto',
+        }}
+      >
+        <SectionHeading>Credenciales y Antecedentes</SectionHeading>
+
+        <p className="cred-intro">
+          Antecedentes verificables de la empresa y de su dirección técnica, para mandantes
+          industriales y comisiones evaluadoras que requieran acreditar competencia técnica y
+          situación legal antes de contratar.
+        </p>
+
+        <div className="cred-grid">
+          <article className="cred-card">
+            <h3>Dirección Técnica</h3>
+            <p className="cred-lead">
+              La dirección técnica está a cargo de <strong>{company.direccionTecnica}</strong>,
+              con más de 30 años de ejercicio en refrigeración industrial y climatización, e
+              incluye docencia técnica de nivel superior.
+            </p>
+            <dl className="cred-list">
+              {formacionTecnica.map(item => (
+                <div key={item.titulo} className="cred-list-row">
+                  <dt>{item.titulo}</dt>
+                  <dd>{item.detalle}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="cred-note">
+              Currículum completo y certificados disponibles a solicitud, o adjuntos en los
+              anexos técnicos de cada licitación.
+            </p>
+          </article>
+
+          <article className="cred-card">
+            <h3>Capacidad Operativa</h3>
+            <p className="cred-lead">
+              Herramienta, instrumental y existencias propias, sin dependencia de arriendo para
+              la ejecución de los servicios.
+            </p>
+            <dl className="cred-list">
+              {capacidadOperativa.map(item => (
+                <div key={item.titulo} className="cred-list-row">
+                  <dt>{item.titulo}</dt>
+                  <dd>{item.detalle}</dd>
+                </div>
+              ))}
+            </dl>
+          </article>
+        </div>
+
+        <div className="cred-sectores">
+          <h3>Sectores de ejercicio de la dirección técnica</h3>
+          <ul>
+            {sectoresExperiencia.map(sector => (
+              <li key={sector}>{sector}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="cred-ficha">
+          <h3>Antecedentes de la empresa</h3>
+          <dl>
+            <div><dt>Razón social</dt><dd>{company.razonSocial}</dd></div>
+            <div><dt>R.U.T.</dt><dd>{company.rut}</dd></div>
+            <div><dt>Tipo de sociedad</dt><dd>{company.tipoSociedad}</dd></div>
+            <div><dt>Giro</dt><dd>{company.giro}</dd></div>
+            <div><dt>Código de actividad</dt><dd>{company.codigoActividad}</dd></div>
+            <div><dt>Régimen tributario</dt><dd>{company.regimenTributario}</dd></div>
+            <div><dt>Representante legal</dt><dd>{company.representanteLegal}</dd></div>
+            <div><dt>Domicilio</dt><dd>{domicilioLinea}</dd></div>
+            <div><dt>Facturación</dt><dd>Factura electrónica autorizada por el SII</dd></div>
+            <div><dt>Área de servicio</dt><dd>{company.areaServicio}</dd></div>
+            {/*
+              Cuando la inscripción en ChileProveedores esté vigente, agregar aquí:
+                <div><dt>ChileProveedores</dt><dd>Inscrito y hábil — ID 000000</dd></div>
+              No publicar antes de que esté acreditado: declarar como vigente algo que no lo
+              está es causal de exclusión en una licitación.
+            */}
+          </dl>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════
           CONTACT STRIP
       ════════════════════════════════════ */}
       <section
@@ -437,64 +544,57 @@ function MarketingPage() {
           borderTop: '1px solid var(--rule)',
           borderBottom: '1px solid var(--rule)',
           padding: 'clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 5rem)',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '2rem',
           maxWidth: 1100,
           margin: '0 auto',
         }}
       >
-        <div>
-          <p style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontWeight: 300,
-            fontSize: 'clamp(1.6rem, 4vw, 2.6rem)',
-            color: 'var(--ink)',
-            lineHeight: 1.15,
-          }}>
-            ¿Listo para optimizar<br />
-            <em style={{ color: 'var(--steel)' }}>su operación térmica?</em>
-          </p>
-        </div>
+        <div className="contact-grid">
+          <div className="contact-aside">
+            <h2 className="contact-title">
+              ¿Listo para optimizar<br />
+              <em>su operación térmica?</em>
+            </h2>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', alignItems: 'center' }}>
-          {/* CTA buttons */}
-          <div
-            className="fade-up delay-4"
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '0.85rem',
-              justifyContent: 'center',
-            }}
-          >
-            <a
-              href="https://wa.me/message/5NJEUAL5M6GTK1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              <IconWhatsApp />
-              WhatsApp
-            </a>
-            <a
-              href="https://www.instagram.com/caloryfrioindustrial"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-ghost"
-            >
-              <IconInstagram />
-              Instagram
-            </a>
-            <a
-              href="mailto:contacto@caloryfrioindustrial.cl"
-              className="btn btn-ghost"
-            >
-              <IconMail />
-              Correo
-            </a>
+            <p className="contact-copy">
+              Atendemos requerimientos industriales, comerciales y domiciliarios, y cotizaciones
+              para organismos públicos.
+            </p>
+
+            <div className="contact-channels">
+              <a
+                href={company.contacto.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                <IconWhatsApp />
+                WhatsApp
+              </a>
+              <a
+                href={company.contacto.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost"
+              >
+                <IconInstagram />
+                Instagram
+              </a>
+              <a href={`mailto:${company.contacto.email}`} className="btn btn-ghost">
+                <IconMail />
+                Correo
+              </a>
+            </div>
+
+            <dl className="contact-details">
+              <div><dt>Correo</dt><dd>{company.contacto.email}</dd></div>
+              <div><dt>Teléfono</dt><dd>{company.contacto.telefonoDisplay}</dd></div>
+              <div><dt>Dirección</dt><dd>{domicilioLinea}</dd></div>
+            </dl>
+          </div>
+
+          <div className="contact-form-wrap">
+            <h3>Escríbanos</h3>
+            <ContactForm />
           </div>
         </div>
       </section>
@@ -539,7 +639,7 @@ function MarketingPage() {
 
         <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
           <a
-            href="https://www.instagram.com/caloryfrioindustrial"
+            href={company.contacto.instagram}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
@@ -552,7 +652,7 @@ function MarketingPage() {
             <IconInstagram />
           </a>
           <a
-            href="https://wa.me/message/5NJEUAL5M6GTK1"
+            href={company.contacto.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp"
@@ -565,7 +665,7 @@ function MarketingPage() {
             <IconWhatsApp />
           </a>
           <a
-            href="mailto:contacto@caloryfrioindustrial.cl"
+            href={`mailto:${company.contacto.email}`}
             aria-label="Email"
             style={{
               color: 'var(--text-faint)',
@@ -587,7 +687,8 @@ function MarketingPage() {
           paddingTop: '0.5rem',
           borderTop: '1px solid rgba(79,115,168,0.1)',
         }}>
-          © {new Date().getFullYear()} Calor y Frío Industrial SpA. Todos los derechos reservados. R.U.T. 78.333.185-3 | Zanzibar Oriente 7473, Las Condes, Santiago
+          © {new Date().getFullYear()} {company.razonSocial}. Todos los derechos reservados.
+          {' '}R.U.T. {company.rut} | {domicilioLinea}
         </p>
       </footer>
     </main>
