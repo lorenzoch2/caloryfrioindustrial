@@ -1,0 +1,21 @@
+import { createFileRoute } from '@tanstack/react-router'
+import { PaginaServicio } from '../components/PaginaServicio'
+import { getServicio } from '../lib/servicios'
+import { company } from '../lib/company'
+
+const servicio = getServicio('capacitaciones')
+const url = `${company.sitio.url}/servicios/capacitaciones`
+
+export const Route = createFileRoute('/servicios/capacitaciones')({
+  head: () => ({
+    meta: [
+      { title: `${servicio.tituloPagina} | ${company.nombreFantasia}` },
+      { name: 'description', content: servicio.metaDescription },
+      { property: 'og:title', content: servicio.tituloPagina },
+      { property: 'og:description', content: servicio.metaDescription },
+      { property: 'og:url', content: url },
+    ],
+    links: [{ rel: 'canonical', href: url }],
+  }),
+  component: () => <PaginaServicio servicio={servicio} />,
+})

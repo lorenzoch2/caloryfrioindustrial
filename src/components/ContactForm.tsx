@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { company } from '../lib/company'
 
 /**
  * Formulario de contacto sobre Netlify Forms.
@@ -108,7 +109,7 @@ export function ContactForm() {
           {status === 'error' && (
             <>
               No pudimos enviar el mensaje. Escríbanos a{' '}
-              <a href="mailto:contacto@caloryfrioindustrial.cl">contacto@caloryfrioindustrial.cl</a>.
+              <a href={`mailto:${company.contacto.email}`}>{company.contacto.email}</a>.
             </>
           )}
         </p>

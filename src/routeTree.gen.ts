@@ -9,38 +9,141 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SectorPublicoRouteImport } from './routes/sector-publico'
+import { Route as EmpresaRouteImport } from './routes/empresa'
+import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServiciosMantenimientoRouteImport } from './routes/servicios.mantenimiento'
+import { Route as ServiciosCapacitacionesRouteImport } from './routes/servicios.capacitaciones'
+import { Route as ServiciosAsesoriasRouteImport } from './routes/servicios.asesorias'
 
+const SectorPublicoRoute = SectorPublicoRouteImport.update({
+  id: '/sector-publico',
+  path: '/sector-publico',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmpresaRoute = EmpresaRouteImport.update({
+  id: '/empresa',
+  path: '/empresa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServiciosMantenimientoRoute = ServiciosMantenimientoRouteImport.update({
+  id: '/servicios/mantenimiento',
+  path: '/servicios/mantenimiento',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiciosCapacitacionesRoute = ServiciosCapacitacionesRouteImport.update({
+  id: '/servicios/capacitaciones',
+  path: '/servicios/capacitaciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiciosAsesoriasRoute = ServiciosAsesoriasRouteImport.update({
+  id: '/servicios/asesorias',
+  path: '/servicios/asesorias',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/empresa': typeof EmpresaRoute
+  '/sector-publico': typeof SectorPublicoRoute
+  '/servicios/asesorias': typeof ServiciosAsesoriasRoute
+  '/servicios/capacitaciones': typeof ServiciosCapacitacionesRoute
+  '/servicios/mantenimiento': typeof ServiciosMantenimientoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/empresa': typeof EmpresaRoute
+  '/sector-publico': typeof SectorPublicoRoute
+  '/servicios/asesorias': typeof ServiciosAsesoriasRoute
+  '/servicios/capacitaciones': typeof ServiciosCapacitacionesRoute
+  '/servicios/mantenimiento': typeof ServiciosMantenimientoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
+  '/empresa': typeof EmpresaRoute
+  '/sector-publico': typeof SectorPublicoRoute
+  '/servicios/asesorias': typeof ServiciosAsesoriasRoute
+  '/servicios/capacitaciones': typeof ServiciosCapacitacionesRoute
+  '/servicios/mantenimiento': typeof ServiciosMantenimientoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contacto'
+    | '/empresa'
+    | '/sector-publico'
+    | '/servicios/asesorias'
+    | '/servicios/capacitaciones'
+    | '/servicios/mantenimiento'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contacto'
+    | '/empresa'
+    | '/sector-publico'
+    | '/servicios/asesorias'
+    | '/servicios/capacitaciones'
+    | '/servicios/mantenimiento'
+  id:
+    | '__root__'
+    | '/'
+    | '/contacto'
+    | '/empresa'
+    | '/sector-publico'
+    | '/servicios/asesorias'
+    | '/servicios/capacitaciones'
+    | '/servicios/mantenimiento'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactoRoute: typeof ContactoRoute
+  EmpresaRoute: typeof EmpresaRoute
+  SectorPublicoRoute: typeof SectorPublicoRoute
+  ServiciosAsesoriasRoute: typeof ServiciosAsesoriasRoute
+  ServiciosCapacitacionesRoute: typeof ServiciosCapacitacionesRoute
+  ServiciosMantenimientoRoute: typeof ServiciosMantenimientoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sector-publico': {
+      id: '/sector-publico'
+      path: '/sector-publico'
+      fullPath: '/sector-publico'
+      preLoaderRoute: typeof SectorPublicoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/empresa': {
+      id: '/empresa'
+      path: '/empresa'
+      fullPath: '/empresa'
+      preLoaderRoute: typeof EmpresaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +151,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/servicios/mantenimiento': {
+      id: '/servicios/mantenimiento'
+      path: '/servicios/mantenimiento'
+      fullPath: '/servicios/mantenimiento'
+      preLoaderRoute: typeof ServiciosMantenimientoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios/capacitaciones': {
+      id: '/servicios/capacitaciones'
+      path: '/servicios/capacitaciones'
+      fullPath: '/servicios/capacitaciones'
+      preLoaderRoute: typeof ServiciosCapacitacionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios/asesorias': {
+      id: '/servicios/asesorias'
+      path: '/servicios/asesorias'
+      fullPath: '/servicios/asesorias'
+      preLoaderRoute: typeof ServiciosAsesoriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactoRoute: ContactoRoute,
+  EmpresaRoute: EmpresaRoute,
+  SectorPublicoRoute: SectorPublicoRoute,
+  ServiciosAsesoriasRoute: ServiciosAsesoriasRoute,
+  ServiciosCapacitacionesRoute: ServiciosCapacitacionesRoute,
+  ServiciosMantenimientoRoute: ServiciosMantenimientoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

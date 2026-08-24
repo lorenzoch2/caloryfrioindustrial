@@ -1,37 +1,74 @@
-# Calor & Frío Industrial — Marketing Site
+# Calor & Frío Industrial — Sitio corporativo
 
-Corporate marketing landing page for **Calor & Frío Industrial**, a Chilean company offering thermal engineering advisory, training, and integral services.
+Sitio de **Calor y Frío Industrial SpA**, empresa chilena de ingeniería en climatización,
+refrigeración industrial y ventilación.
 
-## Technologies
+## Tecnologías
 
-- [TanStack Start](https://tanstack.com/start) (React SSR framework)
-- [Tailwind CSS v4](https://tailwindcss.com/) (utility-first CSS)
-- [Vite](https://vitejs.dev/) build tooling
-- Deployed on [Netlify](https://netlify.com)
+- [TanStack Start](https://tanstack.com/start) (React 19 con SSR)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Vite](https://vitejs.dev/)
+- Desplegado en [Netlify](https://netlify.com) — https://caloryfrioindustrial.cl
 
-## Running Locally
+## Desarrollo
 
 ```bash
 npm install
-npm run dev        # starts at http://localhost:3000
+npm run dev        # http://localhost:3000
 ```
-
-Or with the Netlify CLI for full platform emulation:
 
 ```bash
-netlify dev --port 8889
+npm run typecheck
 ```
 
-## Notes
+> El repositorio vive dentro de una carpeta sincronizada por OneDrive, lo que hace que un arranque
+> en frío tarde cerca de dos minutos. Moverlo fuera de OneDrive lo deja en segundos.
 
-- Carousel images live in `src/assets/images/{asesorias,capacitaciones,servicios}/`.
-- The carousel is driven by `import.meta.glob`, so adding or removing files updates the gallery automatically.
+## Páginas
 
-## Recommended Image Size
+| Ruta | Contenido |
+|---|---|
+| `/` | Propuesta, selector de segmento, servicios, credenciales, metodología |
+| `/servicios/mantenimiento` | Mantención preventiva y correctiva HVAC |
+| `/servicios/asesorias` | Asesorías técnicas e Inspección Técnica de Obras |
+| `/servicios/capacitaciones` | Capacitación técnica in-company |
+| `/sector-publico` | Antecedentes para procesos de compra pública |
+| `/empresa` | Equipo, credenciales y antecedentes legales |
+| `/contacto` | Formulario y canales directos |
 
-- Aspect ratio: `16:9` or `4:3`
-- Ideal size: `1600 x 900 px` for horizontal photos, `1200 x 900 px` for more square photos
-- Recommended weight: under `300-500 KB`
-- Supported formats: `jpg`, `jpeg`, `png`, `webp`, `avif`, `gif`, `svg`
+## Dónde se edita el contenido
 
-- If a service folder has no images, its carousel section is hidden.
+Casi nunca en el JSX:
+
+| Qué | Archivo |
+|---|---|
+| RUT, dirección, correo, teléfono, giro | `src/lib/company.ts` |
+| Alcance, entregables y público de cada servicio | `src/lib/servicios.ts` |
+| Certificaciones, capacidad operativa, metodología, segmentos | `src/lib/credenciales.ts` |
+| Colores, tipografía y estilos | `src/styles.css` |
+
+`src/lib/company.ts` debe mantenerse en sincronía con
+`Documentos/Mercado Público/01 - Ficha de Proveedor (datos maestros).md`.
+
+## Imágenes
+
+Las galerías se arman solas: cualquier archivo que se deje en
+`src/assets/images/{asesorias,capacitaciones,servicios}/` aparece en el carrusel de esa página, y si
+una carpeta queda vacía su sección se oculta.
+
+- Proporción recomendada: `16:9`
+- Tamaño ideal: `1600 x 900 px`
+- Peso: bajo `300 KB`
+- Formatos: `jpg`, `jpeg`, `png`, `webp`, `avif`, `gif`, `svg`
+
+Las imágenes de portada viven aparte, en `src/assets/hero/`, en dos anchos (1280 y 760) para
+`srcset`.
+
+## Formulario de contacto
+
+Usa Netlify Forms. La declaración del formulario está en `public/__forms.html` porque Netlify
+detecta formularios escaneando HTML estático y estas páginas se renderizan en el servidor.
+**Si se agrega o renombra un campo hay que reflejarlo en los dos archivos**, o el dato se pierde
+sin aviso.
+
+En Netlify hay que tener activada la detección de formularios y configurado el correo de aviso.

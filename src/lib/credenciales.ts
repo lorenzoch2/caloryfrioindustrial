@@ -93,3 +93,52 @@ export interface Antecedente {
   valor: string
   pendiente?: boolean
 }
+
+/**
+ * Metodología de trabajo. Espeja el apartado del dossier técnico, que es lo que
+ * se presenta en el anexo de metodología de una licitación — los dos textos
+ * deben decir lo mismo.
+ */
+export const metodologia: Credencial[] = [
+  { titulo: 'Levantamiento en terreno', detalle: 'Inspección del sistema, registro de equipos, estado y condiciones de operación, con respaldo fotográfico.' },
+  { titulo: 'Diagnóstico técnico', detalle: 'Evaluación de estado, identificación de puntos críticos y verificación de cumplimiento normativo aplicable.' },
+  { titulo: 'Plan de trabajo', detalle: 'Actividades, frecuencias, repuestos e insumos, y programa de ejecución acordado con la contraparte técnica.' },
+  { titulo: 'Ejecución', detalle: 'Trabajos bajo protocolo y normas de seguridad, coordinando accesos y ventanas de intervención para no afectar la operación.' },
+  { titulo: 'Verificación y entrega', detalle: 'Pruebas de funcionamiento, mediciones de parámetros e informe de cierre con registro de antes y después.' },
+  { titulo: 'Respaldo posterior', detalle: 'Recomendaciones por escrito y disponibilidad para consultas durante el período de garantía ofertado.' },
+]
+
+/** Segmentos de comprador. Cada uno tiene un riesgo y un contrato distinto. */
+export interface Segmento {
+  id: string
+  titulo: string
+  detalle: string
+  destino: string
+}
+
+export const segmentos: Segmento[] = [
+  {
+    id: 'industria',
+    titulo: 'Industria y agroindustria',
+    detalle: 'Cámaras de frío, salas de máquinas y continuidad de producción.',
+    destino: '/servicios/mantenimiento',
+  },
+  {
+    id: 'comercio',
+    titulo: 'Comercio y edificios',
+    detalle: 'Oficinas, retail y comunidades. Contratos de mantención preventiva.',
+    destino: '/servicios/mantenimiento',
+  },
+  {
+    id: 'publico',
+    titulo: 'Sector público',
+    detalle: 'Licitaciones y compras ágiles, con antecedentes a la vista.',
+    destino: '/sector-publico',
+  },
+  {
+    id: 'hogar',
+    titulo: 'Hogar',
+    detalle: 'Instalación y mantención de split e inverter, con boleta y garantía.',
+    destino: '/contacto',
+  },
+]

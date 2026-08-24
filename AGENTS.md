@@ -2,13 +2,15 @@
 
 ## Project Overview
 
-Corporate marketing landing page for Calor & Frío Industrial, a Chilean HVAC and industrial
-refrigeration company. Built with TanStack Start (React + Vite + SSR) and deployed on Netlify.
-Single page, no routing complexity needed.
+Corporate marketing site for Calor & Frío Industrial, a Chilean HVAC and industrial refrigeration
+company. Built with TanStack Start (React + Vite + SSR) and deployed on Netlify.
 
-Beyond marketing, the page now doubles as a **credentials sheet for third-party evaluation** —
-industrial clients and public-tender evaluation committees (Mercado Público / ChileCompra) who need
-to verify technical competence and legal standing before contracting.
+**Seven pages, not one.** Each competes for its own search and speaks to one buyer. A plant
+maintenance chief and someone wanting their home split cleaned are different sales, with different
+prices and different language — the site routes them apart from the home page's segment selector.
+
+`/sector-publico` exists to be cited inside a bid: it carries the company's legal and technical
+record for public-tender evaluation committees (Mercado Público / ChileCompra).
 
 ## Tech Stack
 
@@ -25,40 +27,59 @@ to verify technical competence and legal standing before contracting.
 
 ```
 public/
-  logo.png          # Company logo
-  favicon.ico
-  robots.txt
-  sitemap.xml
-  __forms.html      # Netlify Forms declaration (see "Contact form" below)
+  marca.png, marca-clara.png   # Logo mark alone (light/dark surfaces)
+  og-image.jpg                 # 1200x630 social card
+  logo.png, favicon.ico, robots.txt, sitemap.xml
+  __forms.html                 # Netlify Forms declaration (see "Contact form")
 src/
   routes/
-    __root.tsx      # HTML shell: fonts, meta tags, schema.org JSON-LD
-    index.tsx       # Entire marketing page
+    __root.tsx                 # HTML shell, meta defaults, JSON-LD, header/footer, 404
+    index.tsx                  # /
+    servicios.mantenimiento.tsx    # /servicios/mantenimiento
+    servicios.asesorias.tsx        # /servicios/asesorias
+    servicios.capacitaciones.tsx   # /servicios/capacitaciones
+    sector-publico.tsx             # /sector-publico
+    empresa.tsx                    # /empresa
+    contacto.tsx                   # /contacto
   components/
-    GalleryCarousel.tsx
-    ContactForm.tsx
+    SiteHeader.tsx, SiteFooter.tsx
+    ui.tsx                     # Seccion, RotuloSeccion, HeroPagina, FranjaDatos, CierreCTA
+    PaginaServicio.tsx         # Shared template behind the three service routes
+    GalleryCarousel.tsx, ContactForm.tsx, icons.tsx
   lib/
-    company.ts      # Single source of truth for corporate data + JSON-LD builder
-    credenciales.ts # Technical credentials, operational capacity
-    images.ts       # Maps src/assets/images/** into the galleries
-  styles.css        # CSS custom properties, resets, animations, component styles
+    company.ts                 # Single source of truth for corporate data + JSON-LD builder
+    servicios.ts               # Content of the three service lines
+    credenciales.ts            # Credentials, operational capacity, methodology, segments
+    images.ts                  # Maps src/assets/images/** into the galleries
+  assets/hero/                 # Responsive hero images (1280 / 760 for srcset)
+  styles.css                   # Design tokens and every component style
 ```
+
+The three service routes are thin: they set their own `head` and render `PaginaServicio` with data
+from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line route file.
 
 ## Key Decisions
 
-- **Route-first page**: the whole page lives in `src/routes/index.tsx`, with UI extracted only where
-  it improves clarity.
+- **Content lives in `lib/`, not in JSX.** Service scope, credentials and segments are data; routes
+  render them. Copy edits happen in one file, not scattered across markup.
 - **`src/lib/company.ts` is the single source of truth.** Every contact detail, RUT, address and
   legal fact is declared there and consumed from the views — never hardcoded in JSX. It must stay in
   sync with `Documentos/Mercado Público/01 - Ficha de Proveedor (datos maestros).md`. Three
   conflicting sets of contact details were circulating before this file existed.
-- **CSS custom properties over Tailwind tokens**: brand colors live in `:root` in `styles.css` and
-  are used inline in JSX.
-- **Logo rendering**: `mixBlendMode: 'multiply'` against the light background.
-- **No external icon library**: SVG icons are inlined as small React components.
+- **CSS custom properties over Tailwind tokens, and classes over inline styles.** Every token lives
+  in `:root` in `styles.css`; components carry class names, not `style={{}}` objects.
+- **Two alternating surfaces**: dark (`--ink-900`) for hero, proof and closing CTA; light
+  (`--paper`) for long-form content, which is where reading actually happens.
+- **The accent is deliberately double, taken from the logo**: steel blue (`--steel`) for structure
+  and links, ember (`--ember`) for action. Cold and hot doing a job, not decorating.
+- **Typography is IBM Plex Sans + IBM Plex Mono.** Mono carries eyebrows, figures and field labels
+  so data reads as data. The previous Cormorant Garamond was retired on purpose: a high-contrast
+  didone reads as a perfume house, which contradicts the trade.
+- **The logo mark is kept, the serif wordmark is not.** Header and footer use `marca-clara.png` (the
+  circle alone) — the full `logo.png` is 1024x1024 and was being displayed at 34px.
+- **No external icon library**: SVG icons are inlined in `components/icons.tsx`.
 - **Carousel images**: files in `src/assets/images/{asesorias,capacitaciones,servicios}/`, picked up
   by `import.meta.glob` in `src/lib/images.ts` — dropping a file in the folder is enough.
-- **Fonts**: `Cormorant Garamond` (display) + `Montserrat` (UI/body) via Google Fonts.
 
 ## Content rules — read before editing copy
 
@@ -67,8 +88,8 @@ src/
   penalised in a tender evaluation. Sectors and certifications only. Client names belong in the CV
   attached to a bid's technical annex.
 - **Never publish a credential as current before it is.** The ChileProveedores row in the
-  credentials sheet is commented out in `index.tsx` for exactly this reason. Declaring something as
-  in force when it is not is grounds for exclusion from a tender.
+  record is commented out in `routes/sector-publico.tsx` for exactly this reason. Declaring something
+  as in force when it is not is grounds for exclusion from a tender.
 - Facts on the site must be traceable to a document in the company folder (tax record, CV,
   certificates, inventory).
 
@@ -83,21 +104,29 @@ and `ContactForm.tsx` POSTs to it — the documented Netlify pattern for SSR fra
 
 ## Color Palette
 
-| Token        | Value      | Usage                      |
-|--------------|------------|----------------------------|
-| `--ink`      | `#14181f`  | Primary text               |
-| `--ink-soft` | `#3b4250`  | Secondary text             |
-| `--steel`    | `#4f73a8`  | Primary accent (logo blue) |
-| `--steel-lt` | `#6b8fc4`  | Lighter accent             |
-| `--steel-dk` | `#3a5880`  | Accent text on light       |
-| `--bg`       | `#f6f5f2`  | Page background            |
-| `--surface`  | `#ffffff`  | Cards / elevated surfaces  |
+Full set in `:root` in `styles.css`. The ones that carry meaning:
+
+| Token       | Value     | Usage                                  |
+|-------------|-----------|----------------------------------------|
+| `--ink-900` | `#0f1216` | Dark surface: hero, proof, closing CTA |
+| `--ink-850` | `#12161c` | Elevated dark: data strip, cards, footer |
+| `--paper`   | `#f7f6f3` | Light surface: long-form content       |
+| `--tinte`   | `#edf0f4` | Alternating light band                 |
+| `--steel`   | `#4f73a8` | Brand blue — structure, links, icons   |
+| `--ember`   | `#c2560f` | Action — primary CTAs, active nav      |
+| `--texto`   | `#14181f` | Body text on light                     |
+| `--fog-300` | `#a4aebd` | Body text on dark                      |
+
+Steel is never a call to action and ember is never structure. Keeping that split is what makes the
+warm/cool duality read as a system rather than as two random colors.
 
 ## Gotchas
 
 - **Do not animate `max-height` for reveals.** A previous `carouselSlideIn` went from `0` to `600px`
   with `animation-fill-mode: both`, so the cap stuck permanently and clipped the service panel on
-  narrow screens (needs 667px at 320px wide). Animate opacity and transform instead.
+  narrow screens. Animate opacity and transform instead.
+- **Declare `canonical` per page, never in `__root.tsx`.** A canonical on the root route is
+  inherited by every route and points them all at the home page.
 - **`netlify.toml` headers do not reach the HTML response.** They apply to static CDN assets only;
   the document is served by the SSR function and bypasses them. Verified against production.
 - The repo sits inside a OneDrive-synced path, which makes a cold `npm run dev` take ~2 minutes.
