@@ -11,7 +11,22 @@ const config = defineConfig({
       projects: ['./tsconfig.json'],
     }),
     tailwindcss(),
-    netlify(),
+    netlify({
+      dev: {
+        // La emulación local de edge functions corre sobre Deno y añade entre 12
+        // y 36 segundos por petición en esta máquina, lo que deja el servidor de
+        // desarrollo inservible. La función se despliega y corre igual en
+        // producción; sólo se apaga su emulación aquí.
+        //
+        // Para verificarla en local, poner `enabled: true` y comprobar las
+        // cabeceras con:
+        //   curl -s -D - -o /dev/null http://localhost:3000/
+        edgeFunctions: { enabled: false },
+        // El proyecto no usa base de datos y su arranque local falla en cada
+        // inicio con "RuntimeError: unreachable".
+        database: { enabled: false },
+      },
+    }),
     tanstackStart(),
     viteReact(),
   ],

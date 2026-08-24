@@ -128,7 +128,15 @@ warm/cool duality read as a system rather than as two random colors.
 - **Declare `canonical` per page, never in `__root.tsx`.** A canonical on the root route is
   inherited by every route and points them all at the home page.
 - **`netlify.toml` headers do not reach the HTML response.** They apply to static CDN assets only;
-  the document is served by the SSR function and bypasses them. Verified against production.
+  the document is served by the SSR function and bypasses them — verified against production. That
+  is why `netlify/edge-functions/security-headers.ts` exists: an edge function runs ahead of the
+  origin and can set headers on every response, SSR included. It is the authority; the `netlify.toml`
+  block stays as a floor in case the edge function fails to deploy.
+- **The CSP is skipped on localhost** — Vite's dev server needs WebSocket and module behaviour the
+  production policy blocks. Every other security header applies in both environments, so they can be
+  checked in development.
+- **The first `npm run dev` after cloning downloads Deno** (the edge-function emulator) and can fail
+  once while it does. Re-run it; the second start works.
 - The repo sits inside a OneDrive-synced path, which makes a cold `npm run dev` take ~2 minutes.
 
 ## Contact Links

@@ -24,6 +24,23 @@ npm run typecheck
 > El repositorio vive dentro de una carpeta sincronizada por OneDrive, lo que hace que un arranque
 > en frío tarde cerca de dos minutos. Moverlo fuera de OneDrive lo deja en segundos.
 
+## Cabeceras de seguridad
+
+Las declaradas en `netlify.toml` sólo alcanzan a los archivos estáticos del CDN: el HTML lo emite la
+función SSR y no pasa por esa capa. Por eso existe `netlify/edge-functions/security-headers.ts`, que
+corre por delante del origen y las fija en **toda** respuesta.
+
+Su emulación local está **apagada** en `vite.config.ts`: corre sobre Deno y añadía entre 12 y 36
+segundos por petición. La función se despliega y funciona igual en producción. Para verificarla en
+local, poner `edgeFunctions: { enabled: true }` en `vite.config.ts` y:
+
+```bash
+curl -s -D - -o /dev/null http://localhost:3000/
+```
+
+La CSP no se aplica en `localhost` — el servidor de Vite necesita WebSocket y módulos que la
+política de producción bloquea. El resto de cabeceras sí, y se pueden comprobar en desarrollo.
+
 ## Páginas
 
 | Ruta | Contenido |
