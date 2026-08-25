@@ -77,6 +77,11 @@ from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line
   didone reads as a perfume house, which contradicts the trade.
 - **The logo mark is kept, the serif wordmark is not.** Header and footer use `marca-clara.png` (the
   circle alone) — the full `logo.png` is 1024x1024 and was being displayed at 34px.
+- **The official logo is `Calor & Frío Industrial 101.png`**, in the company folder under
+  `08 Marca y Marketing/Identidad/Logotipos/`. `public/logo.png` is a byte-identical copy of it, and
+  `marca.png`, `marca-clara.png` and `og-image.jpg` are all derived from that same file — verified by
+  hash. Regenerate them from 101 if it ever changes. Ignore the `Transparent …` variants: despite the
+  name they are mockups rendered on a grey gradient, not transparent artwork.
 - **No external icon library**: SVG icons are inlined in `components/icons.tsx`.
 - **Carousel images**: files in `src/assets/images/{asesorias,capacitaciones,servicios}/`, picked up
   by `import.meta.glob` in `src/lib/images.ts` — dropping a file in the folder is enough.
@@ -92,6 +97,13 @@ from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line
   as in force when it is not is grounds for exclusion from a tender.
 - Facts on the site must be traceable to a document in the company folder (tax record, CV,
   certificates, inventory).
+
+## Contact
+ 
+**`contacto@caloryfrioindustrial.cl` is the company's official address, always** (decided
+2026-08-24). It lives in `src/lib/company.ts` and nowhere else in the code. Any `@gmail` address is
+wrong — three different combinations of email and phone used to circulate between the site, the
+business cards and the quotes.
 
 ## Contact form
 
