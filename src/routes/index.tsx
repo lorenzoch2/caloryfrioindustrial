@@ -69,11 +69,13 @@ function Portada() {
             Contratista de ingeniería térmica · Santiago de Chile
           </p>
           <h1 className="hero-titulo">
-            No lo diagnosticamos<br />por teléfono.
+            Climatización, refrigeración industrial y ventilación
+            {' '}<span className="acento">con diagnóstico en terreno</span>
           </h1>
           <p className="hero-bajada">
-            Vamos, medimos y le decimos qué tiene. Climatización, refrigeración industrial y
-            ventilación para instalaciones que no pueden permitirse una parada.
+            Un mismo equipo desde el levantamiento hasta el informe de cierre. Dirección técnica
+            con más de treinta años en refrigeración industrial, instrumentación propia y visita
+            a terreno antes de cotizar.
           </p>
           <div className="hero-acciones">
             <Link to="/contacto" className="btn btn-acento btn-lg">
@@ -147,7 +149,7 @@ function Portada() {
           <div className="split-copy">
             <RotuloSeccion
               eyebrow="Por qué nosotros"
-              titulo="Treinta años que no se improvisan"
+              titulo="Treinta años de dirección técnica"
             />
             <p className="parrafo">
               La dirección técnica está a cargo de <strong>{company.direccionTecnica}</strong>, con más

@@ -24,6 +24,7 @@ export function SiteFooter() {
             height={112}
             loading="lazy"
           />
+          <p className="footer-slogan">{company.lema}</p>
           <p className="footer-lema">
             Climatización, refrigeración industrial y ventilación en {company.areaServicio}.
           </p>

@@ -417,7 +417,7 @@ a:hover { color: var(--steel); }
   min-height: min(78vh, 660px);
   display: flex;
   align-items: center;
-  padding: clamp(4rem, 10vw, 7rem) 0;
+  padding: clamp(3rem, 7.5vw, 5.25rem) 0;
   overflow: hidden;
 }
 .hero-foto {
@@ -447,7 +447,7 @@ a:hover { color: var(--steel); }
   }
 }
 .hero-contenido { position: relative; z-index: 1; }
-.hero-contenido .eyebrow { margin-bottom: 1.25rem; }
+.hero-contenido .eyebrow { margin-bottom: 1rem; }
 /*
   El logotipo completo sólo aparece donde tiene espacio para respirar. La barra
   fija mide 68 px de alto: a ese tamaño el lettering serif no se lee, y por eso
@@ -455,19 +455,22 @@ a:hover { color: var(--steel); }
 */
 .hero-logotipo {
   display: block;
-  width: clamp(200px, 22vw, 264px);
+  width: clamp(140px, 13vw, 168px);
   height: auto;
-  margin-bottom: 1.9rem;
+  margin-bottom: 1.35rem;
 }
 .hero-titulo {
-  font-size: clamp(2.3rem, 6.2vw, 4rem);
+  font-size: clamp(1.8rem, 4.1vw, 2.75rem);
   font-weight: 600;
-  line-height: 1.03;
-  letter-spacing: -0.03em;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
   color: var(--sobre-banda);
-  max-width: 16ch;
+  max-width: 23ch;
   text-wrap: balance;
 }
+/* El diferenciador va en latón: es lo único del titular que no es descripción
+   del rubro, y conviene que se lea aparte. */
+.hero-titulo .acento { color: var(--laton-dk); }
 .hero-bajada {
   margin-top: 1.5rem;
   font-size: clamp(1rem, 1.8vw, 1.12rem);
@@ -1052,6 +1055,20 @@ a:hover { color: var(--steel); }
   height: auto;
   margin-bottom: 1.2rem;
 }
+/*
+  El lema de la empresa, no la descripción. Va en versalitas espaciadas y en
+  latón oscuro: se lee como firma de la marca y no compite con el texto que
+  sigue, que sí explica a qué se dedican.
+*/
+.footer-slogan {
+  margin-top: -0.5rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--laton-dk);
+}
+
 .footer-lema {
   margin-top: 0.5rem;
   font-size: 0.85rem;

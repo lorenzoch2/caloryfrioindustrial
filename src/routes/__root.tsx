@@ -6,11 +6,28 @@ import { SiteFooter } from '../components/SiteFooter'
 import { Animaciones } from '../components/Animaciones'
 
 const SITE_URL = company.sitio.url
-const OG_IMAGE = `${SITE_URL}/og-image.jpg`
+/*
+  El nombre lleva la fecha a propósito. WhatsApp, LinkedIn y X guardan la vista
+  previa por URL y no vuelven a pedir la imagen aunque el archivo cambie: si se
+  reemplaza `og-image.jpg` en su sitio, los enlaces ya compartidos —y los nuevos—
+  siguen mostrando la tarjeta vieja durante semanas. Al cambiar el nombre, la
+  vista previa se regenera. Al rediseñarla, poner el mes nuevo.
+*/
+const OG_IMAGE = `${SITE_URL}/og-2026-08.jpg`
 
 const TITULO = 'Calor & Frío Industrial — Climatización y Refrigeración Industrial en Santiago'
 const DESCRIPCION =
   'Empresa de ingeniería en climatización, refrigeración industrial y ventilación en Santiago. Mantención, asesorías e ITO y capacitación técnica para clientes industriales, comerciales y públicos.'
+
+/*
+  Al pegar el enlace en WhatsApp el título se corta cerca de los 65 caracteres y
+  la descripción cerca de los 120. El título de SEO mide 79 y la descripción 218,
+  así que en la vista previa se cortaban a media frase. Estas dos versiones dicen
+  lo mismo dentro del espacio que hay.
+*/
+const TITULO_SOCIAL = `${company.nombreFantasia} — ${company.lema}`
+const DESCRIPCION_SOCIAL =
+  'Climatización, refrigeración industrial y ventilación con diagnóstico en terreno. Santiago de Chile.'
 
 const structuredData = JSON.stringify(buildStructuredData())
 
@@ -38,18 +55,21 @@ export const Route = createRootRoute({
       { name: 'geo.region', content: 'CL-RM' },
       { name: 'geo.placename', content: company.domicilio.comuna },
       { property: 'og:site_name', content: company.nombreFantasia },
-      { property: 'og:title', content: TITULO },
-      { property: 'og:description', content: DESCRIPCION },
+      { property: 'og:title', content: TITULO_SOCIAL },
+      { property: 'og:description', content: DESCRIPCION_SOCIAL },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: SITE_URL },
       { property: 'og:image', content: OG_IMAGE },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '630' },
+      { property: 'og:image:type', content: 'image/jpeg' },
+      { property: 'og:image:alt', content: `${company.nombreFantasia} · ${company.lema}` },
       { property: 'og:locale', content: 'es_CL' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: TITULO },
-      { name: 'twitter:description', content: DESCRIPCION },
+      { name: 'twitter:title', content: TITULO_SOCIAL },
+      { name: 'twitter:description', content: DESCRIPCION_SOCIAL },
       { name: 'twitter:image', content: OG_IMAGE },
+      { name: 'twitter:image:alt', content: `${company.nombreFantasia} · ${company.lema}` },
     ],
     links: [
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },

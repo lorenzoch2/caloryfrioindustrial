@@ -12,6 +12,7 @@
 export const company = {
   razonSocial: 'Calor y Frío Industrial SpA',
   nombreFantasia: 'Calor & Frío Industrial',
+  lema: 'Soluciones Térmicas Integrales',
   rut: '78.333.185-3',
   giro: 'Instalaciones de gasfitería, calefacción y aire acondicionado',
   codigoActividad: '432200',
