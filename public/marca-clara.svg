@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Calor y Frio Industrial">
+  <title>Calor y Frio Industrial - simbolo para fondo oscuro</title>
+  <defs><clipPath id="c"><circle cx="100" cy="100" r="96"/></clipPath></defs><g clip-path="url(#c)" transform="rotate(-27 100 100)"><rect x="2" y="-60" width="42" height="320" fill="#A9803F"/><rect x="57" y="-60" width="42" height="320" fill="#A9803F"/><rect x="112" y="-60" width="42" height="320" fill="#EDF0F5"/><rect x="167" y="-60" width="42" height="320" fill="#EDF0F5"/></g>
+</svg>

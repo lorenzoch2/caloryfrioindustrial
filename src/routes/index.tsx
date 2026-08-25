@@ -41,6 +41,19 @@ function Portada() {
         />
         <div className="hero-velo" aria-hidden="true" />
         <div className="contenedor hero-contenido">
+          {/*
+            Lockup vertical: el símbolo con el nombre debajo. La cabecera usa el
+            horizontal, que cabe en una barra de 68 px. Ambos traen el texto en
+            curvas, así que no dependen de que cargue ninguna fuente.
+          */}
+          <img
+            className="hero-logotipo"
+            src="/lockup-vertical.svg"
+            alt="Calor &amp; Frío Industrial"
+            width={346}
+            height={242}
+            fetchPriority="high"
+          />
           <p className="eyebrow eyebrow--acento">
             Contratista de ingeniería térmica · Santiago de Chile
           </p>

@@ -47,11 +47,11 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="site-header-inner">
         <Link to="/" className="marca" aria-label={`${company.nombreFantasia} — inicio`}>
-          <img src="/marca-clara.png" alt="" width={34} height={34} />
-          <span className="marca-texto">
-            <span className="marca-nombre">Calor &amp; Frío Industrial</span>
-            <span className="marca-bajada">Ingeniería térmica</span>
-          </span>
+          {/*
+            El lockup horizontal trae el texto en curvas, así que la marca se ve
+            igual aquí que en un letrero, sin depender de fuentes cargadas.
+          */}
+          <img src="/lockup-horizontal.svg" alt={company.nombreFantasia} width={406} height={112} />
         </Link>
 
         <nav className="nav-desktop" aria-label="Principal">

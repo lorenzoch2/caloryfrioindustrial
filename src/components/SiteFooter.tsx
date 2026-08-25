@@ -8,8 +8,14 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-inner">
         <div className="footer-marca">
-          <img src="/marca-clara.png" alt="" width={40} height={40} />
-          <p className="footer-nombre">{company.nombreFantasia}</p>
+          <img
+            className="footer-logotipo"
+            src="/lockup-horizontal.svg"
+            alt={company.nombreFantasia}
+            width={406}
+            height={112}
+            loading="lazy"
+          />
           <p className="footer-lema">
             Climatización, refrigeración industrial y ventilación en {company.areaServicio}.
           </p>

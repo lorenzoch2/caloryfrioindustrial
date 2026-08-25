@@ -37,9 +37,17 @@
   --steel:    #4f73a8;
   --steel-dk: #3a5880;
   --steel-lt: #7ea3d8;
-  --ember:    #c2560f;
-  --ember-dk: #a44608;
-  --ember-lt: #e07a33;
+  /*
+    Latón de marca. Tres valores porque el contraste manda:
+      --laton     fondos, marcas y acentos sobre oscuro (5,2:1 sobre --ink-900)
+      --laton-dk  texto latón sobre fondo claro (4,8:1; el de marca sólo da 3,3:1)
+      --laton-lt  realce en hover sobre fondos oscuros
+    Los botones llevan texto grafito, no blanco: blanco sobre latón da 3,6:1 y no
+    pasa; grafito sobre latón da 4,95:1 y además se ve mejor.
+  */
+  --laton:    #a9803f;
+  --laton-dk: #8a6730;
+  --laton-lt: #c49c58;
 
   --sans: 'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
   --mono: 'IBM Plex Mono', 'Consolas', ui-monospace, monospace;
@@ -88,7 +96,7 @@ a:hover { color: var(--steel); }
   position: absolute;
   left: -9999px;
   z-index: 200;
-  background: var(--ember);
+  background: var(--laton-dk);
   color: #fff;
   padding: 0.75rem 1.25rem;
   font-size: 0.85rem;
@@ -194,8 +202,8 @@ a:hover { color: var(--steel); }
 .btn-sm { padding: 0.65rem 1.1rem; min-height: 38px; font-size: 0.78rem; }
 .btn-lg { padding: 1rem 1.75rem; min-height: 52px; font-size: 0.88rem; }
 
-.btn-acento { background: var(--ember); color: #fff; }
-.btn-acento:hover { background: var(--ember-dk); color: #fff; }
+.btn-acento { background: var(--laton); color: var(--ink-900); }
+.btn-acento:hover { background: var(--laton-lt); color: var(--ink-900); }
 
 .btn-primario { background: var(--steel); color: #fff; }
 .btn-primario:hover { background: var(--steel-dk); color: #fff; }
@@ -250,18 +258,8 @@ a:hover { color: var(--steel); }
   gap: 1.5rem;
 }
 
-.marca { display: flex; align-items: center; gap: 0.7rem; color: var(--fog-100); }
-.marca:hover { color: var(--fog-100); }
-.marca img { display: block; width: 34px; height: 34px; }
-.marca-texto { display: flex; flex-direction: column; gap: 1px; }
-.marca-nombre { font-size: 0.9rem; font-weight: 600; letter-spacing: 0.005em; }
-.marca-bajada {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--fog-500);
-}
+.marca { display: flex; align-items: center; }
+.marca img { display: block; width: clamp(150px, 17vw, 178px); height: auto; }
 
 .nav-desktop { display: flex; align-items: center; gap: 1.5rem; }
 .nav-link {
@@ -272,7 +270,7 @@ a:hover { color: var(--steel); }
   border-bottom: 2px solid transparent;
 }
 .nav-link:hover { color: var(--fog-100); }
-.nav-link--activo { color: #fff; border-bottom-color: var(--ember); }
+.nav-link--activo { color: #fff; border-bottom-color: var(--laton); }
 
 .nav-toggle {
   display: none;
@@ -338,6 +336,17 @@ a:hover { color: var(--steel); }
 }
 .hero-contenido { position: relative; z-index: 1; }
 .hero-contenido .eyebrow { margin-bottom: 1.25rem; }
+/*
+  El logotipo completo sólo aparece donde tiene espacio para respirar. La barra
+  fija mide 68 px de alto: a ese tamaño el lettering serif no se lee, y por eso
+  ahí va únicamente el símbolo.
+*/
+.hero-logotipo {
+  display: block;
+  width: clamp(200px, 22vw, 264px);
+  height: auto;
+  margin-bottom: 1.9rem;
+}
 .hero-titulo {
   font-size: clamp(2.3rem, 6.2vw, 4rem);
   font-weight: 600;
@@ -487,7 +496,7 @@ a:hover { color: var(--steel); }
 .servicio-numero {
   font-family: var(--mono);
   font-size: 0.78rem;
-  color: var(--ember);
+  color: var(--laton-dk);
   margin-bottom: 0.9rem;
 }
 .servicio-titulo {
@@ -759,7 +768,7 @@ a:hover { color: var(--steel); }
   cursor: pointer;
   transition: background 0.18s ease;
 }
-.carousel-dot.active { background: var(--ember); }
+.carousel-dot.active { background: var(--laton); }
 .carousel-counter {
   font-family: var(--mono);
   font-size: 0.75rem;
@@ -829,7 +838,7 @@ a:hover { color: var(--steel); }
   text-transform: uppercase;
   color: var(--texto-mut);
 }
-.contact-field > span em { color: var(--ember); font-style: normal; }
+.contact-field > span em { color: var(--laton-dk); font-style: normal; }
 .contact-field input,
 .contact-field select,
 .contact-field textarea {
@@ -908,8 +917,12 @@ a:hover { color: var(--steel); }
   grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
   gap: 2.5rem;
 }
-.footer-marca img { display: block; margin-bottom: 1rem; }
-.footer-nombre { font-size: 1rem; font-weight: 600; color: var(--fog-100); }
+.footer-logotipo {
+  display: block;
+  width: clamp(178px, 20vw, 208px);
+  height: auto;
+  margin-bottom: 1.2rem;
+}
 .footer-lema {
   margin-top: 0.5rem;
   font-size: 0.85rem;

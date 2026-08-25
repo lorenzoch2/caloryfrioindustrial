@@ -71,17 +71,22 @@ from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line
 - **Two alternating surfaces**: dark (`--ink-900`) for hero, proof and closing CTA; light
   (`--paper`) for long-form content, which is where reading actually happens.
 - **The accent is deliberately double, taken from the logo**: steel blue (`--steel`) for structure
-  and links, ember (`--ember`) for action. Cold and hot doing a job, not decorating.
+  and links, brass (`--laton`) for action. Cold and hot doing a job, not decorating.
+- **Brass buttons carry graphite text, never white.** White on `--laton` measures 3.6:1 and fails
+  the contrast minimum; graphite on brass measures 4.95:1. Brass as *text* only works on dark
+  grounds — on light ones use `--laton-dk` (`#8a6730`, 4.8:1).
 - **Typography is IBM Plex Sans + IBM Plex Mono.** Mono carries eyebrows, figures and field labels
   so data reads as data. The previous Cormorant Garamond was retired on purpose: a high-contrast
   didone reads as a perfume house, which contradicts the trade.
-- **The logo mark is kept, the serif wordmark is not.** Header and footer use `marca-clara.png` (the
-  circle alone) — the full `logo.png` is 1024x1024 and was being displayed at 34px.
-- **The official logo is `Calor & Frío Industrial 101.png`**, in the company folder under
-  `08 Marca y Marketing/Identidad/Logotipos/`. `public/logo.png` is a byte-identical copy of it, and
-  `marca.png`, `marca-clara.png` and `og-image.jpg` are all derived from that same file — verified by
-  hash. Regenerate them from 101 if it ever changes. Ignore the `Transparent …` variants: despite the
-  name they are mockups rendered on a grey gradient, not transparent artwork.
+- **The brand is the *celosía*** — the angled blades of a damper or diffuser — adopted 2026-08-25,
+  replacing the S-split circle. Every asset is SVG with **text converted to outlines**, so nothing
+  depends on a font being available. Source of truth is the company folder,
+  `08 Marca y Marketing/Identidad/Vectores/`; `public/` holds copies. The rules live in that
+  folder's `LÉEME - Manual de marca.md` — read it before touching brand assets.
+- **Use the lockups, do not retype the name.** The header and footer render
+  `lockup-horizontal.svg` and the home hero renders `lockup-vertical.svg`. Setting "Calor & Frío
+  Industrial" as live text next to the symbol would drift from the trademarked artwork.
+- `public/logo.png` is the **previous** logo, kept only as history. Nothing references it.
 - **No external icon library**: SVG icons are inlined in `components/icons.tsx`.
 - **Carousel images**: files in `src/assets/images/{asesorias,capacitaciones,servicios}/`, picked up
   by `import.meta.glob` in `src/lib/images.ts` — dropping a file in the folder is enough.
