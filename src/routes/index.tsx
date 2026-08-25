@@ -8,6 +8,7 @@ import {
   IconComercio, IconFlecha, IconHogar, IconIndustria, IconPublico,
 } from '../components/icons'
 import { CierreCTA, FranjaDatos, RotuloSeccion, Seccion } from '../components/ui'
+import { useParallax } from '../lib/movimiento'
 
 export const Route = createFileRoute('/')({
   // El canonical se declara por página, no en la raíz: en la raíz lo heredarían
@@ -26,11 +27,14 @@ const iconosSegmento: Record<string, React.ComponentType<{ size?: number }>> = {
 }
 
 function Portada() {
+  const foto = useParallax<HTMLImageElement>()
+
   return (
     <>
       {/* ── HERO ── */}
       <div className="hero">
         <img
+          ref={foto}
           className="hero-foto"
           src={heroAncho}
           srcSet={`${heroAngosto} 760w, ${heroAncho} 1280w`}

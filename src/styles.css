@@ -1109,8 +1109,62 @@ html.js [data-revelar] {
 html.js [data-revelar].visible {
   opacity: 1;
   transform: none;
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.55s ease var(--retardo, 0ms),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--retardo, 0ms);
 }
+
+/*
+  Escalonado. Las rejillas no entran como un bloque sino carta por carta: se
+  lee como una secuencia y no como un telón que sube.
+*/
+html.js [data-revelar] .segmentos-grid > *,
+html.js [data-revelar] .servicios-grid > *,
+html.js [data-revelar] .metodologia > *,
+html.js [data-revelar] .alcance-grid > *,
+html.js [data-revelar] .equipo-grid > *,
+html.js [data-revelar] .lista-check > *,
+html.js [data-revelar] .sectores-lista > * {
+  opacity: 0;
+  transform: translateY(14px);
+}
+html.js [data-revelar].visible .segmentos-grid > *,
+html.js [data-revelar].visible .servicios-grid > *,
+html.js [data-revelar].visible .metodologia > *,
+html.js [data-revelar].visible .alcance-grid > *,
+html.js [data-revelar].visible .equipo-grid > *,
+html.js [data-revelar].visible .lista-check > *,
+html.js [data-revelar].visible .sectores-lista > * {
+  animation: entra 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(1) { animation-delay: 0.10s; }
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(2) { animation-delay: 0.17s; }
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(3) { animation-delay: 0.24s; }
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(4) { animation-delay: 0.31s; }
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(5) { animation-delay: 0.38s; }
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(n+6) { animation-delay: 0.45s; }
+
+/* La regla de la metodología se dibuja de izquierda a derecha al aparecer. */
+html.js .metodologia-paso { border-top-color: transparent; position: relative; }
+html.js .metodologia-paso::after {
+  content: "";
+  position: absolute; top: -2px; left: 0;
+  height: 2px; width: 0;
+  background: var(--steel);
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
+}
+html.js [data-revelar].visible .metodologia-paso::after { width: 100%; }
+
+/* La franja de cifras entra escalonada con el retardo que fija cada dato. */
+html.js .franja-dato { opacity: 0; transform: translateY(10px); }
+html.js [data-revelar].visible .franja-dato {
+  opacity: 1; transform: none;
+  transition: opacity 0.5s ease var(--retardo, 0ms),
+              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--retardo, 0ms);
+}
+.franja-dato-valor { font-variant-numeric: tabular-nums; }
+
+/* La foto del hero se mueve más lento que la página. */
+.hero-foto { will-change: transform; }
 
 /* ─── Entrada de la portada ─── */
 @keyframes entra {
@@ -1181,7 +1235,16 @@ html.js .hero-foto { animation: asienta 1.4s cubic-bezier(0.22, 1, 0.36, 1) both
 .boton-arriba:hover { background: var(--laton-lt); }
 
 @media (prefers-reduced-motion: reduce) {
-  html.js [data-revelar] { opacity: 1; transform: none; }
+  html.js [data-revelar],
+  html.js [data-revelar] :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *,
+  html.js .franja-dato {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+  html.js .metodologia-paso { border-top-color: var(--steel); }
+  html.js .metodologia-paso::after { display: none; }
   html.js .hero-contenido > *,
   html.js .hero-foto { animation: none; }
   .servicio-card:hover,

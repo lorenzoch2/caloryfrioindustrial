@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Link } from '@tanstack/react-router'
 import { IconFlecha } from './icons'
+import { useContador, useRevelar } from '../lib/movimiento'
 
 /**
  * Sección de página. `tono` elige una de las tres superficies claras:
@@ -18,9 +19,10 @@ export function Seccion({
   ancho?: 'normal' | 'estrecho'
   children: ReactNode
 }) {
+  const ref = useRevelar<HTMLDivElement>()
   return (
     <section id={id} className={`seccion seccion--${tono}`}>
-      <div className={`contenedor contenedor--${ancho}`} data-revelar>{children}</div>
+      <div ref={ref} className={`contenedor contenedor--${ancho}`} data-revelar>{children}</div>
     </section>
   )
 }
@@ -60,9 +62,10 @@ export function HeroPagina({
   bajada?: string
   children?: ReactNode
 }) {
+  const ref = useRevelar<HTMLDivElement>()
   return (
     <div className="hero-pagina">
-      <div className="contenedor" data-revelar>
+      <div ref={ref} className="contenedor" data-revelar>
         <p className="eyebrow eyebrow--acento">{eyebrow}</p>
         <h1 className="hero-pagina-titulo">{titulo}</h1>
         {bajada && <p className="hero-pagina-bajada">{bajada}</p>}
@@ -74,18 +77,27 @@ export function HeroPagina({
 
 /** Franja de cifras. Los valores van en monoespaciada para que se lean como datos. */
 export function FranjaDatos({ datos }: { datos: { valor: string; etiqueta: string }[] }) {
+  const ref = useRevelar<HTMLDivElement>()
   return (
     <div className="franja-datos">
-      <div className="contenedor contenedor--full" data-revelar>
+      <div ref={ref} className="contenedor contenedor--full" data-revelar>
         <dl className="franja-datos-grid">
-          {datos.map(dato => (
-            <div key={dato.etiqueta} className="franja-dato">
-              <dt className="franja-dato-valor">{dato.valor}</dt>
-              <dd className="franja-dato-etiqueta">{dato.etiqueta}</dd>
-            </div>
+          {datos.map((dato, i) => (
+            <Dato key={dato.etiqueta} {...dato} indice={i} />
           ))}
         </dl>
       </div>
+    </div>
+  )
+}
+
+/** Una cifra de la franja. El número sube al entrar en pantalla. */
+function Dato({ valor, etiqueta, indice }: { valor: string; etiqueta: string; indice: number }) {
+  const ref = useContador(valor)
+  return (
+    <div className="franja-dato" style={{ '--retardo': `${indice * 90}ms` } as React.CSSProperties}>
+      <dt className="franja-dato-valor" ref={ref}>{valor}</dt>
+      <dd className="franja-dato-etiqueta">{etiqueta}</dd>
     </div>
   )
 }
@@ -98,9 +110,10 @@ export function CierreCTA({
   titulo?: string
   bajada?: string
 }) {
+  const ref = useRevelar<HTMLDivElement>()
   return (
     <section className="cierre-cta">
-      <div className="contenedor cierre-cta-inner" data-revelar>
+      <div ref={ref} className="contenedor cierre-cta-inner" data-revelar>
         <div>
           <h2 className="cierre-cta-titulo">{titulo}</h2>
           <p className="cierre-cta-bajada">{bajada}</p>
