@@ -20,7 +20,7 @@ export function Seccion({
 }) {
   return (
     <section id={id} className={`seccion seccion--${tono}`}>
-      <div className={`contenedor contenedor--${ancho}`}>{children}</div>
+      <div className={`contenedor contenedor--${ancho}`} data-revelar>{children}</div>
     </section>
   )
 }
@@ -62,7 +62,7 @@ export function HeroPagina({
 }) {
   return (
     <div className="hero-pagina">
-      <div className="contenedor">
+      <div className="contenedor" data-revelar>
         <p className="eyebrow eyebrow--acento">{eyebrow}</p>
         <h1 className="hero-pagina-titulo">{titulo}</h1>
         {bajada && <p className="hero-pagina-bajada">{bajada}</p>}
@@ -76,7 +76,7 @@ export function HeroPagina({
 export function FranjaDatos({ datos }: { datos: { valor: string; etiqueta: string }[] }) {
   return (
     <div className="franja-datos">
-      <div className="contenedor contenedor--full">
+      <div className="contenedor contenedor--full" data-revelar>
         <dl className="franja-datos-grid">
           {datos.map(dato => (
             <div key={dato.etiqueta} className="franja-dato">
@@ -100,7 +100,7 @@ export function CierreCTA({
 }) {
   return (
     <section className="cierre-cta">
-      <div className="contenedor cierre-cta-inner">
+      <div className="contenedor cierre-cta-inner" data-revelar>
         <div>
           <h2 className="cierre-cta-titulo">{titulo}</h2>
           <p className="cierre-cta-bajada">{bajada}</p>

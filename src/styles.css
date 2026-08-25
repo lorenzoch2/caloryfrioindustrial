@@ -1091,3 +1091,100 @@ a:hover { color: var(--steel); }
   .contacto-datos > div { grid-template-columns: 1fr; gap: 0.2rem; }
   .site-footer-inner { grid-template-columns: 1fr; gap: 2rem; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MOVIMIENTO
+
+   Tres cosas y ninguna más: la portada entra escalonada, los bloques
+   se revelan al llegar a pantalla, y las tarjetas responden al puntero.
+   Todo se apaga con prefers-reduced-motion, y el estado oculto cuelga
+   de `html.js` para que sin JavaScript la página se vea entera.
+   ═══════════════════════════════════════════════════════════════ */
+
+html.js [data-revelar] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+html.js [data-revelar].visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── Entrada de la portada ─── */
+@keyframes entra {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+html.js .hero-contenido > * {
+  animation: entra 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+html.js .hero-logotipo        { animation-delay: 0.05s; }
+html.js .hero-contenido .eyebrow { animation-delay: 0.16s; }
+html.js .hero-titulo          { animation-delay: 0.24s; }
+html.js .hero-bajada          { animation-delay: 0.34s; }
+html.js .hero-acciones        { animation-delay: 0.44s; }
+
+/* La foto entra con un acercamiento mínimo: da profundidad sin marear. */
+@keyframes asienta {
+  from { transform: scale(1.05); }
+  to   { transform: none; }
+}
+html.js .hero-foto { animation: asienta 1.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* ─── Respuesta al puntero ─── */
+.servicio-card,
+.alcance-item,
+.persona,
+.cred-card {
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.22s ease,
+              border-color 0.22s ease;
+}
+.servicio-card:hover,
+.persona:hover {
+  transform: translateY(-3px);
+  border-color: var(--line-2);
+  box-shadow: 0 14px 30px rgba(20, 24, 31, 0.07);
+}
+.btn { will-change: transform; }
+.btn:active { transform: translateY(1px); }
+
+/* ─── Botón para volver arriba ─── */
+.boton-arriba {
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 90;
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--laton);
+  color: #14181f;   /* grafito sobre latón: 4,95:1, igual que los botones de acento */
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(20, 24, 31, 0.18);
+  opacity: 0;
+  transform: translateY(10px) scale(0.94);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.18s ease;
+}
+.boton-arriba.visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.boton-arriba:hover { background: var(--laton-lt); }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-revelar] { opacity: 1; transform: none; }
+  html.js .hero-contenido > *,
+  html.js .hero-foto { animation: none; }
+  .servicio-card:hover,
+  .persona:hover { transform: none; }
+  .boton-arriba { transition: opacity 0.01ms; }
+}

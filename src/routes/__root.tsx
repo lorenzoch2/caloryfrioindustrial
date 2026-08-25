@@ -3,6 +3,7 @@ import '../styles.css'
 import { buildStructuredData, company } from '../lib/company'
 import { SiteHeader } from '../components/SiteHeader'
 import { SiteFooter } from '../components/SiteFooter'
+import { Animaciones } from '../components/Animaciones'
 
 const SITE_URL = company.sitio.url
 const OG_IMAGE = `${SITE_URL}/og-image.jpg`
@@ -18,8 +19,12 @@ const structuredData = JSON.stringify(buildStructuredData())
   página aparecería un instante con el tema equivocado antes de hidratar.
   El claro es el tema principal: sólo se usa el oscuro si la persona lo eligió,
   no por la preferencia del sistema.
+
+  También marca `html.js`. De esa clase cuelga el estado oculto de las
+  animaciones: sin JavaScript no se aplica y todo se ve, en vez de quedar el
+  contenido con opacidad cero.
 */
-const scriptTema = `try{document.documentElement.dataset.tema=localStorage.getItem('tema')==='oscuro'?'oscuro':'claro'}catch(e){document.documentElement.dataset.tema='claro'}`
+const scriptTema = `document.documentElement.classList.add('js');try{document.documentElement.dataset.tema=localStorage.getItem('tema')==='oscuro'?'oscuro':'claro'}catch(e){document.documentElement.dataset.tema='claro'}`
 
 export const Route = createRootRoute({
   head: () => ({
@@ -92,6 +97,7 @@ function RootLayout() {
         <Outlet />
       </main>
       <SiteFooter />
+      <Animaciones />
     </>
   )
 }
