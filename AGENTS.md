@@ -137,7 +137,11 @@ warm/cool duality read as a system rather than as two random colors.
   checked in development.
 - **The first `npm run dev` after cloning downloads Deno** (the edge-function emulator) and can fail
   once while it does. Re-run it; the second start works.
-- The repo sits inside a OneDrive-synced path, which makes a cold `npm run dev` take ~2 minutes.
+- **Keep this repo out of OneDrive.** It lives at `D:\GitHub\caloryfrioindustrial`, alongside the
+  other repositories. It used to sit inside the OneDrive-synced company folder, where OneDrive was
+  syncing all ~28.000 files of `node_modules` one by one: a cold `npm run dev` took 128 s, and
+  OneDrive held a lock on the directory that made it impossible to move until `node_modules` was
+  deleted. Outside OneDrive the same start takes ~7 s.
 
 ## Contact Links
 

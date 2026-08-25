@@ -21,8 +21,10 @@ npm run dev        # http://localhost:3000
 npm run typecheck
 ```
 
-> El repositorio vive dentro de una carpeta sincronizada por OneDrive, lo que hace que un arranque
-> en frío tarde cerca de dos minutos. Moverlo fuera de OneDrive lo deja en segundos.
+> **Este repositorio no debe vivir dentro de OneDrive.** Su lugar es `D:\GitHub\`, junto al resto
+> de los repositorios. Estuvo dentro de la carpeta de empresa sincronizada y OneDrive sincronizaba
+> los ~28.000 archivos de `node_modules` uno por uno: el arranque en frío tardaba 128 segundos y la
+> carpeta quedaba bloqueada. Fuera de OneDrive, arranca en unos 7 segundos.
 
 ## Cabeceras de seguridad
 
