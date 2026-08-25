@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useRouterState } from '@tanstack/react-router'
+import { SelectorTema } from './SelectorTema'
 import { company } from '../lib/company'
 import { servicios } from '../lib/servicios'
 
@@ -48,10 +49,25 @@ export function SiteHeader() {
       <div className="site-header-inner">
         <Link to="/" className="marca" aria-label={`${company.nombreFantasia} — inicio`}>
           {/*
-            El lockup horizontal trae el texto en curvas, así que la marca se ve
-            igual aquí que en un letrero, sin depender de fuentes cargadas.
+            Dos archivos, uno por tema: el de fondo claro lleva el texto en
+            grafito y el de fondo oscuro en blanco hueso. CSS muestra el que
+            corresponde. Ambos traen el texto en curvas, así que la marca se ve
+            igual aquí que en un letrero.
           */}
-          <img src="/lockup-horizontal.svg" alt={company.nombreFantasia} width={406} height={112} />
+          <img
+            className="solo-claro"
+            src="/lockup-horizontal-claro.svg"
+            alt={company.nombreFantasia}
+            width={406}
+            height={112}
+          />
+          <img
+            className="solo-oscuro"
+            src="/lockup-horizontal.svg"
+            alt={company.nombreFantasia}
+            width={406}
+            height={112}
+          />
         </Link>
 
         <nav className="nav-desktop" aria-label="Principal">
@@ -66,18 +82,23 @@ export function SiteHeader() {
             </Link>
           ))}
           <Link to="/contacto" className="btn btn-primario btn-sm">Contacto</Link>
+          <SelectorTema />
         </nav>
 
-        <button
-          type="button"
-          className="nav-toggle"
+        {/* Sólo para móvil: en escritorio el selector va dentro de la navegación. */}
+        <div className="acciones-movil">
+          <SelectorTema />
+          <button
+            type="button"
+            className="nav-toggle"
           onClick={() => setAbierto(valor => !valor)}
           aria-expanded={abierto}
           aria-controls="nav-movil"
           aria-label={abierto ? 'Cerrar menú' : 'Abrir menú'}
         >
-          {abierto ? <IconClose /> : <IconMenu />}
-        </button>
+            {abierto ? <IconClose /> : <IconMenu />}
+          </button>
+        </div>
       </div>
 
       {abierto && (

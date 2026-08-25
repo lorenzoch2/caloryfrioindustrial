@@ -34,7 +34,7 @@ function Empresa() {
         bajada="Una empresa nueva con una dirección técnica que no lo es."
       />
 
-      <Seccion tono="claro">
+      <Seccion tono="base">
         <div className="split split--media">
           {imagenSobreNosotros && (
             <figure className="figura">
@@ -62,7 +62,7 @@ function Empresa() {
       </Seccion>
 
       {/* ── EQUIPO ── */}
-      <Seccion tono="oscuro">
+      <Seccion tono="banda">
         <RotuloSeccion eyebrow="Equipo" titulo="Quién responde por el trabajo" />
         <div className="equipo-grid">
           <article className="persona">
@@ -102,7 +102,7 @@ function Empresa() {
       </Seccion>
 
       {/* ── CREDENCIALES ── */}
-      <Seccion tono="claro">
+      <Seccion tono="base">
         <div className="dos-columnas">
           <div>
             <RotuloSeccion eyebrow="Formación" titulo="Títulos y certificaciones" />

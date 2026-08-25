@@ -32,7 +32,7 @@ function Contacto() {
         bajada="Mientras más sepamos del equipo y de la falla, más concreta será la respuesta."
       />
 
-      <Seccion tono="claro">
+      <Seccion tono="base">
         <div className="contacto-grid">
           <div className="contacto-aside">
             <h2 className="contacto-subtitulo">Canales directos</h2>

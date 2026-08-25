@@ -2,15 +2,19 @@ import type { ReactNode } from 'react'
 import { Link } from '@tanstack/react-router'
 import { IconFlecha } from './icons'
 
-/** Sección de página. `tono` define si va sobre fondo claro u oscuro. */
+/**
+ * Sección de página. `tono` elige una de las tres superficies claras:
+ * `base` para lectura, `tinte` para la banda alterna y `banda` para las bandas
+ * fuertes — portada, cifras y cierre. Ninguna es oscura en el tema claro.
+ */
 export function Seccion({
   id,
-  tono = 'claro',
+  tono = 'base',
   ancho = 'normal',
   children,
 }: {
   id?: string
-  tono?: 'claro' | 'oscuro' | 'tinte'
+  tono?: 'base' | 'tinte' | 'banda'
   ancho?: 'normal' | 'estrecho'
   children: ReactNode
 }) {

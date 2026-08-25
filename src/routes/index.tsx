@@ -47,12 +47,19 @@ function Portada() {
             curvas, así que no dependen de que cargue ninguna fuente.
           */}
           <img
-            className="hero-logotipo"
-            src="/lockup-vertical.svg"
+            className="hero-logotipo solo-claro"
+            src="/lockup-vertical-claro.svg"
             alt="Calor &amp; Frío Industrial"
             width={346}
             height={242}
             fetchPriority="high"
+          />
+          <img
+            className="hero-logotipo solo-oscuro"
+            src="/lockup-vertical.svg"
+            alt="Calor &amp; Frío Industrial"
+            width={346}
+            height={242}
           />
           <p className="eyebrow eyebrow--acento">
             Contratista de ingeniería térmica · Santiago de Chile
@@ -86,7 +93,7 @@ function Portada() {
       />
 
       {/* ── SEGMENTOS ── */}
-      <Seccion id="segmentos" tono="claro">
+      <Seccion id="segmentos" tono="base">
         <RotuloSeccion
           eyebrow="Por dónde empezar"
           titulo="¿Desde dónde nos escribe?"
@@ -131,7 +138,7 @@ function Portada() {
       </Seccion>
 
       {/* ── POR QUÉ ── */}
-      <Seccion tono="oscuro">
+      <Seccion tono="banda">
         <div className="split">
           <div className="split-copy">
             <RotuloSeccion
@@ -164,7 +171,7 @@ function Portada() {
       </Seccion>
 
       {/* ── METODOLOGÍA ── */}
-      <Seccion tono="claro">
+      <Seccion tono="base">
         <RotuloSeccion
           eyebrow="Cómo trabajamos"
           titulo="Del levantamiento al informe de cierre"

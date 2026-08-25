@@ -9,7 +9,15 @@ export function SiteFooter() {
       <div className="site-footer-inner">
         <div className="footer-marca">
           <img
-            className="footer-logotipo"
+            className="footer-logotipo solo-claro"
+            src="/lockup-horizontal-claro.svg"
+            alt={company.nombreFantasia}
+            width={406}
+            height={112}
+            loading="lazy"
+          />
+          <img
+            className="footer-logotipo solo-oscuro"
             src="/lockup-horizontal.svg"
             alt={company.nombreFantasia}
             width={406}

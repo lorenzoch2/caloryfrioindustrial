@@ -13,6 +13,14 @@ const DESCRIPCION =
 
 const structuredData = JSON.stringify(buildStructuredData())
 
+/*
+  Fija el tema antes del primer pintado. Si esto corriera dentro de React, la
+  página aparecería un instante con el tema equivocado antes de hidratar.
+  El claro es el tema principal: sólo se usa el oscuro si la persona lo eligió,
+  no por la preferencia del sistema.
+*/
+const scriptTema = `try{document.documentElement.dataset.tema=localStorage.getItem('tema')==='oscuro'?'oscuro':'claro'}catch(e){document.documentElement.dataset.tema='claro'}`
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -20,7 +28,7 @@ export const Route = createRootRoute({
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { title: TITULO },
       { name: 'description', content: DESCRIPCION },
-      { name: 'theme-color', content: '#0f1216' },
+      { name: 'theme-color', content: '#ffffff' },
       { name: 'author', content: company.razonSocial },
       { name: 'geo.region', content: 'CL-RM' },
       { name: 'geo.placename', content: company.domicilio.comuna },
@@ -60,6 +68,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     <html lang="es-CL">
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: scriptTema }} />
         <script
           type="application/ld+json"
           // Datos estructurados schema.org: los consume Google, no el runtime.

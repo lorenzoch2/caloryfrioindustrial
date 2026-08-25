@@ -68,8 +68,15 @@ from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line
   conflicting sets of contact details were circulating before this file existed.
 - **CSS custom properties over Tailwind tokens, and classes over inline styles.** Every token lives
   in `:root` in `styles.css`; components carry class names, not `style={{}}` objects.
-- **Two alternating surfaces**: dark (`--ink-900`) for hero, proof and closing CTA; light
-  (`--paper`) for long-form content, which is where reading actually happens.
+- **The site is light. There are no dark zones in the default theme.** Three light surfaces
+  alternate to give the page rhythm: `--paper` (reading base), `--tinte` (alternating band) and
+  `--banda` (strong band — hero, figures, closing CTA). "Strong band" no longer means dark: it is a
+  steel tint, and the text on it stays graphite.
+- **A dark theme exists but is opt-in.** It is never selected from `prefers-color-scheme`; only a
+  stored choice turns it on. The same tokens are redefined for it, so the alternation survives and
+  only the absolute values change.
+- **Token names describe role, not colour.** `--banda` / `--sobre-banda` rather than `--ink-900` /
+  `--fog-100` — the old names became lies the moment the band turned light.
 - **The accent is deliberately double, taken from the logo**: steel blue (`--steel`) for structure
   and links, brass (`--laton`) for action. Cold and hot doing a job, not decorating.
 - **Brass buttons carry graphite text, never white.** White on `--laton` measures 3.6:1 and fails

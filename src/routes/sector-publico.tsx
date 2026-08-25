@@ -67,7 +67,7 @@ function SectorPublico() {
         bajada="Todo lo que una comisión evaluadora necesita revisar, sin pedirlo por correo y sin esperar respuesta."
       />
 
-      <Seccion tono="claro" ancho="estrecho">
+      <Seccion tono="base" ancho="estrecho">
         <p className="parrafo parrafo--destacado">
           Atendemos requerimientos de organismos públicos en mantención de climatización y
           refrigeración, asesoría técnica e inspección de obras, y capacitación de personal.
@@ -95,7 +95,7 @@ function SectorPublico() {
         </dl>
       </Seccion>
 
-      <Seccion tono="claro">
+      <Seccion tono="base">
         <div className="dos-columnas">
           <div>
             <RotuloSeccion

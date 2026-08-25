@@ -12,26 +12,42 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Superficie oscura */
-  --ink-900:    #0f1216;
-  --ink-850:    #12161c;
-  --ink-800:    #161b22;
-  --ink-line:   #1e242c;
-  --ink-line-2: #2a323d;
-  --fog-500:    #7c8798;
-  --fog-400:    #8d97a6;
-  --fog-300:    #a4aebd;
-  --fog-100:    #e9ecf1;
-
-  /* Superficie clara */
-  --paper:       #f7f6f3;
+  /*
+    El sitio es claro. Hay tres superficies, de más clara a menos, y la
+    alternancia entre ellas es la que da ritmo a la página:
+      --paper  base de lectura        --tinte  banda alterna
+      --banda  banda fuerte (portada, cifras, cierre)
+    "Banda fuerte" ya no significa oscura: es un tinte de acero, más saturado
+    que las otras dos, y el texto encima sigue siendo grafito.
+  */
+  --paper:       #f8f7f4;
   --paper-2:     #ffffff;
-  --tinte:       #edf0f4;
+  --tinte:       #eef1f6;
   --line:        #e0e4ea;
   --line-2:      #ccd3dd;
   --texto:       #14181f;
   --texto-mut:   #59626f;
   --texto-faint: #838c99;
+
+  --banda:         #dfe7f1;
+  --banda-2:       #e9eef6;
+  --banda-3:       #f1f4f9;
+  --banda-linea:   #cbd7e6;
+  --banda-linea-2: #b6c5d9;
+  --sobre-banda:       #14181f;
+  --sobre-banda-mut:   #4a5462;
+  --sobre-banda-mut2:  #59626f;
+  --sobre-banda-faint: #6f7a89;
+
+  /*
+    Velo del hero. Fuerte donde va el texto y flojo a la derecha, para que la
+    foto se vea. Un velo parejo la borraba: quedaba una textura fantasma en vez
+    de una fotografía. El segundo degradado sólo apaga el borde inferior.
+  */
+  --velo: linear-gradient(90deg, rgba(248,247,244,0.98) 0%, rgba(248,247,244,0.95) 44%, rgba(248,247,244,0.22) 100%),
+          linear-gradient(180deg, rgba(248,247,244,0) 0%, rgba(248,247,244,0) 58%, rgba(248,247,244,0.40) 100%);
+  --acento-txt: var(--steel-dk);
+  --btn-linea-hover: rgba(20, 24, 31, 0.05);
 
   /* Acentos de marca */
   --steel:    #4f73a8;
@@ -39,7 +55,7 @@
   --steel-lt: #7ea3d8;
   /*
     Latón de marca. Tres valores porque el contraste manda:
-      --laton     fondos, marcas y acentos sobre oscuro (5,2:1 sobre --ink-900)
+      --laton     fondos, marcas y acentos sobre oscuro (5,2:1 sobre --banda)
       --laton-dk  texto latón sobre fondo claro (4,8:1; el de marca sólo da 3,3:1)
       --laton-lt  realce en hover sobre fondos oscuros
     Los botones llevan texto grafito, no blanco: blanco sobre latón da 3,6:1 y no
@@ -53,7 +69,64 @@
   --mono: 'IBM Plex Mono', 'Consolas', ui-monospace, monospace;
 
   --header-h: 68px;
+
+  /*
+    Cromo: cabecera, menú móvil y pie. Es la parte que más cambia entre temas —
+    en claro es papel con texto grafito, en oscuro es tinta con texto hueso.
+  */
+  --cromo:       #ffffff;
+  --cromo-txt:   #14181f;
+  --cromo-mut:   #59626f;
+  --cromo-faint: #838c99;
+  --cromo-line:  #e0e4ea;
 }
+
+/*
+  Tema oscuro. Se redefinen los mismos tokens en lugar de escribir reglas nuevas:
+  así la alternancia de bandas del diseño se conserva y sólo cambian los valores
+  absolutos. Las bandas "fuertes" siguen siendo las más oscuras en ambos temas.
+*/
+:root[data-tema="oscuro"] {
+  --paper:       #12161c;
+  --paper-2:     #171c24;
+  --tinte:       #0f1319;
+  --line:        #242c36;
+  --line-2:      #323b48;
+  --texto:       #e9ecf1;
+  --texto-mut:   #a4aebd;
+  --texto-faint: #7c8798;
+
+  --banda:         #0a0d11;
+  --banda-2:       #0f1319;
+  --banda-3:       #141920;
+  --banda-linea:   #1b2029;
+  --banda-linea-2: #2a333e;
+  --sobre-banda:       #e9ecf1;
+  --sobre-banda-mut:   #a4aebd;
+  --sobre-banda-mut2:  #8d97a6;
+  --sobre-banda-faint: #7c8798;
+
+  --velo: linear-gradient(90deg, rgba(15,18,22,0.94) 0%, rgba(15,18,22,0.86) 42%, rgba(15,18,22,0.55) 100%),
+          linear-gradient(180deg, rgba(15,18,22,0.70) 0%, rgba(15,18,22,0.35) 45%, rgba(15,18,22,0.80) 100%);
+  --acento-txt: var(--steel-lt);
+  --btn-linea-hover: rgba(255, 255, 255, 0.05);
+
+  --cromo:       #0a0d11;
+  --cromo-txt:   #e9ecf1;
+  --cromo-mut:   #a4aebd;
+  --cromo-faint: #7c8798;
+  --cromo-line:  #1b2029;
+}
+
+/*
+  Un logotipo por tema. Los selectores van anclados en :root a propósito: reglas
+  como `.marca img` o `.footer-logotipo` fijan `display: block` y, con la misma
+  especificidad o más, ganarían por orden en la hoja. Anclar en :root sube la
+  especificidad a (0,3,0) y evita tener que recurrir a !important.
+*/
+:root:not([data-tema="oscuro"]) .solo-oscuro { display: none; }
+:root[data-tema="oscuro"] .solo-claro { display: none; }
+
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -120,11 +193,11 @@ a:hover { color: var(--steel); }
 .contenedor--full { max-width: none; padding: 0; }
 
 .seccion { padding: clamp(3.5rem, 8vw, 6rem) 0; }
-.seccion--claro  { background: var(--paper); }
+.seccion--base  { background: var(--paper); }
 .seccion--tinte  { background: var(--tinte); }
-.seccion--oscuro { background: var(--ink-900); color: var(--fog-100); }
-.seccion--oscuro a { color: var(--steel-lt); }
-.seccion--oscuro a:hover { color: #a8c4e8; }
+.seccion--banda { background: var(--banda); color: var(--sobre-banda); }
+.seccion--banda a { color: var(--acento-txt); }
+.seccion--banda a:hover { color: #a8c4e8; }
 
 /* ─── TIPOGRAFÍA ─── */
 
@@ -136,8 +209,8 @@ a:hover { color: var(--steel); }
   text-transform: uppercase;
   color: var(--texto-faint);
 }
-.eyebrow--acento { color: var(--steel-lt); }
-.seccion--claro .eyebrow,
+.eyebrow--acento { color: var(--acento-txt); }
+.seccion--base .eyebrow,
 .seccion--tinte .eyebrow { color: var(--steel-dk); }
 
 .rotulo { margin-bottom: 2.5rem; max-width: 68ch; }
@@ -155,7 +228,7 @@ a:hover { color: var(--steel); }
   line-height: 1.75;
   color: var(--texto-mut);
 }
-.seccion--oscuro .rotulo-bajada { color: var(--fog-400); }
+.seccion--banda .rotulo-bajada { color: var(--sobre-banda-mut2); }
 
 .parrafo {
   font-size: 1rem;
@@ -169,8 +242,8 @@ a:hover { color: var(--steel); }
   color: var(--texto);
 }
 .parrafo strong { font-weight: 600; color: var(--texto); }
-.seccion--oscuro .parrafo { color: var(--fog-300); }
-.seccion--oscuro .parrafo strong { color: var(--fog-100); }
+.seccion--banda .parrafo { color: var(--sobre-banda-mut); }
+.seccion--banda .parrafo strong { color: var(--sobre-banda); }
 
 .nota {
   margin-top: 1.25rem;
@@ -178,7 +251,7 @@ a:hover { color: var(--steel); }
   line-height: 1.7;
   color: var(--texto-faint);
 }
-.seccion--oscuro .nota { color: var(--fog-500); }
+.seccion--banda .nota { color: var(--sobre-banda-faint); }
 
 /* ─── BOTONES ─── */
 
@@ -202,21 +275,21 @@ a:hover { color: var(--steel); }
 .btn-sm { padding: 0.65rem 1.1rem; min-height: 38px; font-size: 0.78rem; }
 .btn-lg { padding: 1rem 1.75rem; min-height: 52px; font-size: 0.88rem; }
 
-.btn-acento { background: var(--laton); color: var(--ink-900); }
-.btn-acento:hover { background: var(--laton-lt); color: var(--ink-900); }
+.btn-acento { background: var(--laton); color: var(--banda); }
+.btn-acento:hover { background: var(--laton-lt); color: var(--banda); }
 
 .btn-primario { background: var(--steel); color: #fff; }
 .btn-primario:hover { background: var(--steel-dk); color: #fff; }
 
 .btn-linea {
-  border-color: var(--ink-line-2);
-  color: var(--fog-100);
+  border-color: var(--banda-linea-2);
+  color: var(--sobre-banda);
   background: transparent;
 }
 .btn-linea:hover {
-  border-color: var(--fog-500);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--fog-100);
+  border-color: var(--sobre-banda-faint);
+  background: var(--btn-linea-hover);
+  color: var(--sobre-banda);
 }
 .btn-linea--oscuro { border-color: var(--line-2); color: var(--texto); }
 .btn-linea--oscuro:hover {
@@ -236,7 +309,7 @@ a:hover { color: var(--steel); }
 }
 .enlace-flecha svg { transition: transform 0.18s ease; }
 .enlace-flecha:hover svg { transform: translateX(3px); }
-.enlace-flecha--claro { color: var(--steel-lt); }
+.enlace-flecha--claro { color: var(--acento-txt); }
 
 /* ─── HEADER ─── */
 
@@ -244,8 +317,8 @@ a:hover { color: var(--steel); }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--ink-900);
-  border-bottom: 1px solid var(--ink-line);
+  background: var(--cromo);
+  border-bottom: 1px solid var(--cromo-line);
 }
 .site-header-inner {
   max-width: 1140px;
@@ -258,19 +331,21 @@ a:hover { color: var(--steel); }
   gap: 1.5rem;
 }
 
-.marca { display: flex; align-items: center; }
+.marca { display: flex; align-items: center; color: var(--cromo-txt); }
 .marca img { display: block; width: clamp(150px, 17vw, 178px); height: auto; }
 
 .nav-desktop { display: flex; align-items: center; gap: 1.5rem; }
 .nav-link {
   font-size: 0.83rem;
   font-weight: 500;
-  color: var(--fog-300);
+  color: var(--cromo-mut);
   padding: 0.4rem 0;
   border-bottom: 2px solid transparent;
 }
-.nav-link:hover { color: var(--fog-100); }
-.nav-link--activo { color: #fff; border-bottom-color: var(--laton); }
+.nav-link:hover { color: var(--cromo-txt); }
+.nav-link--activo { color: var(--cromo-txt); border-bottom-color: var(--laton); }
+
+.acciones-movil { display: none; align-items: center; gap: 0.6rem; }
 
 .nav-toggle {
   display: none;
@@ -279,31 +354,47 @@ a:hover { color: var(--steel); }
   width: 44px;
   height: 44px;
   background: transparent;
-  border: 1px solid var(--ink-line-2);
-  color: var(--fog-100);
+  border: 1px solid var(--cromo-line);
+  color: var(--cromo-txt);
   cursor: pointer;
 }
+
+.tema-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  background: transparent;
+  border: 1px solid var(--cromo-line);
+  color: var(--cromo-mut);
+  cursor: pointer;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.tema-toggle:hover { color: var(--cromo-txt); border-color: var(--cromo-mut); }
 
 .nav-movil {
   display: none;
   flex-direction: column;
   gap: 0.25rem;
   padding: 0.75rem clamp(1.25rem, 5vw, 3rem) 1.5rem;
-  background: var(--ink-900);
-  border-top: 1px solid var(--ink-line);
+  background: var(--cromo);
+  border-top: 1px solid var(--cromo-line);
 }
 .nav-movil-link {
   padding: 0.9rem 0;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--fog-300);
-  border-bottom: 1px solid var(--ink-line);
+  color: var(--cromo-mut);
+  border-bottom: 1px solid var(--cromo-line);
 }
-.nav-movil-link--activo { color: #fff; }
+.nav-movil-link--activo { color: var(--cromo-txt); }
 .nav-movil-cta { margin-top: 1rem; }
 
 @media (max-width: 940px) {
   .nav-desktop { display: none; }
+  .acciones-movil { display: flex; }
   .nav-toggle { display: inline-flex; }
   .nav-movil { display: flex; }
 }
@@ -312,7 +403,7 @@ a:hover { color: var(--steel); }
 
 .hero {
   position: relative;
-  background: var(--ink-900);
+  background: var(--banda);
   min-height: min(78vh, 660px);
   display: flex;
   align-items: center;
@@ -330,9 +421,20 @@ a:hover { color: var(--steel); }
 .hero-velo {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(15,18,22,0.94) 0%, rgba(15,18,22,0.86) 42%, rgba(15,18,22,0.55) 100%),
-    linear-gradient(180deg, rgba(15,18,22,0.7) 0%, rgba(15,18,22,0.35) 45%, rgba(15,18,22,0.8) 100%);
+  background: var(--velo);
+}
+/*
+  En pantalla angosta el texto ocupa todo el ancho, así que el velo lateral deja
+  de servir: se necesita parejo y fuerte, o las líneas largas caen sobre la foto
+  y pierden contraste.
+*/
+@media (max-width: 860px) {
+  :root {
+    --velo: linear-gradient(180deg, rgba(248,247,244,0.94) 0%, rgba(248,247,244,0.92) 62%, rgba(248,247,244,0.96) 100%);
+  }
+  :root[data-tema="oscuro"] {
+    --velo: linear-gradient(180deg, rgba(15,18,22,0.90) 0%, rgba(15,18,22,0.86) 62%, rgba(15,18,22,0.93) 100%);
+  }
 }
 .hero-contenido { position: relative; z-index: 1; }
 .hero-contenido .eyebrow { margin-bottom: 1.25rem; }
@@ -352,7 +454,7 @@ a:hover { color: var(--steel); }
   font-weight: 600;
   line-height: 1.03;
   letter-spacing: -0.03em;
-  color: #fff;
+  color: var(--sobre-banda);
   max-width: 16ch;
   text-wrap: balance;
 }
@@ -360,7 +462,7 @@ a:hover { color: var(--steel); }
   margin-top: 1.5rem;
   font-size: clamp(1rem, 1.8vw, 1.12rem);
   line-height: 1.72;
-  color: var(--fog-300);
+  color: var(--sobre-banda-mut);
   max-width: 52ch;
 }
 .hero-acciones {
@@ -373,10 +475,10 @@ a:hover { color: var(--steel); }
 /* ─── HERO PÁGINAS INTERIORES ─── */
 
 .hero-pagina {
-  background: var(--ink-900);
-  color: var(--fog-100);
+  background: var(--banda);
+  color: var(--sobre-banda);
   padding: clamp(3rem, 8vw, 5rem) 0 clamp(2.5rem, 6vw, 4rem);
-  border-bottom: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--banda-linea);
 }
 .hero-pagina .eyebrow { margin-bottom: 1rem; }
 .hero-pagina-titulo {
@@ -384,7 +486,7 @@ a:hover { color: var(--steel); }
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.025em;
-  color: #fff;
+  color: var(--sobre-banda);
   max-width: 20ch;
   text-wrap: pretty;
 }
@@ -392,7 +494,7 @@ a:hover { color: var(--steel); }
   margin-top: 1.1rem;
   font-size: clamp(0.98rem, 1.7vw, 1.1rem);
   line-height: 1.72;
-  color: var(--fog-300);
+  color: var(--sobre-banda-mut);
   max-width: 56ch;
 }
 .hero-pagina .hero-acciones { margin-top: 2rem; }
@@ -400,9 +502,9 @@ a:hover { color: var(--steel); }
 /* ─── FRANJA DE DATOS ─── */
 
 .franja-datos {
-  background: var(--ink-850);
-  border-bottom: 1px solid var(--ink-line);
-  color: var(--fog-100);
+  background: var(--banda-2);
+  border-bottom: 1px solid var(--banda-linea);
+  color: var(--sobre-banda);
 }
 .franja-datos-grid {
   display: grid;
@@ -418,28 +520,28 @@ a:hover { color: var(--steel); }
   gap: 0.35rem;
 }
 .franja-dato + .franja-dato {
-  border-left: 1px solid var(--ink-line);
+  border-left: 1px solid var(--banda-linea);
   padding-left: 1.5rem;
 }
 .franja-dato-valor {
   font-family: var(--mono);
   font-size: clamp(1.5rem, 3vw, 1.9rem);
   font-weight: 500;
-  color: #fff;
+  color: var(--sobre-banda);
   line-height: 1;
 }
 .franja-dato-etiqueta {
   font-size: 0.78rem;
   line-height: 1.5;
-  color: var(--fog-500);
+  color: var(--sobre-banda-faint);
 }
 
 @media (max-width: 720px) {
   .franja-datos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .franja-dato { padding: 1.25rem 1rem 1.25rem 0; }
   .franja-dato:nth-child(odd) { border-left: 0; padding-left: 0; }
-  .franja-dato:nth-child(even) { border-left: 1px solid var(--ink-line); padding-left: 1rem; }
-  .franja-dato:nth-child(n+3) { border-top: 1px solid var(--ink-line); }
+  .franja-dato:nth-child(even) { border-left: 1px solid var(--banda-linea); padding-left: 1rem; }
+  .franja-dato:nth-child(n+3) { border-top: 1px solid var(--banda-linea); }
 }
 
 /* ─── SEGMENTOS ─── */
@@ -565,12 +667,12 @@ a:hover { color: var(--steel); }
   flex-direction: column;
   gap: 0.25rem;
   padding: 1.1rem 0;
-  border-bottom: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--banda-linea);
 }
 .credencial-lista li:first-child,
 .credencial-lista > div:first-child { padding-top: 0; }
 .credencial-titulo { font-size: 0.9rem; font-weight: 600; line-height: 1.4; }
-.credencial-detalle { font-size: 0.83rem; line-height: 1.6; color: var(--fog-500); }
+.credencial-detalle { font-size: 0.83rem; line-height: 1.6; color: var(--sobre-banda-faint); }
 
 .credencial-lista--claro > div { border-bottom-color: var(--line); }
 .credencial-lista--claro .credencial-detalle { color: var(--texto-mut); }
@@ -648,8 +750,8 @@ a:hover { color: var(--steel); }
   gap: 1.25rem;
 }
 .persona {
-  background: var(--ink-850);
-  border: 1px solid var(--ink-line);
+  background: var(--banda-2);
+  border: 1px solid var(--banda-linea);
   padding: 1.9rem 1.75rem;
 }
 .persona-rol {
@@ -657,34 +759,34 @@ a:hover { color: var(--steel); }
   font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--steel-lt);
+  color: var(--acento-txt);
 }
 .persona-nombre {
   margin-top: 0.7rem;
   font-size: 1.28rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  color: #fff;
+  color: var(--sobre-banda);
 }
 .persona-bio {
   margin-top: 0.85rem;
   font-size: 0.88rem;
   line-height: 1.75;
-  color: var(--fog-400);
+  color: var(--sobre-banda-mut2);
 }
 
 .sectores {
   margin-top: 2.5rem;
   padding-top: 2rem;
-  border-top: 1px solid var(--ink-line);
+  border-top: 1px solid var(--banda-linea);
 }
 .sectores-titulo { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
 .sectores-lista { display: flex; flex-wrap: wrap; gap: 0.55rem; }
 .sectores-lista li {
-  border: 1px solid var(--ink-line-2);
+  border: 1px solid var(--banda-linea-2);
   padding: 0.5rem 0.95rem;
   font-size: 0.82rem;
-  color: var(--fog-300);
+  color: var(--sobre-banda-mut);
 }
 
 /* ─── FICHA ─── */
@@ -716,10 +818,10 @@ a:hover { color: var(--steel); }
 .carousel {
   position: relative;
   padding: 1.5rem 3rem;
-  background: var(--ink-850);
-  border: 1px solid var(--ink-line);
+  background: var(--banda-2);
+  border: 1px solid var(--banda-linea);
 }
-.carousel-empty { padding: 2rem; text-align: center; font-size: 0.85rem; color: var(--fog-500); }
+.carousel-empty { padding: 2rem; text-align: center; font-size: 0.85rem; color: var(--sobre-banda-faint); }
 .carousel-viewport {
   display: flex;
   justify-content: center;
@@ -730,7 +832,7 @@ a:hover { color: var(--steel); }
   max-width: 100%;
   max-height: 440px;
   object-fit: contain;
-  background: var(--ink-900);
+  background: var(--banda);
 }
 .carousel-btn {
   position: absolute;
@@ -742,13 +844,13 @@ a:hover { color: var(--steel); }
   align-items: center;
   justify-content: center;
   background: rgba(15, 18, 22, 0.75);
-  border: 1px solid var(--ink-line-2);
-  color: var(--fog-100);
+  border: 1px solid var(--banda-linea-2);
+  color: var(--sobre-banda);
   cursor: pointer;
   z-index: 2;
   transition: background 0.18s ease, border-color 0.18s ease;
 }
-.carousel-btn:hover { background: var(--ink-900); border-color: var(--steel); }
+.carousel-btn:hover { background: var(--banda); border-color: var(--steel); }
 .carousel-btn-prev { left: 0.7rem; }
 .carousel-btn-next { right: 0.7rem; }
 .carousel-footer {
@@ -764,7 +866,7 @@ a:hover { color: var(--steel); }
   height: 8px;
   border: none;
   padding: 0;
-  background: var(--ink-line-2);
+  background: var(--banda-linea-2);
   cursor: pointer;
   transition: background 0.18s ease;
 }
@@ -772,7 +874,7 @@ a:hover { color: var(--steel); }
 .carousel-counter {
   font-family: var(--mono);
   font-size: 0.75rem;
-  color: var(--fog-500);
+  color: var(--sobre-banda-faint);
 }
 
 /* ─── CONTACTO ─── */
@@ -878,9 +980,9 @@ a:hover { color: var(--steel); }
 /* ─── CIERRE CTA ─── */
 
 .cierre-cta {
-  background: var(--ink-900);
-  color: var(--fog-100);
-  border-top: 1px solid var(--ink-line);
+  background: var(--banda);
+  color: var(--sobre-banda);
+  border-top: 1px solid var(--banda-linea);
   padding: clamp(3rem, 7vw, 4.5rem) 0;
 }
 .cierre-cta-inner {
@@ -895,20 +997,20 @@ a:hover { color: var(--steel); }
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--sobre-banda);
   max-width: 20ch;
 }
 .cierre-cta-bajada {
   margin-top: 0.8rem;
   font-size: 0.95rem;
   line-height: 1.72;
-  color: var(--fog-400);
+  color: var(--sobre-banda-mut2);
   max-width: 52ch;
 }
 
 /* ─── FOOTER ─── */
 
-.site-footer { background: var(--ink-850); color: var(--fog-300); }
+.site-footer { background: var(--cromo); color: var(--cromo-mut); }
 .site-footer-inner {
   max-width: 1140px;
   margin: 0 auto;
@@ -927,12 +1029,12 @@ a:hover { color: var(--steel); }
   margin-top: 0.5rem;
   font-size: 0.85rem;
   line-height: 1.65;
-  color: var(--fog-500);
+  color: var(--cromo-faint);
   max-width: 34ch;
 }
 .footer-social { display: flex; gap: 1.1rem; margin-top: 1.25rem; }
-.footer-social a { color: var(--fog-500); display: flex; }
-.footer-social a:hover { color: var(--fog-100); }
+.footer-social a { color: var(--cromo-faint); display: flex; }
+.footer-social a:hover { color: var(--cromo-txt); }
 
 .footer-columna h2 {
   font-family: var(--mono);
@@ -940,16 +1042,16 @@ a:hover { color: var(--steel); }
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--fog-500);
+  color: var(--cromo-faint);
   margin-bottom: 1rem;
 }
 .footer-columna ul { display: flex; flex-direction: column; gap: 0.6rem; }
-.footer-columna a { font-size: 0.87rem; color: var(--fog-300); }
-.footer-columna a:hover { color: #fff; }
-.footer-datos li { font-size: 0.87rem; color: var(--fog-300); line-height: 1.5; }
+.footer-columna a { font-size: 0.87rem; color: var(--cromo-mut); }
+.footer-columna a:hover { color: var(--cromo-txt); }
+.footer-datos li { font-size: 0.87rem; color: var(--cromo-mut); line-height: 1.5; }
 
 .site-footer-legal {
-  border-top: 1px solid var(--ink-line);
+  border-top: 1px solid var(--cromo-line);
   max-width: 1140px;
   margin: 0 auto;
   padding: 1.25rem clamp(1.25rem, 5vw, 3rem);
@@ -959,7 +1061,7 @@ a:hover { color: var(--steel); }
   justify-content: space-between;
   font-family: var(--mono);
   font-size: 0.7rem;
-  color: var(--fog-500);
+  color: var(--cromo-faint);
 }
 
 /* ═══════════════ RESPONSIVE ═══════════════ */

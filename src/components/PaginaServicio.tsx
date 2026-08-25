@@ -23,7 +23,7 @@ export function PaginaServicio({ servicio }: { servicio: Servicio }) {
         bajada={servicio.bajada}
       />
 
-      <Seccion tono="claro" ancho="estrecho">
+      <Seccion tono="base" ancho="estrecho">
         <p className="parrafo parrafo--destacado">{servicio.intro}</p>
       </Seccion>
 
@@ -39,7 +39,7 @@ export function PaginaServicio({ servicio }: { servicio: Servicio }) {
         </div>
       </Seccion>
 
-      <Seccion tono="claro">
+      <Seccion tono="base">
         <div className="dos-columnas">
           <div>
             <RotuloSeccion eyebrow="Entregables" titulo="Qué recibe usted" />
@@ -67,7 +67,7 @@ export function PaginaServicio({ servicio }: { servicio: Servicio }) {
       </Seccion>
 
       {imagenes.length > 0 && (
-        <Seccion tono="oscuro">
+        <Seccion tono="banda">
           <RotuloSeccion eyebrow="En terreno" titulo="Trabajos realizados" />
           <GalleryCarousel
             images={imagenes}
