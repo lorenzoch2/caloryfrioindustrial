@@ -73,13 +73,13 @@ export function useContador(valor: string) {
       if (!entradas[0]?.isIntersecting) return
       observador.disconnect()
 
-      const duracion = 900
+      const duracion = 1500
       const inicio = performance.now()
 
       function paso(ahora: number) {
         const t = Math.min(1, (ahora - inicio) / duracion)
-        // Desaceleración: arranca rápido y frena al llegar, como un contador real.
-        const suave = 1 - Math.pow(1 - t, 3)
+        // Salida exponencial, la misma sensación que la curva CSS: llega y se posa.
+        const suave = t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
         if (el) el.textContent = plantilla(Math.round(destino * suave))
         if (t < 1) requestAnimationFrame(paso)
         else setListo(true)
@@ -100,7 +100,7 @@ export function useContador(valor: string) {
  * Se mueve la imagen y no el contenedor, para no arrastrar el texto. El factor
  * es bajo a propósito: un parallax marcado en un hero se nota como truco.
  */
-export function useParallax<T extends HTMLElement>(factor = 0.18) {
+export function useParallax<T extends HTMLElement>(factor = 0.14) {
   const ref = useRef<T>(null)
 
   useEffect(() => {

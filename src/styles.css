@@ -71,6 +71,16 @@
   --header-h: 68px;
 
   /*
+    Ritmo del movimiento. Un solo lugar donde ajustarlo.
+    La curva es una salida exponencial: entra con velocidad y se posa sin
+    rebote, que es la sensación de aterrizaje suave. Cambiar aquí cambia todo.
+  */
+  --ease-aterriza: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-corta: 0.4s;
+  --dur-media: 0.95s;
+  --dur-larga: 1.3s;
+
+  /*
     Cromo: cabecera, menú móvil y pie. Es la parte que más cambia entre temas —
     en claro es papel con texto grafito, en oscuro es tinta con texto hueso.
   */
@@ -270,7 +280,7 @@ a:hover { color: var(--steel); }
   min-height: 46px;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  transition: background var(--dur-corta) ease, border-color var(--dur-corta) ease, color var(--dur-corta) ease;
 }
 .btn-sm { padding: 0.65rem 1.1rem; min-height: 38px; font-size: 0.78rem; }
 .btn-lg { padding: 1rem 1.75rem; min-height: 52px; font-size: 0.88rem; }
@@ -307,7 +317,7 @@ a:hover { color: var(--steel); }
   font-weight: 600;
   color: var(--steel-dk);
 }
-.enlace-flecha svg { transition: transform 0.18s ease; }
+.enlace-flecha svg { transition: transform var(--dur-corta) var(--ease-aterriza); }
 .enlace-flecha:hover svg { transform: translateX(3px); }
 .enlace-flecha--claro { color: var(--acento-txt); }
 
@@ -560,7 +570,7 @@ a:hover { color: var(--steel); }
   background: var(--paper-2);
   border: 1px solid var(--line);
   color: var(--texto);
-  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  transition: border-color var(--dur-corta) ease, transform var(--dur-corta) var(--ease-aterriza), box-shadow var(--dur-corta) ease;
 }
 .segmento:hover {
   border-color: var(--steel);
@@ -577,9 +587,9 @@ a:hover { color: var(--steel); }
   bottom: 1.3rem;
   color: var(--steel);
   display: flex;
-  transition: transform 0.18s ease;
+  transition: transform var(--dur-corta) var(--ease-aterriza);
 }
-.segmento:hover .segmento-flecha { transform: translateX(4px); }
+.segmento:hover .segmento-flecha { transform: translateX(5px); }
 
 /* ─── SERVICIOS ─── */
 
@@ -822,17 +832,34 @@ a:hover { color: var(--steel); }
   border: 1px solid var(--banda-linea);
 }
 .carousel-empty { padding: 2rem; text-align: center; font-size: 0.85rem; color: var(--sobre-banda-faint); }
+/*
+  El carrusel desliza: una pista con todas las fotos que se traslada, en vez de
+  cambiar el `src` de una sola imagen. Así el movimiento automático y el manual
+  son el mismo gesto.
+*/
 .carousel-viewport {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 200px;
+  overflow: hidden;
+  height: clamp(200px, 38vw, 420px);
 }
-.carousel-img {
+.carousel-pista {
+  display: flex;
+  height: 100%;
+  will-change: transform;
+  transition: transform var(--dur-larga) var(--ease-aterriza);
+}
+.carousel-slide {
+  flex: 0 0 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carousel-slide img {
   max-width: 100%;
-  max-height: 440px;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  background: var(--banda);
 }
 .carousel-btn {
   position: absolute;
@@ -1104,13 +1131,13 @@ a:hover { color: var(--steel); }
 
 html.js [data-revelar] {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(22px);
 }
 html.js [data-revelar].visible {
   opacity: 1;
   transform: none;
-  transition: opacity 0.55s ease var(--retardo, 0ms),
-              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--retardo, 0ms);
+  transition: opacity var(--dur-media) var(--ease-aterriza) var(--retardo, 0ms),
+              transform var(--dur-media) var(--ease-aterriza) var(--retardo, 0ms);
 }
 
 /*
@@ -1125,7 +1152,7 @@ html.js [data-revelar] .equipo-grid > *,
 html.js [data-revelar] .lista-check > *,
 html.js [data-revelar] .sectores-lista > * {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(20px);
 }
 html.js [data-revelar].visible .segmentos-grid > *,
 html.js [data-revelar].visible .servicios-grid > *,
@@ -1134,14 +1161,14 @@ html.js [data-revelar].visible .alcance-grid > *,
 html.js [data-revelar].visible .equipo-grid > *,
 html.js [data-revelar].visible .lista-check > *,
 html.js [data-revelar].visible .sectores-lista > * {
-  animation: entra 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: entra var(--dur-media) var(--ease-aterriza) both;
 }
-html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(1) { animation-delay: 0.10s; }
-html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(2) { animation-delay: 0.17s; }
-html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(3) { animation-delay: 0.24s; }
-html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(4) { animation-delay: 0.31s; }
-html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(5) { animation-delay: 0.38s; }
-html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(n+6) { animation-delay: 0.45s; }
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(1) { animation-delay: 0.14s; }
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(2) { animation-delay: 0.26s; }
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(3) { animation-delay: 0.38s; }
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(4) { animation-delay: 0.50s; }
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(5) { animation-delay: 0.62s; }
+html.js [data-revelar].visible :is(.segmentos-grid,.servicios-grid,.metodologia,.alcance-grid,.equipo-grid,.lista-check,.sectores-lista) > *:nth-child(n+6) { animation-delay: 0.74s; }
 
 /* La regla de la metodología se dibuja de izquierda a derecha al aparecer. */
 html.js .metodologia-paso { border-top-color: transparent; position: relative; }
@@ -1150,7 +1177,7 @@ html.js .metodologia-paso::after {
   position: absolute; top: -2px; left: 0;
   height: 2px; width: 0;
   background: var(--steel);
-  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
+  transition: width var(--dur-larga) var(--ease-aterriza) 0.35s;
 }
 html.js [data-revelar].visible .metodologia-paso::after { width: 100%; }
 
@@ -1158,8 +1185,8 @@ html.js [data-revelar].visible .metodologia-paso::after { width: 100%; }
 html.js .franja-dato { opacity: 0; transform: translateY(10px); }
 html.js [data-revelar].visible .franja-dato {
   opacity: 1; transform: none;
-  transition: opacity 0.5s ease var(--retardo, 0ms),
-              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--retardo, 0ms);
+  transition: opacity var(--dur-media) var(--ease-aterriza) var(--retardo, 0ms),
+              transform var(--dur-media) var(--ease-aterriza) var(--retardo, 0ms);
 }
 .franja-dato-valor { font-variant-numeric: tabular-nums; }
 
@@ -1168,33 +1195,33 @@ html.js [data-revelar].visible .franja-dato {
 
 /* ─── Entrada de la portada ─── */
 @keyframes entra {
-  from { opacity: 0; transform: translateY(18px); }
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: none; }
 }
 html.js .hero-contenido > * {
-  animation: entra 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: entra var(--dur-larga) var(--ease-aterriza) both;
 }
-html.js .hero-logotipo        { animation-delay: 0.05s; }
-html.js .hero-contenido .eyebrow { animation-delay: 0.16s; }
-html.js .hero-titulo          { animation-delay: 0.24s; }
-html.js .hero-bajada          { animation-delay: 0.34s; }
-html.js .hero-acciones        { animation-delay: 0.44s; }
+html.js .hero-logotipo        { animation-delay: 0.08s; }
+html.js .hero-contenido .eyebrow { animation-delay: 0.26s; }
+html.js .hero-titulo          { animation-delay: 0.42s; }
+html.js .hero-bajada          { animation-delay: 0.58s; }
+html.js .hero-acciones        { animation-delay: 0.74s; }
 
 /* La foto entra con un acercamiento mínimo: da profundidad sin marear. */
 @keyframes asienta {
   from { transform: scale(1.05); }
   to   { transform: none; }
 }
-html.js .hero-foto { animation: asienta 1.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
+html.js .hero-foto { animation: asienta 2.4s var(--ease-aterriza) both; }
 
 /* ─── Respuesta al puntero ─── */
 .servicio-card,
 .alcance-item,
 .persona,
 .cred-card {
-  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.22s ease,
-              border-color 0.22s ease;
+  transition: transform var(--dur-corta) var(--ease-aterriza),
+              box-shadow var(--dur-corta) ease,
+              border-color var(--dur-corta) ease;
 }
 .servicio-card:hover,
 .persona:hover {
@@ -1224,8 +1251,8 @@ html.js .hero-foto { animation: asienta 1.4s cubic-bezier(0.22, 1, 0.36, 1) both
   opacity: 0;
   transform: translateY(10px) scale(0.94);
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              background 0.18s ease;
+  transition: opacity var(--dur-corta) ease, transform var(--dur-corta) var(--ease-aterriza),
+              background var(--dur-corta) ease;
 }
 .boton-arriba.visible {
   opacity: 1;

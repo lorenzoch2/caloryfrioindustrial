@@ -98,6 +98,23 @@ from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line
 - **Carousel images**: files in `src/assets/images/{asesorias,capacitaciones,servicios}/`, picked up
   by `import.meta.glob` in `src/lib/images.ts` — dropping a file in the folder is enough.
 
+## Motion
+
+Timing lives in three tokens on `:root` — `--ease-aterriza`, `--dur-corta`,
+`--dur-media`, `--dur-larga`. **Change the feel there, not in individual rules.** The curve is an
+exponential ease-out: it enters with speed and settles without bounce.
+
+Reveals are per-element: each block owns its `IntersectionObserver` through `useRevelar`. Do **not**
+go back to one observer that queries the DOM on route change — TanStack updates the location
+*before* rendering the new component, so such an observer finds nothing and every block on the
+destination page stays at opacity zero. That bug shipped once.
+
+The hidden state hangs off `html.js`. Without that class the page would render blank if JavaScript
+failed: content present in the HTML but invisible.
+
+Everything is disabled under `prefers-reduced-motion`, including the stagger, the counter, the
+methodology rule, the parallax and the carousel's auto-advance.
+
 ## Content rules — read before editing copy
 
 - **Never name third-party clients on the site.** The technical director's professional history
