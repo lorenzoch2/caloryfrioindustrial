@@ -11,9 +11,10 @@ const SITE_URL = company.sitio.url
   previa por URL y no vuelven a pedir la imagen aunque el archivo cambie: si se
   reemplaza `og-image.jpg` en su sitio, los enlaces ya compartidos —y los nuevos—
   siguen mostrando la tarjeta vieja durante semanas. Al cambiar el nombre, la
-  vista previa se regenera. Al rediseñarla, poner el mes nuevo.
+  vista previa se regenera. Al rediseñarla, poner el mes nuevo — y una letra al
+  final si se corrige dentro del mismo mes, como pasó con esta.
 */
-const OG_IMAGE = `${SITE_URL}/og-2026-08.jpg`
+const OG_IMAGE = `${SITE_URL}/og-2026-08b.jpg`
 
 const TITULO = 'Calor & Frío Industrial — Climatización y Refrigeración Industrial en Santiago'
 const DESCRIPCION =

@@ -157,8 +157,9 @@ function Portada() {
               docencia técnica en educación superior.
             </p>
             <p className="parrafo">
-              Eso significa que quien evalúa su instalación ya vio fallar la suya antes, en otra
-              planta y con otro nombre. La experiencia en frío industrial no se estudia: se acumula.
+              Esa trayectoria respalda cada diagnóstico, cada informe y cada recomendación de
+              recambio. Es también el antecedente que se presenta al acreditar experiencia en
+              licitaciones públicas.
             </p>
             <Link to="/empresa" className="enlace-flecha enlace-flecha--claro">
               Ver credenciales y antecedentes
