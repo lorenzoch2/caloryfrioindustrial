@@ -71,7 +71,7 @@ export const servicios: Servicio[] = [
     metaDescription:
       'Inspección Técnica de Obras (ITO) en climatización, diagnóstico de sistemas existentes, análisis de eficiencia energética y adecuación normativa para infraestructura crítica e industrial.',
     eyebrow: 'Servicios · 02',
-    bajada: 'Criterio técnico independiente, con mediciones y no con impresiones.',
+    bajada: 'Criterio técnico independiente, con mediciones que quedan por escrito.',
     intro:
       'Cuando el que instala es también el que certifica su propio trabajo, el mandante queda sin contraparte. La inspección técnica existe para cerrar esa brecha: revisar lo ejecutado contra lo especificado, medir lo que se puede medir y dejar por escrito lo que falta. También asesoramos antes de comprar, que suele ser más barato que asesorar después.',
     alcance: [
@@ -106,7 +106,7 @@ export const servicios: Servicio[] = [
     eyebrow: 'Servicios · 03',
     bajada: 'En sus dependencias, sobre sus propios equipos.',
     intro:
-      'La capacitación que sirve no se hace con diapositivas: se hace frente al equipo que el personal opera todos los días. Nuestros programas se dictan en dependencias del cliente, combinan aula y práctica sobre instalación real, y están a cargo de una dirección técnica con más de una década de docencia en educación superior además del ejercicio en planta.',
+      'La capacitación se hace frente al equipo que el personal opera todos los días. Nuestros programas se dictan en dependencias del cliente, combinan aula y práctica sobre instalación real, y están a cargo de una dirección técnica con más de una década de docencia en educación superior además del ejercicio en planta.',
     alcance: [
       { titulo: 'Refrigerantes inflamables', detalle: 'Buenas prácticas en refrigeración, manipulación segura y prevención de riesgos.' },
       { titulo: 'Refrigerante CO₂ (R-744)', detalle: 'Fundamentos, particularidades de operación y seguridad en sistemas transcríticos.' },

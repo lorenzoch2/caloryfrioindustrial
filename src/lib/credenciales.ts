@@ -103,7 +103,7 @@ export const metodologia: Credencial[] = [
   { titulo: 'Levantamiento en terreno', detalle: 'Inspección del sistema, registro de equipos, estado y condiciones de operación, con respaldo fotográfico.' },
   { titulo: 'Diagnóstico técnico', detalle: 'Evaluación de estado, identificación de puntos críticos y verificación de cumplimiento normativo aplicable.' },
   { titulo: 'Plan de trabajo', detalle: 'Actividades, frecuencias, repuestos e insumos, y programa de ejecución acordado con la contraparte técnica.' },
-  { titulo: 'Ejecución', detalle: 'Trabajos bajo protocolo y normas de seguridad, coordinando accesos y ventanas de intervención para no afectar la operación.' },
+  { titulo: 'Ejecución', detalle: 'Trabajos bajo protocolo y normas de seguridad, coordinando accesos y ventanas de intervención para mantener la operación en marcha.' },
   { titulo: 'Verificación y entrega', detalle: 'Pruebas de funcionamiento, mediciones de parámetros e informe de cierre con registro de antes y después.' },
   { titulo: 'Respaldo posterior', detalle: 'Recomendaciones por escrito y disponibilidad para consultas durante el período de garantía ofertado.' },
 ]

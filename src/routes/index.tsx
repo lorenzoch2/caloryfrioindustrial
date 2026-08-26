@@ -181,7 +181,7 @@ function Portada() {
         <RotuloSeccion
           eyebrow="Cómo trabajamos"
           titulo="Del levantamiento al informe de cierre"
-          bajada="El mismo procedimiento en un contrato industrial y en una mantención domiciliaria. Cambia la escala, no el método."
+          bajada="El mismo procedimiento en un contrato industrial y en una mantención domiciliaria. Cambia la escala; el método es el mismo."
         />
         <ol className="metodologia">
           {metodologia.map((paso, indice) => (
