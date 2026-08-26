@@ -105,7 +105,7 @@ function Dato({ valor, etiqueta, indice }: { valor: string; etiqueta: string; in
 /** Cierre con llamado a la acción. Una acción principal, repetida en cada página. */
 export function CierreCTA({
   titulo = '¿Conversamos sobre su instalación?',
-  bajada = 'Cuéntenos qué equipo tiene y qué le está pasando. Respondemos con una propuesta concreta, no con un catálogo.',
+  bajada = 'Cuéntenos qué equipo tiene y qué le está pasando. Respondemos con una propuesta concreta para su caso.',
 }: {
   titulo?: string
   bajada?: string
