@@ -157,8 +157,8 @@ function Portada() {
               docencia técnica en educación superior.
             </p>
             <p className="parrafo">
-              Es también quien va a terreno. No hay traspaso entre quien cotiza y quien ejecuta,
-              ni informes firmados por alguien que no vio la instalación.
+              Es también quien va a terreno. La misma persona que evalúa su instalación dirige
+              la ejecución y firma el informe de cierre.
             </p>
             <Link to="/empresa" className="enlace-flecha enlace-flecha--claro">
               Ver credenciales y antecedentes
