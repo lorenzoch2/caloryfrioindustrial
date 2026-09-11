@@ -16,19 +16,19 @@ const SITE_URL = company.sitio.url
 */
 const OG_IMAGE = `${SITE_URL}/og-2026-08b.jpg`
 
-const TITULO = 'Calor & Frío Industrial — Climatización y Refrigeración Industrial en Santiago'
+const TITULO = 'Calor & Frío Industrial — Climatización y Refrigeración en Santiago'
 const DESCRIPCION =
-  'Empresa de ingeniería en climatización, refrigeración industrial y ventilación en Santiago. Mantención, asesorías e ITO y capacitación técnica para clientes industriales, comerciales y públicos.'
+  'Empresa de ingeniería en climatización, refrigeración y ventilación en Santiago. Mantención, asesorías e ITO y capacitación técnica para clientes industriales, comerciales y públicos.'
 
 /*
   Al pegar el enlace en WhatsApp el título se corta cerca de los 65 caracteres y
-  la descripción cerca de los 120. El título de SEO mide 79 y la descripción 218,
+  la descripción cerca de los 120. El título y la descripción de SEO son más largos,
   así que en la vista previa se cortaban a media frase. Estas dos versiones dicen
   lo mismo dentro del espacio que hay.
 */
 const TITULO_SOCIAL = `${company.nombreFantasia} — ${company.lema}`
 const DESCRIPCION_SOCIAL =
-  'Climatización, refrigeración industrial y ventilación con diagnóstico en terreno. Santiago de Chile.'
+  'Climatización, refrigeración y ventilación con diagnóstico en terreno. Santiago de Chile.'
 
 const structuredData = JSON.stringify(buildStructuredData())
 

@@ -69,13 +69,13 @@ function Portada() {
             Contratista de ingeniería térmica · Santiago de Chile
           </p>
           <h1 className="hero-titulo">
-            Climatización, refrigeración industrial y ventilación
+            Climatización, refrigeración y ventilación
             {' '}<span className="acento">con diagnóstico en terreno</span>
           </h1>
           <p className="hero-bajada">
             Un mismo equipo desde el levantamiento hasta el informe de cierre. Dirección técnica
-            con más de treinta años en refrigeración industrial, instrumentación propia y visita
-            a terreno antes de cotizar.
+            con más de treinta años en refrigeración, instrumentación propia y visita a terreno
+            antes de cotizar.
           </p>
           <div className="hero-acciones">
             <Link to="/contacto" className="btn btn-acento btn-lg">
@@ -153,8 +153,8 @@ function Portada() {
             />
             <p className="parrafo">
               La dirección técnica está a cargo de <strong>{company.direccionTecnica}</strong>, con más
-              de tres décadas en refrigeración industrial, retail y agroindustria, y catorce años de
-              docencia técnica en educación superior.
+              de tres décadas en refrigeración para industria, retail y agroindustria, y catorce años
+              de docencia técnica en educación superior.
             </p>
             <p className="parrafo">
               Es también quien va a terreno. La misma persona que evalúa su instalación dirige

@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Corporate marketing site for Calor & Frío Industrial, a Chilean HVAC and industrial refrigeration
+Corporate marketing site for Calor & Frío Industrial, a Chilean HVAC, refrigeration and ventilation
 company. Built with TanStack Start (React + Vite + SSR) and deployed on Netlify.
 
 **Seven pages, not one.** Each competes for its own search and speaks to one buyer. A plant
@@ -126,6 +126,10 @@ methodology rule, the parallax and the carousel's auto-advance.
   as in force when it is not is grounds for exclusion from a tender.
 - Facts on the site must be traceable to a document in the company folder (tax record, CV,
   certificates, inventory).
+- **The trade is «climatización, refrigeración y ventilación» — never «refrigeración industrial».**
+  The partners dropped «industrial» from the description of what the company does in September 2026,
+  on the site and on the business cards. «Industrial» stays in the company name, in the technical
+  director's INACAP title (its official name) and where it names a sector of his experience.
 
 ## Contact
  

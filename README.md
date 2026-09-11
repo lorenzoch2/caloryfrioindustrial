@@ -1,7 +1,7 @@
 # Calor & Frío Industrial — Sitio corporativo
 
 Sitio de **Calor y Frío Industrial SpA**, empresa chilena de ingeniería en climatización,
-refrigeración industrial y ventilación.
+refrigeración y ventilación.
 
 ## Tecnologías
 

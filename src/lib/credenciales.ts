@@ -49,7 +49,7 @@ export const formacionTecnica: Credencial[] = [
 
 /** Sectores en que la dirección técnica ha ejercido. Sin nombres de mandantes. */
 export const sectoresExperiencia: string[] = [
-  'Refrigeración industrial y agroindustria',
+  'Refrigeración para industria y agroindustria',
   'Retail y cadenas de supermercados',
   'Climatización de precisión en data centers',
   'Educación superior y edificios institucionales',

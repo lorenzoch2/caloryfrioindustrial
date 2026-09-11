@@ -32,9 +32,9 @@ export const servicios: Servicio[] = [
     galeria: 'servicios',
     navLabel: 'Mantención',
     titulo: 'Mantención HVAC y refrigeración',
-    tituloPagina: 'Mantención de aire acondicionado y refrigeración industrial · Santiago',
+    tituloPagina: 'Mantención de aire acondicionado y refrigeración · Santiago',
     metaDescription:
-      'Mantención preventiva y correctiva de sistemas de climatización y refrigeración industrial en la Región Metropolitana. Con contrato o por evento, para industria, comercio, edificios y hogar.',
+      'Mantención preventiva y correctiva de sistemas de climatización y refrigeración en la Región Metropolitana. Con contrato o por evento, para industria, comercio, edificios y hogar.',
     eyebrow: 'Servicios · 01',
     bajada: 'Preventiva y correctiva, con contrato o por evento.',
     intro:

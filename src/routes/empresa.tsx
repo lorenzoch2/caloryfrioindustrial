@@ -7,7 +7,7 @@ import { CierreCTA, HeroPagina, RotuloSeccion, Seccion } from '../components/ui'
 const url = `${company.sitio.url}/empresa`
 const TITULO = 'Quiénes somos — ingeniería en climatización y refrigeración'
 const DESCRIPCION =
-  'Calor y Frío Industrial SpA: empresa de ingeniería en climatización y refrigeración industrial en Las Condes, Santiago. Dirección técnica con más de 30 años de ejercicio, certificaciones y capacidad operativa propia.'
+  'Calor y Frío Industrial SpA: empresa de ingeniería en climatización y refrigeración en Las Condes, Santiago. Dirección técnica con más de 30 años de ejercicio, certificaciones y capacidad operativa propia.'
 
 export const Route = createFileRoute('/empresa')({
   head: () => ({
@@ -66,7 +66,7 @@ function Empresa() {
         <RotuloSeccion eyebrow="Equipo" titulo="Quién responde por el trabajo" />
         <div className="equipo-grid">
           <article className="persona">
-            <p className="persona-rol">Dirección Técnica</p>
+            <p className="persona-rol">Supervisor Técnico</p>
             <h3 className="persona-nombre">{company.direccionTecnica}</h3>
             <p className="persona-bio">
               Ingeniero de Ejecución Industrial con más de 30 años liderando supervisión,

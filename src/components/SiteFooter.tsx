@@ -26,7 +26,7 @@ export function SiteFooter() {
           />
           <p className="footer-slogan">{company.lema}</p>
           <p className="footer-lema">
-            Climatización, refrigeración industrial y ventilación en {company.areaServicio}.
+            Climatización, refrigeración y ventilación en {company.areaServicio}.
           </p>
           <div className="footer-social">
             <a href={company.contacto.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><IconWhatsApp /></a>

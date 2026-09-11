@@ -94,7 +94,7 @@ export function buildStructuredData() {
     sameAs: [company.contacto.instagram],
     knowsAbout: [
       'Climatización HVAC',
-      'Refrigeración industrial',
+      'Refrigeración',
       'Ventilación',
       'Inspección Técnica de Obras (ITO)',
       'Eficiencia energética',
