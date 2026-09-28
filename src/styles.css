@@ -255,6 +255,8 @@ a:hover { color: var(--steel); }
 .seccion--banda .parrafo { color: var(--sobre-banda-mut); }
 .seccion--banda .parrafo strong { color: var(--sobre-banda); }
 
+.prosa { max-width: 68ch; }
+
 .nota {
   margin-top: 1.25rem;
   font-size: 0.82rem;
@@ -661,15 +663,7 @@ a:hover { color: var(--steel); }
   gap: clamp(2rem, 5vw, 4rem);
   align-items: start;
 }
-.split--media { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); align-items: center; }
 .split-copy .rotulo { margin-bottom: 1.5rem; }
-
-.figura {
-  border: 1px solid var(--line);
-  background: var(--paper-2);
-  padding: 0.75rem;
-}
-.figura img { display: block; width: 100%; height: auto; }
 
 /* ─── CREDENCIALES ─── */
 
@@ -1114,7 +1108,7 @@ a:hover { color: var(--steel); }
   .segmentos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .servicios-grid { grid-template-columns: 1fr; }
   .metodologia { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .split, .split--media, .dos-columnas, .contacto-grid, .equipo-grid {
+  .split, .dos-columnas, .contacto-grid, .equipo-grid {
     grid-template-columns: 1fr;
   }
   .site-footer-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }

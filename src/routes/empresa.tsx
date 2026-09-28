@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { company, domicilioLinea } from '../lib/company'
 import { capacidadOperativa, formacionTecnica, sectoresExperiencia } from '../lib/credenciales'
-import { getAboutImage } from '../lib/images'
 import { CierreCTA, HeroPagina, RotuloSeccion, Seccion } from '../components/ui'
 
 const url = `${company.sitio.url}/empresa`
@@ -24,8 +23,6 @@ export const Route = createFileRoute('/empresa')({
 })
 
 function Empresa() {
-  const imagenSobreNosotros = getAboutImage()
-
   return (
     <>
       <HeroPagina
@@ -35,29 +32,22 @@ function Empresa() {
       />
 
       <Seccion tono="base">
-        <div className="split split--media">
-          {imagenSobreNosotros && (
-            <figure className="figura">
-              <img src={imagenSobreNosotros} alt="Equipo de Calor &amp; Frío Industrial en terreno" loading="lazy" />
-            </figure>
-          )}
-          <div>
-            <RotuloSeccion eyebrow="Quiénes somos" titulo="Qué hacemos y para quién" />
-            <p className="parrafo">
-              Somos una empresa de ingeniería especializada en el mantenimiento, diseño y
-              optimización de sistemas térmicos industriales y comerciales. Atendemos con la misma
-              rigurosidad técnica a clientes industriales y corporativos como a familias y comercios.
-            </p>
-            <p className="parrafo">
-              Nuestra propuesta se apoya en tres cosas concretas: criterio técnico con treinta años
-              de ejercicio detrás, cumplimiento normativo, y herramienta e instrumental propios para
-              no depender de terceros en la ejecución.
-            </p>
-            <p className="parrafo">
-              Trabajamos en {company.areaServicio}, desde proyectos de alta complejidad hasta
-              mantención domiciliaria.
-            </p>
-          </div>
+        <RotuloSeccion eyebrow="Quiénes somos" titulo="Qué hacemos y para quién" />
+        <div className="prosa">
+          <p className="parrafo">
+            Somos una empresa de ingeniería especializada en el mantenimiento, diseño y
+            optimización de sistemas térmicos industriales y comerciales. Atendemos con la misma
+            rigurosidad técnica a clientes industriales y corporativos como a familias y comercios.
+          </p>
+          <p className="parrafo">
+            Nuestra propuesta se apoya en tres cosas concretas: criterio técnico con treinta años
+            de ejercicio detrás, cumplimiento normativo, y herramienta e instrumental propios para
+            no depender de terceros en la ejecución.
+          </p>
+          <p className="parrafo">
+            Trabajamos en {company.areaServicio}, desde proyectos de alta complejidad hasta
+            mantención domiciliaria.
+          </p>
         </div>
       </Seccion>
 

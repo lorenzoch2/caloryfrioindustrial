@@ -11,8 +11,6 @@ const serviceFolders: Record<ServiceId, string> = {
   servicios: '../assets/images/servicios',
 }
 
-const aboutFolder = '../assets/images/sobre nosotros'
-
 export function getServiceImages(id: ServiceId): string[] {
   const folder = serviceFolders[id]
 
@@ -20,12 +18,4 @@ export function getServiceImages(id: ServiceId): string[] {
     .filter(path => path.startsWith(`${folder}/`))
     .sort((a, b) => a.localeCompare(b, 'es'))
     .map(path => imageModules[path])
-}
-
-export function getAboutImage(): string | undefined {
-  const path = Object.keys(imageModules)
-    .filter(imagePath => imagePath.startsWith(`${aboutFolder}/`))
-    .sort((a, b) => a.localeCompare(b, 'es'))[0]
-
-  return path ? imageModules[path] : undefined
 }
