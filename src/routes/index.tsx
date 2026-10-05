@@ -3,9 +3,9 @@ import heroAncho from '../assets/hero/hero-home-1280.jpg'
 import heroAngosto from '../assets/hero/hero-home-760.jpg'
 import { company } from '../lib/company'
 import { servicios } from '../lib/servicios'
-import { formacionTecnica, metodologia, segmentos } from '../lib/credenciales'
+import { metodologia, preguntas, razones, segmentos } from '../lib/contenido'
 import {
-  IconComercio, IconFlecha, IconHogar, IconIndustria, IconPublico,
+  IconComercio, IconFlecha, IconHogar, IconIndustria, IconWhatsApp,
 } from '../components/icons'
 import { CierreCTA, FranjaDatos, RotuloSeccion, Seccion } from '../components/ui'
 import { useParallax } from '../lib/movimiento'
@@ -22,7 +22,6 @@ export const Route = createFileRoute('/')({
 const iconosSegmento: Record<string, React.ComponentType<{ size?: number }>> = {
   industria: IconIndustria,
   comercio: IconComercio,
-  publico: IconPublico,
   hogar: IconHogar,
 }
 
@@ -73,28 +72,34 @@ function Portada() {
             {' '}<span className="acento">con diagnóstico en terreno</span>
           </h1>
           <p className="hero-bajada">
-            Un mismo equipo desde el levantamiento hasta el informe de cierre. Dirección técnica
-            con más de treinta años en refrigeración, instrumentación propia y visita a terreno
-            antes de cotizar.
+            Instalación, mantención y asesoría técnica para industria, comercio y hogar.
+            Visita a terreno antes de cotizar, instrumental propio y mediciones que quedan
+            por escrito.
           </p>
           <div className="hero-acciones">
             <Link to="/contacto" className="btn btn-acento btn-lg">
               Solicitar visita técnica
               <IconFlecha />
             </Link>
-            <Link to="/sector-publico" className="btn btn-linea btn-lg">
-              Antecedentes para licitaciones
-            </Link>
+            <a
+              href={company.contacto.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-linea btn-lg"
+            >
+              <IconWhatsApp />
+              Escribir por WhatsApp
+            </a>
           </div>
         </div>
       </div>
 
       <FranjaDatos
         datos={[
-          { valor: '30+', etiqueta: 'años de dirección técnica' },
-          { valor: '06', etiqueta: 'certificaciones y especializaciones' },
+          { valor: '30+', etiqueta: 'años de experiencia técnica' },
           { valor: '100%', etiqueta: 'instrumental y herramienta propia' },
           { valor: 'RM', etiqueta: 'Región Metropolitana y alrededores' },
+          { valor: '03', etiqueta: 'líneas de servicio' },
         ]}
       />
 
@@ -105,7 +110,7 @@ function Portada() {
           titulo="¿Desde dónde nos escribe?"
           bajada="Una cámara de frío detenida y un split que no enfría son dos problemas distintos, con precios y plazos distintos. Elija el suyo y le mostramos lo que corresponde."
         />
-        <div className="segmentos-grid">
+        <div className="segmentos-grid segmentos-grid--tres">
           {segmentos.map(segmento => {
             const Icono = iconosSegmento[segmento.id]
             return (
@@ -148,28 +153,28 @@ function Portada() {
         <div className="split">
           <div className="split-copy">
             <RotuloSeccion
-              eyebrow="Por qué nosotros"
-              titulo="Treinta años de dirección técnica"
+              eyebrow="Por qué elegirnos"
+              titulo="Trabajo medido y documentado"
             />
             <p className="parrafo">
-              La dirección técnica está a cargo de <strong>{company.direccionTecnica}</strong>, con más
-              de tres décadas en refrigeración para industria, retail y agroindustria, y catorce años
-              de docencia técnica en educación superior.
+              Trabajamos climatización, refrigeración y ventilación con más de treinta años de
+              experiencia técnica detrás y equipamiento propio para ejecutar en los plazos que
+              acordamos.
             </p>
             <p className="parrafo">
-              Es también quien va a terreno. La misma persona que evalúa su instalación dirige
-              la ejecución y firma el informe de cierre.
+              Cada servicio parte con una visita a terreno y termina con un informe que deja
+              registro de lo medido y de lo intervenido.
             </p>
             <Link to="/empresa" className="enlace-flecha enlace-flecha--claro">
-              Ver credenciales y antecedentes
+              Conocer la empresa
               <IconFlecha size={16} />
             </Link>
           </div>
           <ul className="credencial-lista">
-            {formacionTecnica.slice(0, 4).map(item => (
-              <li key={item.titulo}>
-                <span className="credencial-titulo">{item.titulo}</span>
-                <span className="credencial-detalle">{item.detalle}</span>
+            {razones.map(razon => (
+              <li key={razon.titulo}>
+                <span className="credencial-titulo">{razon.titulo}</span>
+                <span className="credencial-detalle">{razon.detalle}</span>
               </li>
             ))}
           </ul>
@@ -192,6 +197,22 @@ function Portada() {
             </li>
           ))}
         </ol>
+      </Seccion>
+
+      {/* ── PREGUNTAS FRECUENTES ── */}
+      <Seccion tono="tinte">
+        <RotuloSeccion
+          eyebrow="Preguntas frecuentes"
+          titulo="Lo que nos preguntan antes de contratar"
+        />
+        <dl className="preguntas">
+          {preguntas.map(pregunta => (
+            <div key={pregunta.titulo}>
+              <dt className="pregunta-titulo">{pregunta.titulo}</dt>
+              <dd className="pregunta-detalle">{pregunta.detalle}</dd>
+            </div>
+          ))}
+        </dl>
       </Seccion>
 
       <CierreCTA />

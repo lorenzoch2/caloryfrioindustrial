@@ -4,9 +4,9 @@ import type { ServiceId } from './images'
  * Contenido de las tres líneas de servicio.
  *
  * Cada una tiene su propia página y su propio objetivo de búsqueda. El `alcance`
- * no es relleno: es lo que un jefe de mantención o una comisión evaluadora lee
- * para decidir si sabemos de qué estamos hablando, y es lo que se pega en el
- * anexo técnico de una licitación. Mantenerlo específico y verificable.
+ * no es relleno: es lo que un jefe de mantención o un administrador de edificio
+ * lee para decidir si sabemos de qué estamos hablando. Mantenerlo específico y
+ * verificable.
  */
 
 export interface Servicio {
@@ -31,15 +31,17 @@ export const servicios: Servicio[] = [
     slug: 'mantenimiento',
     galeria: 'servicios',
     navLabel: 'Mantención',
-    titulo: 'Mantención HVAC y refrigeración',
-    tituloPagina: 'Mantención de aire acondicionado y refrigeración · Santiago',
+    titulo: 'Instalación y mantención',
+    tituloPagina: 'Instalación y mantención de aire acondicionado · Santiago',
     metaDescription:
-      'Mantención preventiva y correctiva de sistemas de climatización y refrigeración en la Región Metropolitana. Con contrato o por evento, para industria, comercio, edificios y hogar.',
+      'Instalación, recambio y mantención de equipos de climatización y refrigeración en la Región Metropolitana. Con contrato o por evento, para industria, comercio, edificios y hogar.',
     eyebrow: 'Servicios · 01',
-    bajada: 'Preventiva y correctiva, con contrato o por evento.',
+    bajada: 'Instalación, recambio y mantención, con contrato o por evento.',
     intro:
-      'Un equipo de frío rara vez falla de golpe: se degrada durante meses y avisa en el consumo, en las presiones y en el ruido. La mantención preventiva existe para leer esas señales antes de que se conviertan en una parada. Trabajamos con contrato periódico para instalaciones críticas y por evento para requerimientos puntuales.',
+      'Instalamos equipos nuevos, hacemos recambios y mantenemos instalaciones en marcha. Un equipo de frío rara vez falla de golpe: se degrada durante meses y avisa en el consumo, en las presiones y en el ruido. La mantención preventiva existe para leer esas señales antes de que se conviertan en una parada. Trabajamos con contrato periódico para instalaciones críticas y por evento para requerimientos puntuales.',
     alcance: [
+      { titulo: 'Instalación y puesta en marcha', detalle: 'Montaje de unidad interior y exterior, líneas de refrigerante, conexión eléctrica, vacío y puesta en marcha.' },
+      { titulo: 'Recambio de equipos', detalle: 'Recuperación de refrigerante, desmontaje del equipo existente, traslado e instalación del nuevo.' },
       { titulo: 'Limpieza y sanitización', detalle: 'Evaporadores, condensadores, filtros y bandejas de condensado.' },
       { titulo: 'Medición de parámetros', detalle: 'Presiones de alta y baja, sobrecalentamiento, subenfriamiento y temperaturas de operación.' },
       { titulo: 'Detección y reparación de fugas', detalle: 'Prueba con nitrógeno, localización, reparación por soldadura y verificación de estanqueidad.' },
@@ -80,7 +82,7 @@ export const servicios: Servicio[] = [
       { titulo: 'Eficiencia energética', detalle: 'Análisis de consumo, identificación de pérdidas y evaluación de alternativas de mejora.' },
       { titulo: 'Adecuación normativa', detalle: 'Revisión frente a la reglamentación aplicable y a las buenas prácticas del rubro.' },
       { titulo: 'Peritaje y segunda opinión', detalle: 'Evaluación independiente ante fallas recurrentes, discrepancias con un contratista o siniestros.' },
-      { titulo: 'Especificación técnica', detalle: 'Redacción de requisitos técnicos para compra de equipos o para bases de licitación.' },
+      { titulo: 'Especificación técnica', detalle: 'Redacción de requisitos técnicos para comprar equipos o para pedir propuestas comparables.' },
     ],
     entregables: [
       'Informe técnico con metodología, mediciones y conclusiones',
@@ -92,7 +94,7 @@ export const servicios: Servicio[] = [
       'Mandantes de proyectos de climatización en ejecución',
       'Infraestructura crítica: data centers, salas técnicas, cadena de frío',
       'Administraciones que necesitan una contraparte técnica propia',
-      'Organismos públicos que requieren especificación previa a licitar',
+      'Empresas que necesitan especificar bien antes de comprar',
     ],
   },
   {
@@ -106,7 +108,7 @@ export const servicios: Servicio[] = [
     eyebrow: 'Servicios · 03',
     bajada: 'En sus dependencias, sobre sus propios equipos.',
     intro:
-      'La capacitación se hace frente al equipo que el personal opera todos los días. Nuestros programas se dictan en dependencias del cliente, combinan aula y práctica sobre instalación real, y están a cargo de una dirección técnica con más de una década de docencia en educación superior además del ejercicio en planta.',
+      'La capacitación se hace frente al equipo que el personal opera todos los días. Nuestros programas se dictan en dependencias del cliente, combinan aula y práctica sobre instalación real, y los dicta personal con ejercicio en planta y más de una década de docencia técnica en educación superior.',
     alcance: [
       { titulo: 'Refrigerantes inflamables', detalle: 'Buenas prácticas en refrigeración, manipulación segura y prevención de riesgos.' },
       { titulo: 'Refrigerante CO₂ (R-744)', detalle: 'Fundamentos, particularidades de operación y seguridad en sistemas transcríticos.' },

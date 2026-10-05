@@ -3,10 +3,12 @@
  *
  * Todo dato de identificación, contacto o antecedente legal de la empresa se
  * declara aquí y se consume desde las vistas. Si un dato cambia (correo,
- * teléfono, ID de ChileProveedores), se cambia en este archivo y en ningún otro.
+ * teléfono, domicilio), se cambia en este archivo y en ningún otro.
  *
- * Los valores deben coincidir exactamente con `Documentos/Información Adicional.txt`
- * y con la Ficha de Proveedor usada en Mercado Público.
+ * Los valores deben coincidir exactamente con `Documentos/Información Adicional.txt`.
+ *
+ * El sitio no nombra personas. El representante legal y la supervisión técnica
+ * no se publican: viven en los documentos de la empresa, no en la web.
  */
 
 export const company = {
@@ -19,8 +21,6 @@ export const company = {
   tipoSociedad: 'Sociedad por Acciones (SpA)',
   regimenTributario: 'Régimen Pro Pyme General (14 D)',
   inicioActividades: '2026-01-12',
-  representanteLegal: 'Lorenzo Chacano Muñoz',
-  direccionTecnica: 'Francisco Chacano Jara',
 
   domicilio: {
     calle: 'Zanzibar Oriente 7473',
@@ -76,10 +76,6 @@ export function buildStructuredData() {
     taxID: company.rut,
     vatID: company.rut,
     foundingDate: company.inicioActividades,
-    founder: {
-      '@type': 'Person',
-      name: company.representanteLegal,
-    },
     address: {
       '@type': 'PostalAddress',
       streetAddress: company.domicilio.calle,

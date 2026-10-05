@@ -7,7 +7,7 @@ import { HeroPagina, Seccion } from '../components/ui'
 const url = `${company.sitio.url}/contacto`
 const TITULO = 'Contacto — solicitar visita técnica o cotización'
 const DESCRIPCION =
-  'Solicite una visita técnica o una cotización de climatización y refrigeración en la Región Metropolitana. Atendemos requerimientos industriales, comerciales, domiciliarios y de organismos públicos.'
+  'Solicite una visita técnica o una cotización de climatización y refrigeración en la Región Metropolitana. Atendemos requerimientos industriales, comerciales y domiciliarios.'
 
 export const Route = createFileRoute('/contacto')({
   head: () => ({
@@ -59,11 +59,6 @@ function Contacto() {
               <div><dt>Razón social</dt><dd>{company.razonSocial}</dd></div>
               <div><dt>R.U.T.</dt><dd>{company.rut}</dd></div>
             </dl>
-
-            <p className="nota">
-              Para requerimientos de organismos públicos, indique el ID del proceso y el plazo de
-              cierre en el mensaje.
-            </p>
           </div>
 
           <div className="contacto-form-wrap">

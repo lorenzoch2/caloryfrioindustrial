@@ -5,12 +5,12 @@
 Corporate marketing site for Calor & Frío Industrial, a Chilean HVAC, refrigeration and ventilation
 company. Built with TanStack Start (React + Vite + SSR) and deployed on Netlify.
 
-**Seven pages, not one.** Each competes for its own search and speaks to one buyer. A plant
+**Six pages, not one.** Each competes for its own search and speaks to one buyer. A plant
 maintenance chief and someone wanting their home split cleaned are different sales, with different
 prices and different language — the site routes them apart from the home page's segment selector.
 
-`/sector-publico` exists to be cited inside a bid: it carries the company's legal and technical
-record for public-tender evaluation committees (Mercado Público / ChileCompra).
+The partners dropped the public-procurement line in October 2026. `/sector-publico` was deleted
+and `netlify.toml` redirects it to the home page with a 301. Do not reintroduce tender copy.
 
 ## Tech Stack
 
@@ -38,7 +38,6 @@ src/
     servicios.mantenimiento.tsx    # /servicios/mantenimiento
     servicios.asesorias.tsx        # /servicios/asesorias
     servicios.capacitaciones.tsx   # /servicios/capacitaciones
-    sector-publico.tsx             # /sector-publico
     empresa.tsx                    # /empresa
     contacto.tsx                   # /contacto
   components/
@@ -49,7 +48,7 @@ src/
   lib/
     company.ts                 # Single source of truth for corporate data + JSON-LD builder
     servicios.ts               # Content of the three service lines
-    credenciales.ts            # Credentials, operational capacity, methodology, segments
+    contenido.ts               # Reasons, methodology, equipment, FAQ and buyer segments
     images.ts                  # Maps src/assets/images/** into the galleries
   assets/hero/                 # Responsive hero images (1280 / 760 for srcset)
   styles.css                   # Design tokens and every component style
@@ -117,13 +116,15 @@ methodology rule, the parallax and the carousel's auto-advance.
 
 ## Content rules — read before editing copy
 
-- **Never name third-party clients on the site.** The technical director's professional history
-  predates the company; publishing those names here implies they are contracts of the SpA, which is
-  penalised in a tender evaluation. Sectors and certifications only. Client names belong in the CV
-  attached to a bid's technical annex.
-- **Never publish a credential as current before it is.** The ChileProveedores row in the
-  record is commented out in `routes/sector-publico.tsx` for exactly this reason. Declaring something
-  as in force when it is not is grounds for exclusion from a tender.
+- **The site speaks as a company, never as people.** No personal names and no CV: no degrees,
+  certifications or individual career history. The partners decided in October 2026 that they do
+  not want to appear on the site. Experience is stated as the company's («más de treinta años de
+  experiencia técnica»), and what sets the service apart are facts about the work itself: visit
+  before quoting, measurements in writing, own equipment, informe de cierre.
+- **Never name third-party clients on the site.** Those jobs predate the company; publishing the
+  names here implies they are contracts of the SpA.
+- **Never publish a credential as current before it is.** Declaring something in force when it is
+  not costs far more than leaving it out.
 - Facts on the site must be traceable to a document in the company folder (tax record, CV,
   certificates, inventory).
 - **The trade is «climatización, refrigeración y ventilación» — never «refrigeración industrial».**

@@ -18,7 +18,7 @@ const OG_IMAGE = `${SITE_URL}/og-2026-08b.jpg`
 
 const TITULO = 'Calor & Frío Industrial — Climatización y Refrigeración en Santiago'
 const DESCRIPCION =
-  'Empresa de ingeniería en climatización, refrigeración y ventilación en Santiago. Mantención, asesorías e ITO y capacitación técnica para clientes industriales, comerciales y públicos.'
+  'Empresa de ingeniería en climatización, refrigeración y ventilación en Santiago. Instalación, mantención, asesorías e ITO y capacitación técnica para industria, comercio y hogar.'
 
 /*
   Al pegar el enlace en WhatsApp el título se corta cerca de los 65 caracteres y

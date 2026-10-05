@@ -17,10 +17,10 @@ import { company } from '../lib/company'
 const FORM_NAME = 'contacto'
 
 const tiposRequerimiento = [
+  'Mantención de equipos',
+  'Instalación o recambio de equipos',
   'Asesoría técnica / ITO',
   'Capacitación',
-  'Servicio de mantenimiento',
-  'Licitación pública o cotización para el Estado',
   'Otro',
 ]
 

@@ -7,9 +7,17 @@
   targetPort = 3000
   port = 8888
 
-# Sin regla de redirect: el enrutamiento lo resuelve el handler SSR de TanStack
-# Start, que ya devuelve 404 en rutas inexistentes. La regla anterior
-# (`from = "/**"`) además nunca se aplicó: el comodín de Netlify es `/*`.
+# Única regla de redirect: /sector-publico existió hasta octubre de 2026 y puede
+# estar indexada o enlazada desde afuera. Va a la portada con 301 en vez de
+# devolver 404. `force` es necesario porque el handler SSR atiende todas las
+# rutas. El resto del enrutamiento lo resuelve ese handler, que ya devuelve 404
+# en rutas inexistentes; la regla anterior (`from = "/**"`) nunca se aplicó,
+# porque el comodín de Netlify es `/*`.
+[[redirects]]
+  from = "/sector-publico"
+  to = "/"
+  status = 301
+  force = true
 
 # Estas cabeceras sólo alcanzan a los archivos estáticos del CDN — la respuesta
 # HTML la emite la función SSR y no pasa por aquí. La autoridad es

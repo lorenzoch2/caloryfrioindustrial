@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SectorPublicoRouteImport } from './routes/sector-publico'
 import { Route as EmpresaRouteImport } from './routes/empresa'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,11 +16,6 @@ import { Route as ServiciosMantenimientoRouteImport } from './routes/servicios.m
 import { Route as ServiciosCapacitacionesRouteImport } from './routes/servicios.capacitaciones'
 import { Route as ServiciosAsesoriasRouteImport } from './routes/servicios.asesorias'
 
-const SectorPublicoRoute = SectorPublicoRouteImport.update({
-  id: '/sector-publico',
-  path: '/sector-publico',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const EmpresaRoute = EmpresaRouteImport.update({
   id: '/empresa',
   path: '/empresa',
@@ -57,7 +51,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
   '/empresa': typeof EmpresaRoute
-  '/sector-publico': typeof SectorPublicoRoute
   '/servicios/asesorias': typeof ServiciosAsesoriasRoute
   '/servicios/capacitaciones': typeof ServiciosCapacitacionesRoute
   '/servicios/mantenimiento': typeof ServiciosMantenimientoRoute
@@ -66,7 +59,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
   '/empresa': typeof EmpresaRoute
-  '/sector-publico': typeof SectorPublicoRoute
   '/servicios/asesorias': typeof ServiciosAsesoriasRoute
   '/servicios/capacitaciones': typeof ServiciosCapacitacionesRoute
   '/servicios/mantenimiento': typeof ServiciosMantenimientoRoute
@@ -76,7 +68,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contacto': typeof ContactoRoute
   '/empresa': typeof EmpresaRoute
-  '/sector-publico': typeof SectorPublicoRoute
   '/servicios/asesorias': typeof ServiciosAsesoriasRoute
   '/servicios/capacitaciones': typeof ServiciosCapacitacionesRoute
   '/servicios/mantenimiento': typeof ServiciosMantenimientoRoute
@@ -87,7 +78,6 @@ export interface FileRouteTypes {
     | '/'
     | '/contacto'
     | '/empresa'
-    | '/sector-publico'
     | '/servicios/asesorias'
     | '/servicios/capacitaciones'
     | '/servicios/mantenimiento'
@@ -96,7 +86,6 @@ export interface FileRouteTypes {
     | '/'
     | '/contacto'
     | '/empresa'
-    | '/sector-publico'
     | '/servicios/asesorias'
     | '/servicios/capacitaciones'
     | '/servicios/mantenimiento'
@@ -105,7 +94,6 @@ export interface FileRouteTypes {
     | '/'
     | '/contacto'
     | '/empresa'
-    | '/sector-publico'
     | '/servicios/asesorias'
     | '/servicios/capacitaciones'
     | '/servicios/mantenimiento'
@@ -115,7 +103,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactoRoute: typeof ContactoRoute
   EmpresaRoute: typeof EmpresaRoute
-  SectorPublicoRoute: typeof SectorPublicoRoute
   ServiciosAsesoriasRoute: typeof ServiciosAsesoriasRoute
   ServiciosCapacitacionesRoute: typeof ServiciosCapacitacionesRoute
   ServiciosMantenimientoRoute: typeof ServiciosMantenimientoRoute
@@ -123,13 +110,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sector-publico': {
-      id: '/sector-publico'
-      path: '/sector-publico'
-      fullPath: '/sector-publico'
-      preLoaderRoute: typeof SectorPublicoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/empresa': {
       id: '/empresa'
       path: '/empresa'
@@ -179,7 +159,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactoRoute: ContactoRoute,
   EmpresaRoute: EmpresaRoute,
-  SectorPublicoRoute: SectorPublicoRoute,
   ServiciosAsesoriasRoute: ServiciosAsesoriasRoute,
   ServiciosCapacitacionesRoute: ServiciosCapacitacionesRoute,
   ServiciosMantenimientoRoute: ServiciosMantenimientoRoute,

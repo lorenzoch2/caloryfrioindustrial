@@ -1,12 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { company, domicilioLinea } from '../lib/company'
-import { capacidadOperativa, formacionTecnica, sectoresExperiencia } from '../lib/credenciales'
+import { equipamiento } from '../lib/contenido'
 import { CierreCTA, HeroPagina, RotuloSeccion, Seccion } from '../components/ui'
 
 const url = `${company.sitio.url}/empresa`
-const TITULO = 'Quiénes somos — ingeniería en climatización y refrigeración'
+const TITULO = 'La empresa — ingeniería en climatización y refrigeración'
 const DESCRIPCION =
-  'Calor y Frío Industrial SpA: empresa de ingeniería en climatización y refrigeración en Las Condes, Santiago. Dirección técnica con más de 30 años de ejercicio, certificaciones y capacidad operativa propia.'
+  'Calor y Frío Industrial SpA: empresa de ingeniería en climatización, refrigeración y ventilación en Santiago. Instalación, mantención, asesoría técnica y capacitación, con equipamiento propio.'
 
 export const Route = createFileRoute('/empresa')({
   head: () => ({
@@ -26,23 +26,24 @@ function Empresa() {
   return (
     <>
       <HeroPagina
-        eyebrow="Empresa"
-        titulo="Ingeniería térmica con respaldo verificable"
-        bajada="Una empresa nueva con una dirección técnica que no lo es."
+        eyebrow="La empresa"
+        titulo="Ingeniería térmica para industria, comercio y hogar"
+        bajada="Instalación, mantención, asesoría técnica y capacitación en la Región Metropolitana."
       />
 
       <Seccion tono="base">
         <RotuloSeccion eyebrow="Quiénes somos" titulo="Qué hacemos y para quién" />
         <div className="prosa">
           <p className="parrafo">
-            Somos una empresa de ingeniería especializada en el mantenimiento, diseño y
-            optimización de sistemas térmicos industriales y comerciales. Atendemos con la misma
-            rigurosidad técnica a clientes industriales y corporativos como a familias y comercios.
+            Somos una empresa de ingeniería especializada en la instalación, el mantenimiento y la
+            optimización de sistemas de climatización, refrigeración y ventilación. Atendemos con la
+            misma rigurosidad técnica a clientes industriales y corporativos como a comercios y
+            familias.
           </p>
           <p className="parrafo">
-            Nuestra propuesta se apoya en tres cosas concretas: criterio técnico con treinta años
-            de ejercicio detrás, cumplimiento normativo, y herramienta e instrumental propios para
-            no depender de terceros en la ejecución.
+            Nuestra propuesta se apoya en tres cosas concretas: criterio técnico con más de treinta
+            años de experiencia detrás, cumplimiento normativo, y herramienta e instrumental propios
+            para ejecutar en los plazos que acordamos.
           </p>
           <p className="parrafo">
             Trabajamos en {company.areaServicio}, desde proyectos de alta complejidad hasta
@@ -51,84 +52,44 @@ function Empresa() {
         </div>
       </Seccion>
 
-      {/* ── EQUIPO ── */}
+      {/* ── EQUIPAMIENTO ── */}
       <Seccion tono="banda">
-        <RotuloSeccion eyebrow="Equipo" titulo="Quién responde por el trabajo" />
-        <div className="equipo-grid">
-          <article className="persona">
-            <p className="persona-rol">Supervisor Técnico</p>
-            <h3 className="persona-nombre">{company.direccionTecnica}</h3>
-            <p className="persona-bio">
-              Ingeniero de Ejecución Industrial con más de 30 años liderando supervisión,
-              mantenimiento integral y ejecución de proyectos de refrigeración comercial, industrial
-              y climatización. Especializado en tecnologías de refrigerantes ecoeficientes e
-              inflamables, con catorce años de docencia técnica en educación superior y ejercicio
-              como relator especialista para la agroindustria.
+        <div className="split">
+          <div className="split-copy">
+            <RotuloSeccion
+              eyebrow="Equipamiento"
+              titulo="Con qué llegamos a terreno"
+            />
+            <p className="parrafo">
+              La medición, la soldadura y el manejo de refrigerante se hacen con equipamiento
+              propio. Eso permite programar la ejecución cuando el cliente la necesita y entregar
+              mediciones hechas con instrumental calibrado.
             </p>
-          </article>
-          <article className="persona">
-            <p className="persona-rol">Representante Legal y Gerente General</p>
-            <h3 className="persona-nombre">{company.representanteLegal}</h3>
-            <p className="persona-bio">
-              Responsable de la administración, la contratación y la coordinación comercial de la
-              empresa. Contraparte para procesos de compra, contratos de mantención y
-              requerimientos de organismos públicos.
-            </p>
-          </article>
-        </div>
-
-        <div className="sectores">
-          <h3 className="sectores-titulo">Sectores de ejercicio de la dirección técnica</h3>
-          <ul className="sectores-lista">
-            {sectoresExperiencia.map(sector => (
-              <li key={sector}>{sector}</li>
+          </div>
+          <dl className="credencial-lista">
+            {equipamiento.map(item => (
+              <div key={item.titulo}>
+                <dt className="credencial-titulo">{item.titulo}</dt>
+                <dd className="credencial-detalle">{item.detalle}</dd>
+              </div>
             ))}
-          </ul>
-          <p className="nota">
-            Trayectoria profesional de la dirección técnica, anterior a la constitución de la
-            sociedad. Currículum y certificados disponibles a solicitud.
-          </p>
+          </dl>
         </div>
       </Seccion>
 
-      {/* ── CREDENCIALES ── */}
-      <Seccion tono="base">
-        <div className="dos-columnas">
-          <div>
-            <RotuloSeccion eyebrow="Formación" titulo="Títulos y certificaciones" />
-            <dl className="credencial-lista credencial-lista--claro">
-              {formacionTecnica.map(item => (
-                <div key={item.titulo}>
-                  <dt className="credencial-titulo">{item.titulo}</dt>
-                  <dd className="credencial-detalle">{item.detalle}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-          <div>
-            <RotuloSeccion eyebrow="Capacidad operativa" titulo="Con qué llegamos a terreno" />
-            <dl className="credencial-lista credencial-lista--claro">
-              {capacidadOperativa.map(item => (
-                <div key={item.titulo}>
-                  <dt className="credencial-titulo">{item.titulo}</dt>
-                  <dd className="credencial-detalle">{item.detalle}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </Seccion>
-
-      {/* ── DATOS LEGALES ── */}
+      {/* ── DATOS DE LA EMPRESA ── */}
       <Seccion tono="tinte">
-        <RotuloSeccion eyebrow="Identificación" titulo="Antecedentes legales" />
+        <RotuloSeccion
+          eyebrow="Identificación"
+          titulo="Datos para facturación y contratos"
+        />
         <dl className="ficha">
           <div className="ficha-fila"><dt>Razón social</dt><dd>{company.razonSocial}</dd></div>
           <div className="ficha-fila"><dt>R.U.T.</dt><dd>{company.rut}</dd></div>
           <div className="ficha-fila"><dt>Giro</dt><dd>{company.giro}</dd></div>
           <div className="ficha-fila"><dt>Código de actividad</dt><dd>{company.codigoActividad}</dd></div>
           <div className="ficha-fila"><dt>Domicilio</dt><dd>{domicilioLinea}</dd></div>
-          <div className="ficha-fila"><dt>Representante legal</dt><dd>{company.representanteLegal}</dd></div>
+          <div className="ficha-fila"><dt>Cobertura</dt><dd>{company.areaServicio}</dd></div>
         </dl>
       </Seccion>
 

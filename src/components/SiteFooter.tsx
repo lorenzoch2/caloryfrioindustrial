@@ -50,7 +50,6 @@ export function SiteFooter() {
           <h2>Empresa</h2>
           <ul>
             <li><Link to="/empresa">Quiénes somos</Link></li>
-            <li><Link to="/sector-publico">Sector Público</Link></li>
             <li><Link to="/contacto">Contacto</Link></li>
           </ul>
         </div>

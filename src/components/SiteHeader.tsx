@@ -9,7 +9,6 @@ const enlaces = [
     to: `/servicios/${servicio.slug}`,
     label: servicio.navLabel,
   })),
-  { to: '/sector-publico', label: 'Sector Público' },
   { to: '/empresa', label: 'Empresa' },
 ]
 
