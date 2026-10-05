@@ -63,7 +63,8 @@ from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line
   render them. Copy edits happen in one file, not scattered across markup.
 - **`src/lib/company.ts` is the single source of truth.** Every contact detail, RUT, address and
   legal fact is declared there and consumed from the views — never hardcoded in JSX. It must stay in
-  sync with `Documentos/Mercado Público/01 - Ficha de Proveedor (datos maestros).md`. Three
+  sync with the company folder's
+  `01 Legal y Societario/Identificación/Ficha de datos maestros de la empresa.md`. Three
   conflicting sets of contact details were circulating before this file existed.
 - **CSS custom properties over Tailwind tokens, and classes over inline styles.** Every token lives
   in `:root` in `styles.css`; components carry class names, not `style={{}}` objects.
