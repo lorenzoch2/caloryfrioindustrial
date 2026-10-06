@@ -88,7 +88,7 @@ from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line
 - **The brand is the *celosía*** — the angled blades of a damper or diffuser — adopted 2026-08-25,
   replacing the S-split circle. Every asset is SVG with **text converted to outlines**, so nothing
   depends on a font being available. Source of truth is the company folder,
-  `08 Marca y Marketing/Identidad/Vectores/`; `public/` holds copies. The rules live in that
+  `07 Marca y Marketing/Identidad/Vectores/`; `public/` holds copies. The rules live in that
   folder's `LÉEME - Manual de marca.md` — read it before touching brand assets.
 - **Use the lockups, do not retype the name.** The header and footer render
   `lockup-horizontal.svg` and the home hero renders `lockup-vertical.svg`. Setting "Calor & Frío
