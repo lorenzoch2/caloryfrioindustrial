@@ -64,7 +64,7 @@ from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line
 - **`src/lib/company.ts` is the single source of truth.** Every contact detail, RUT, address and
   legal fact is declared there and consumed from the views — never hardcoded in JSX. It must stay in
   sync with the company folder's
-  `01 Legal y Societario/Identificación/Ficha de datos maestros de la empresa.md`. Three
+  `_Fuentes/01 Legal y Societario/Identificación/Ficha de datos maestros de la empresa.md`. Three
   conflicting sets of contact details were circulating before this file existed.
 - **CSS custom properties over Tailwind tokens, and classes over inline styles.** Every token lives
   in `:root` in `styles.css`; components carry class names, not `style={{}}` objects.
@@ -88,11 +88,16 @@ from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line
 - **The brand is the *celosía*** — the angled blades of a damper or diffuser — adopted 2026-08-25,
   replacing the S-split circle. Every asset is SVG with **text converted to outlines**, so nothing
   depends on a font being available. Source of truth is the company folder,
-  `07 Marca y Marketing/Identidad/Vectores/`; `public/` holds copies. The rules live in that
-  folder's `LÉEME - Manual de marca.md` — read it before touching brand assets.
+  `07 Marca y Marketing/Identidad/Vectores/`; `public/` holds copies. The rules live in
+  `_Fuentes/07 Marca y Marketing/Identidad/LÉEME - Manual de marca.md` — read it before touching
+  brand assets.
 - **Use the lockups, do not retype the name.** The header and footer render
   `lockup-horizontal.svg` and the home hero renders `lockup-vertical.svg`. Setting "Calor & Frío
   Industrial" as live text next to the symbol would drift from the trademarked artwork.
+- **Company-folder documents are written in markdown and read as PDF.** The source lives at
+  `_Fuentes/<same path>.md`; the PDF that gets opened sits at the same path without `_Fuentes`.
+  Edit the markdown and recompose with `_Herramientas/Componer documentos/componer-documentos.py`
+  — a loose `.md` dropped in the directory falls outside that routine.
 - `public/logo.png` is the **previous** logo, kept only as history. Nothing references it.
 - **No external icon library**: SVG icons are inlined in `components/icons.tsx`.
 - **Carousel images**: files in `src/assets/images/{asesorias,capacitaciones,servicios}/`, picked up
