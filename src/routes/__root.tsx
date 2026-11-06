@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { HeadContent, Link, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
 import '../styles.css'
 import { buildStructuredData, company } from '../lib/company'
@@ -35,14 +36,23 @@ const structuredData = JSON.stringify(buildStructuredData())
 /*
   Fija el tema antes del primer pintado. Si esto corriera dentro de React, la
   página aparecería un instante con el tema equivocado antes de hidratar.
-  El claro es el tema principal: sólo se usa el oscuro si la persona lo eligió,
-  no por la preferencia del sistema.
+
+  Orden de precedencia, en tres estados:
+
+    1. Lo que la persona eligió en el selector, guardado en `localStorage`.
+    2. Si no eligió nada, la preferencia del sistema operativo.
+    3. Si el almacenamiento falla —ventana privada, cookies bloqueadas—, la
+       preferencia del sistema igual.
+
+  Hasta noviembre de 2026 el claro era el tema principal y el oscuro sólo se
+  aplicaba por elección explícita. Se cambió para seguir la configuración de
+  cada visitante.
 
   También marca `html.js`. De esa clase cuelga el estado oculto de las
   animaciones: sin JavaScript no se aplica y todo se ve, en vez de quedar el
   contenido con opacidad cero.
 */
-const scriptTema = `document.documentElement.classList.add('js');try{document.documentElement.dataset.tema=localStorage.getItem('tema')==='oscuro'?'oscuro':'claro'}catch(e){document.documentElement.dataset.tema='claro'}`
+const scriptTema = `document.documentElement.classList.add('js');(function(){var s=matchMedia('(prefers-color-scheme: dark)').matches?'oscuro':'claro',e=null;try{e=localStorage.getItem('tema')}catch(x){}document.documentElement.dataset.tema=e==='oscuro'||e==='claro'?e:s})()`
 
 export const Route = createRootRoute({
   head: () => ({
@@ -51,7 +61,14 @@ export const Route = createRootRoute({
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { title: TITULO },
       { name: 'description', content: DESCRIPCION },
-      { name: 'theme-color', content: '#ffffff' },
+      /*
+        Dos `theme-color` con `media`: el color del cromo del navegador —la
+        barra de direcciones en móvil— sigue la preferencia del sistema igual
+        que la página. Con un solo valor blanco, el tema oscuro quedaba con una
+        franja clara arriba.
+      */
+      { name: 'theme-color', content: '#f8f7f4', media: '(prefers-color-scheme: light)' },
+      { name: 'theme-color', content: '#12161c', media: '(prefers-color-scheme: dark)' },
       { name: 'author', content: company.razonSocial },
       { name: 'geo.region', content: 'CL-RM' },
       { name: 'geo.placename', content: company.domicilio.comuna },
@@ -135,9 +152,33 @@ function RootLayout() {
   )
 }
 
+/*
+  El título se corrige desde el cliente y no con un `<title>` en el árbol.
+
+  React 19 iza los `<title>` al `head`, pero los deja **después** del que emite
+  `HeadContent` de TanStack, y el navegador usa el primero: quedaban dos
+  etiquetas y mandaba la de la portada. `HeadContent` se arma desde el `head()`
+  de la ruta raíz, que no sabe que se está renderizando un 404.
+
+  Corregirlo al montar arregla lo que la persona ve —la pestaña, el historial,
+  un marcador—. El HTML del servidor conserva el título genérico, lo que sólo
+  alcanza a los rastreadores, y a ellos los cubre el 404 del servidor más el
+  `noindex` de arriba.
+*/
 function PaginaNoEncontrada() {
+  useEffect(() => {
+    document.title = 'Página no encontrada | Calor & Frío'
+  }, [])
+
   return (
     <div className="hero-pagina">
+      {/*
+        El `noindex` sí se iza al `head` con React 19 y funciona en el render
+        del servidor. Es redundante frente al 404 que ya devuelve el servidor
+        —un buscador no indexa una respuesta 404—, pero cubre el caso de que
+        alguna ruta llegue aquí con estado 200.
+      */}
+      <meta name="robots" content="noindex, follow" />
       <div className="contenedor">
         <p className="eyebrow eyebrow--acento">Error 404</p>
         <h1 className="hero-pagina-titulo">Esta página no existe</h1>

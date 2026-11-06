@@ -72,9 +72,15 @@ from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line
   alternate to give the page rhythm: `--paper` (reading base), `--tinte` (alternating band) and
   `--banda` (strong band — hero, figures, closing CTA). "Strong band" no longer means dark: it is a
   steel tint, and the text on it stays graphite.
-- **A dark theme exists but is opt-in.** It is never selected from `prefers-color-scheme`; only a
-  stored choice turns it on. The same tokens are redefined for it, so the alternation survives and
-  only the absolute values change.
+- **The dark theme follows the visitor's system preference** (changed 2026-11-06; until then it was
+  opt-in only and `prefers-color-scheme` was deliberately ignored). Precedence is: a stored choice
+  from the selector wins; with no stored choice the OS preference decides; if `localStorage` throws,
+  the OS preference decides anyway. The first click on the selector pins a preference and the system
+  stops deciding. While nothing is pinned, the site also follows a system change made with the page
+  open. `scriptTema` in `__root.tsx` applies this before first paint; the same tokens are redefined
+  per theme, so only the absolute values change.
+- **`color-scheme` is declared on `:root` for both themes.** Without it the native controls — the
+  contact form's `<select>`, scrollbars, autofill — stayed light on the dark page.
 - **Token names describe role, not colour.** `--banda` / `--sobre-banda` rather than `--ink-900` /
   `--fog-100` — the old names became lies the moment the band turned light.
 - **The accent is deliberately double, taken from the logo**: steel blue (`--steel`) for structure
@@ -82,6 +88,10 @@ from `lib/servicios.ts`. Add a service by adding an entry there plus a four-line
 - **Brass buttons carry graphite text, never white.** White on `--laton` measures 3.6:1 and fails
   the contrast minimum; graphite on brass measures 4.95:1. Brass as *text* only works on dark
   grounds — on light ones use `--laton-dk` (`#8a6730`, 4.8:1).
+  The text colour is `--sobre-laton`, which is graphite in **both** themes and is deliberately not
+  redefined in the dark block: the brass behind it does not change, so neither should the text on
+  top. `.btn-acento` used to take `--banda`, which does flip with the theme — correct by accident in
+  dark, and 2.88:1 in light, on the main call to action of every page.
 - **Typography is IBM Plex Sans + IBM Plex Mono.** Mono carries eyebrows, figures and field labels
   so data reads as data. The previous Cormorant Garamond was retired on purpose: a high-contrast
   didone reads as a perfume house, which contradicts the trade.

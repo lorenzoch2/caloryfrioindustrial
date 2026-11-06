@@ -20,6 +20,14 @@
     "Banda fuerte" ya no significa oscura: es un tinte de acero, más saturado
     que las otras dos, y el texto encima sigue siendo grafito.
   */
+  /*
+    `color-scheme` hace que los controles nativos —el desplegable del
+    formulario, las barras de desplazamiento, el relleno automático— se pinten
+    en el mismo tema que la página. Sin esto el `<select>` de contacto quedaba
+    blanco sobre la página oscura.
+  */
+  color-scheme: light;
+
   --paper:       #f8f7f4;
   --paper-2:     #ffffff;
   --tinte:       #eef1f6;
@@ -65,6 +73,18 @@
   --laton-dk: #8a6730;
   --laton-lt: #c49c58;
 
+  /*
+    Texto sobre latón. Es grafito en los dos temas y por eso NO se redefine en
+    el bloque oscuro: el color del fondo latón no cambia, así que el texto
+    encima tampoco debe cambiar.
+
+    Antes el botón usaba `--banda`, que sí cambia con el tema. En oscuro
+    `--banda` es casi negro y el resultado era correcto por casualidad; en
+    claro es un gris azulado pálido y daba 2,88:1, bajo el 4,5:1 que exige AA
+    a este tamaño. Con grafito da 4,95:1 en ambos temas.
+  */
+  --sobre-laton: #14181f;
+
   --sans: 'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
   --mono: 'IBM Plex Mono', 'Consolas', ui-monospace, monospace;
 
@@ -97,6 +117,8 @@
   absolutos. Las bandas "fuertes" siguen siendo las más oscuras en ambos temas.
 */
 :root[data-tema="oscuro"] {
+  color-scheme: dark;
+
   --paper:       #12161c;
   --paper-2:     #171c24;
   --tinte:       #0f1319;
@@ -222,6 +244,12 @@ a:hover { color: var(--steel); }
 .eyebrow--acento { color: var(--acento-txt); }
 .seccion--base .eyebrow,
 .seccion--tinte .eyebrow { color: var(--steel-dk); }
+/*
+  La banda necesita su propio color. El `--texto-faint` heredado está pensado
+  para papel y sobre la banda clara daba 2,73:1. `--sobre-banda-mut2` está
+  definido por tema justamente para texto encima de la banda.
+*/
+.seccion--banda .eyebrow { color: var(--sobre-banda-mut2); }
 
 .rotulo { margin-bottom: 2.5rem; max-width: 68ch; }
 .rotulo .eyebrow { margin-bottom: 0.75rem; }
@@ -287,8 +315,8 @@ a:hover { color: var(--steel); }
 .btn-sm { padding: 0.65rem 1.1rem; min-height: 38px; font-size: 0.78rem; }
 .btn-lg { padding: 1rem 1.75rem; min-height: 52px; font-size: 0.88rem; }
 
-.btn-acento { background: var(--laton); color: var(--banda); }
-.btn-acento:hover { background: var(--laton-lt); color: var(--banda); }
+.btn-acento { background: var(--laton); color: var(--sobre-laton); }
+.btn-acento:hover { background: var(--laton-lt); color: var(--sobre-laton); }
 
 .btn-primario { background: var(--steel); color: #fff; }
 .btn-primario:hover { background: var(--steel-dk); color: #fff; }
@@ -1258,3 +1286,42 @@ html.js .hero-foto { animation: asienta 2.4s var(--ease-aterriza) both; }
   .persona:hover { transform: none; }
   .boton-arriba { transition: opacity 0.01ms; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Tamaño mínimo de los objetivos táctiles
+
+   WCAG 2.2, criterio 2.5.8 (nivel AA) exige 24 × 24 px para cualquier
+   control, con una excepción para enlaces incrustados en un párrafo. Los
+   controles sueltos aquí se llevan a 44 px, que es la recomendación de
+   Apple y de Google y lo que de verdad se acierta con el pulgar.
+
+   Medido antes del cambio: los tres iconos del pie daban 18 × 18, el
+   selector de tema 38 × 38 y el botón de volver arriba 43 × 43.
+   ═══════════════════════════════════════════════════════════════ */
+
+.tema-toggle,
+.boton-arriba {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* El icono queda del mismo tamaño: lo que crece es el área que recibe el
+   toque, con el relleno repartido alrededor. */
+.footer-social a {
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  margin: -0.5rem;
+}
+.footer-social { gap: 0.6rem; }
+
+/* Enlaces de lista y de flecha: no son texto corrido, así que no les
+   alcanza la excepción del criterio. Se les da altura con relleno
+   vertical, sin mover la composición. */
+.footer-columna ul a,
+.footer-datos a {
+  display: inline-block;
+  padding-block: 0.22rem;
+}
+.enlace-flecha { padding-block: 0.22rem; }

@@ -13,6 +13,11 @@ export type Tema = 'claro' | 'oscuro'
  * Por eso arranca en `null` y no asume un valor: durante el render del servidor
  * no hay `document` ni `localStorage`, y adivinar produciría un icono que
  * cambia solo al hidratar.
+ *
+ * Mientras la persona no haya tocado el selector, el sitio sigue la preferencia
+ * del sistema, incluso si cambia con la página abierta —el cambio automático al
+ * anochecer, por ejemplo—. El primer clic fija una preferencia propia y a
+ * partir de ahí el sistema deja de mandar.
  */
 export function SelectorTema() {
   const [tema, setTema] = useState<Tema | null>(null)
@@ -20,6 +25,23 @@ export function SelectorTema() {
   useEffect(() => {
     const actual = document.documentElement.dataset.tema
     setTema(actual === 'oscuro' ? 'oscuro' : 'claro')
+
+    const consulta = matchMedia('(prefers-color-scheme: dark)')
+    function alCambiarElSistema(evento: MediaQueryListEvent) {
+      let elegido: string | null = null
+      try {
+        elegido = localStorage.getItem('tema')
+      } catch {
+        // Sin almacenamiento no hay elección guardada: manda el sistema.
+      }
+      if (elegido === 'oscuro' || elegido === 'claro') return
+      const siguiente: Tema = evento.matches ? 'oscuro' : 'claro'
+      document.documentElement.dataset.tema = siguiente
+      setTema(siguiente)
+    }
+
+    consulta.addEventListener('change', alCambiarElSistema)
+    return () => consulta.removeEventListener('change', alCambiarElSistema)
   }, [])
 
   function alternar() {
