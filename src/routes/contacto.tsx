@@ -5,14 +5,14 @@ import { IconInstagram, IconMail, IconWhatsApp } from '../components/icons'
 import { HeroPagina, Seccion } from '../components/ui'
 
 const url = `${company.sitio.url}/contacto`
-const TITULO = 'Contacto — solicitar visita técnica o cotización'
+const TITULO = 'Contacto · solicitar visita técnica'
 const DESCRIPCION =
-  'Solicite una visita técnica o una cotización de climatización y refrigeración en la Región Metropolitana. Atendemos requerimientos industriales, comerciales y domiciliarios.'
+  'Solicite una visita técnica o una cotización de climatización y refrigeración en la Región Metropolitana. Industria, comercio y hogar.'
 
 export const Route = createFileRoute('/contacto')({
   head: () => ({
     meta: [
-      { title: `${TITULO} | ${company.nombreFantasia}` },
+      { title: `${TITULO} | ${company.nombreCorto}` },
       { name: 'description', content: DESCRIPCION },
       { property: 'og:title', content: TITULO },
       { property: 'og:description', content: DESCRIPCION },
@@ -28,8 +28,8 @@ function Contacto() {
     <>
       <HeroPagina
         eyebrow="Contacto"
-        titulo="Cuéntenos qué le está pasando"
-        bajada="Mientras más sepamos del equipo y de la falla, más concreta será la respuesta."
+        titulo="Solicitud de visita técnica"
+        bajada="El detalle del equipo y de las condiciones de operación permite entregar una respuesta más precisa."
       />
 
       <Seccion tono="base">

@@ -106,9 +106,9 @@ function Portada() {
       {/* ── SEGMENTOS ── */}
       <Seccion id="segmentos" tono="base">
         <RotuloSeccion
-          eyebrow="Por dónde empezar"
-          titulo="¿Desde dónde nos escribe?"
-          bajada="Una cámara de frío detenida y un split que no enfría son dos problemas distintos, con precios y plazos distintos. Elija el suyo y le mostramos lo que corresponde."
+          eyebrow="Por segmento"
+          titulo="Industria, comercio y hogar"
+          bajada="Una cámara de frío detenida y un split que no enfría requieren alcances, plazos y precios distintos. Seleccione el segmento que corresponda."
         />
         <div className="segmentos-grid segmentos-grid--tres">
           {segmentos.map(segmento => {
@@ -127,7 +127,7 @@ function Portada() {
 
       {/* ── SERVICIOS ── */}
       <Seccion tono="tinte">
-        <RotuloSeccion eyebrow="Lo que hacemos" titulo="Tres líneas, un mismo criterio técnico" />
+        <RotuloSeccion eyebrow="Servicios" titulo="Tres líneas de servicio" />
         <div className="servicios-grid">
           {servicios.map((servicio, indice) => (
             <article key={servicio.slug} className="servicio-card">
@@ -153,17 +153,17 @@ function Portada() {
         <div className="split">
           <div className="split-copy">
             <RotuloSeccion
-              eyebrow="Por qué elegirnos"
+              eyebrow="Criterios de trabajo"
               titulo="Trabajo medido y documentado"
             />
             <p className="parrafo">
-              Trabajamos climatización, refrigeración y ventilación con más de treinta años de
-              experiencia técnica detrás y equipamiento propio para ejecutar en los plazos que
-              acordamos.
+              Ejecutamos trabajos de climatización, refrigeración y ventilación. La empresa cuenta
+              con más de treinta años de experiencia técnica y con equipamiento propio para
+              ejecutar en los plazos acordados.
             </p>
             <p className="parrafo">
-              Cada servicio parte con una visita a terreno y termina con un informe que deja
-              registro de lo medido y de lo intervenido.
+              Cada servicio comienza con una visita a terreno y concluye con un informe que
+              registra lo medido y lo intervenido.
             </p>
             <Link to="/empresa" className="enlace-flecha enlace-flecha--claro">
               Conocer la empresa
@@ -186,7 +186,7 @@ function Portada() {
         <RotuloSeccion
           eyebrow="Cómo trabajamos"
           titulo="Del levantamiento al informe de cierre"
-          bajada="El mismo procedimiento en un contrato industrial y en una mantención domiciliaria. Cambia la escala; el método es el mismo."
+          bajada="El mismo procedimiento en un contrato industrial y en una mantención domiciliaria, con el alcance ajustado a cada instalación."
         />
         <ol className="metodologia">
           {metodologia.map((paso, indice) => (
@@ -203,7 +203,7 @@ function Portada() {
       <Seccion tono="tinte">
         <RotuloSeccion
           eyebrow="Preguntas frecuentes"
-          titulo="Lo que nos preguntan antes de contratar"
+          titulo="Antes de contratar"
         />
         <dl className="preguntas">
           {preguntas.map(pregunta => (

@@ -4,14 +4,14 @@ import { equipamiento } from '../lib/contenido'
 import { CierreCTA, HeroPagina, RotuloSeccion, Seccion } from '../components/ui'
 
 const url = `${company.sitio.url}/empresa`
-const TITULO = 'La empresa — ingeniería en climatización y refrigeración'
+const TITULO = 'La empresa · climatización y refrigeración'
 const DESCRIPCION =
-  'Calor y Frío Industrial SpA: empresa de ingeniería en climatización, refrigeración y ventilación en Santiago. Instalación, mantención, asesoría técnica y capacitación, con equipamiento propio.'
+  'Empresa de climatización, refrigeración y ventilación en Santiago. Instalación, mantención, asesoría técnica e ITO y capacitación, con equipamiento propio.'
 
 export const Route = createFileRoute('/empresa')({
   head: () => ({
     meta: [
-      { title: `${TITULO} | ${company.nombreFantasia}` },
+      { title: `${TITULO} | ${company.nombreCorto}` },
       { name: 'description', content: DESCRIPCION },
       { property: 'og:title', content: TITULO },
       { property: 'og:description', content: DESCRIPCION },
@@ -35,15 +35,14 @@ function Empresa() {
         <RotuloSeccion eyebrow="Quiénes somos" titulo="Qué hacemos y para quién" />
         <div className="prosa">
           <p className="parrafo">
-            Somos una empresa de ingeniería especializada en la instalación, el mantenimiento y la
-            optimización de sistemas de climatización, refrigeración y ventilación. Atendemos con la
-            misma rigurosidad técnica a clientes industriales y corporativos como a comercios y
-            familias.
+            Somos una empresa de ingeniería especializada en la instalación, la mantención y la
+            mejora de sistemas de climatización, refrigeración y ventilación. Aplicamos el mismo
+            procedimiento técnico a clientes industriales y corporativos, a comercios y a hogares.
           </p>
           <p className="parrafo">
-            Nuestra propuesta se apoya en tres cosas concretas: criterio técnico con más de treinta
-            años de experiencia detrás, cumplimiento normativo, y herramienta e instrumental propios
-            para ejecutar en los plazos que acordamos.
+            El servicio se apoya en tres condiciones: criterio técnico respaldado por más de
+            treinta años de experiencia, cumplimiento de la normativa aplicable, y herramienta e
+            instrumental propios para ejecutar en los plazos acordados.
           </p>
           <p className="parrafo">
             Trabajamos en {company.areaServicio}, desde proyectos de alta complejidad hasta
@@ -61,9 +60,9 @@ function Empresa() {
               titulo="Con qué llegamos a terreno"
             />
             <p className="parrafo">
-              La medición, la soldadura y el manejo de refrigerante se hacen con equipamiento
-              propio. Eso permite programar la ejecución cuando el cliente la necesita y entregar
-              mediciones hechas con instrumental calibrado.
+              La medición, la soldadura y el manejo de refrigerante se ejecutan con equipamiento
+              propio, sin depender de arriendo ni de terceros. Eso permite programar la ejecución
+              en la fecha que el cliente requiera.
             </p>
           </div>
           <dl className="credencial-lista">

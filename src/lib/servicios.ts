@@ -32,13 +32,13 @@ export const servicios: Servicio[] = [
     galeria: 'servicios',
     navLabel: 'Mantención',
     titulo: 'Instalación y mantención',
-    tituloPagina: 'Instalación y mantención de aire acondicionado · Santiago',
+    tituloPagina: 'Mantención de aire acondicionado · Santiago',
     metaDescription:
-      'Instalación, recambio y mantención de equipos de climatización y refrigeración en la Región Metropolitana. Con contrato o por evento, para industria, comercio, edificios y hogar.',
+      'Instalación, recambio y mantención de climatización y refrigeración en la Región Metropolitana. Con contrato o por evento, para industria, comercio y hogar.',
     eyebrow: 'Servicios · 01',
     bajada: 'Instalación, recambio y mantención, con contrato o por evento.',
     intro:
-      'Instalamos equipos nuevos, hacemos recambios y mantenemos instalaciones en marcha. Un equipo de frío rara vez falla de golpe: se degrada durante meses y avisa en el consumo, en las presiones y en el ruido. La mantención preventiva existe para leer esas señales antes de que se conviertan en una parada. Trabajamos con contrato periódico para instalaciones críticas y por evento para requerimientos puntuales.',
+      'Instalamos equipos nuevos, ejecutamos recambios y mantenemos instalaciones en operación. La degradación de un equipo de frío es progresiva y se manifiesta en el consumo eléctrico, en las presiones de trabajo y en el nivel sonoro antes de producir una detención. La mantención preventiva registra esos parámetros en cada visita y los contrasta con los de la anterior. Trabajamos con contrato periódico en instalaciones críticas y por evento en requerimientos puntuales.',
     alcance: [
       { titulo: 'Instalación y puesta en marcha', detalle: 'Montaje de unidad interior y exterior, líneas de refrigerante, conexión eléctrica, vacío y puesta en marcha.' },
       { titulo: 'Recambio de equipos', detalle: 'Recuperación de refrigerante, desmontaje del equipo existente, traslado e instalación del nuevo.' },
@@ -69,13 +69,13 @@ export const servicios: Servicio[] = [
     galeria: 'asesorias',
     navLabel: 'Asesorías e ITO',
     titulo: 'Asesorías técnicas e Inspección Técnica de Obras',
-    tituloPagina: 'Asesoría técnica e ITO de climatización · Santiago',
+    tituloPagina: 'Asesoría técnica e ITO · Santiago',
     metaDescription:
-      'Inspección Técnica de Obras (ITO) en climatización, diagnóstico de sistemas existentes, análisis de eficiencia energética y adecuación normativa para infraestructura crítica e industrial.',
+      'Inspección Técnica de Obras en climatización, diagnóstico de sistemas existentes, eficiencia energética y adecuación normativa en la Región Metropolitana.',
     eyebrow: 'Servicios · 02',
     bajada: 'Criterio técnico independiente, con mediciones que quedan por escrito.',
     intro:
-      'Cuando el que instala es también el que certifica su propio trabajo, el mandante queda sin contraparte. La inspección técnica existe para cerrar esa brecha: revisar lo ejecutado contra lo especificado, medir lo que se puede medir y dejar por escrito lo que falta. También asesoramos antes de comprar, que suele ser más barato que asesorar después.',
+      'La inspección técnica de obras verifica lo ejecutado contra lo especificado, mide los parámetros de operación y registra por escrito las observaciones pendientes, con un responsable y un plazo para cada una. Constituye la contraparte técnica del mandante frente a quien ejecuta la obra. Asesoramos además en la etapa previa a la compra: especificación de los equipos y comparación de propuestas.',
     alcance: [
       { titulo: 'Inspección Técnica de Obras', detalle: 'Revisión de la instalación contra especificación y normativa, con planilla de observaciones y seguimiento de levantamiento.' },
       { titulo: 'Diagnóstico de sistemas existentes', detalle: 'Levantamiento de estado, inventario de equipos y evaluación de vida útil remanente.' },
@@ -102,13 +102,13 @@ export const servicios: Servicio[] = [
     galeria: 'capacitaciones',
     navLabel: 'Capacitaciones',
     titulo: 'Capacitación técnica in-company',
-    tituloPagina: 'Capacitación técnica en refrigeración y climatización · Santiago',
+    tituloPagina: 'Capacitación técnica en refrigeración · Santiago',
     metaDescription:
-      'Programas de capacitación técnica in-company en refrigeración y climatización: refrigerantes inflamables, CO₂, sistemas VRF, amoníaco y mantenimiento preventivo, con teoría y práctica en equipo real.',
+      'Capacitación técnica in-company en refrigeración y climatización: refrigerantes inflamables, CO₂, sistemas VRF y amoníaco, con práctica en equipo real.',
     eyebrow: 'Servicios · 03',
     bajada: 'En sus dependencias, sobre sus propios equipos.',
     intro:
-      'La capacitación se hace frente al equipo que el personal opera todos los días. Nuestros programas se dictan en dependencias del cliente, combinan aula y práctica sobre instalación real, y los dicta personal con ejercicio en planta y más de una década de docencia técnica en educación superior.',
+      'Los programas se dictan en dependencias del cliente y sobre los equipos que el personal opera. Combinan sesiones de aula y práctica sobre instalación real, y están a cargo de personal con ejercicio en planta y más de una década de docencia técnica en educación superior.',
     alcance: [
       { titulo: 'Refrigerantes inflamables', detalle: 'Buenas prácticas en refrigeración, manipulación segura y prevención de riesgos.' },
       { titulo: 'Refrigerante CO₂ (R-744)', detalle: 'Fundamentos, particularidades de operación y seguridad en sistemas transcríticos.' },

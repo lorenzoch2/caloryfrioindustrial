@@ -14,6 +14,9 @@
 export const company = {
   razonSocial: 'Calor y Frío Industrial SpA',
   nombreFantasia: 'Calor & Frío Industrial',
+  /* Sufijo de los <title>. El nombre completo deja 25 caracteres de los ~60
+     que muestra Google, y empujaba los títulos fuera del corte. */
+  nombreCorto: 'Calor & Frío',
   lema: 'Soluciones Térmicas Integrales',
   rut: '78.333.185-3',
   giro: 'Instalaciones de gasfitería, calefacción y aire acondicionado',

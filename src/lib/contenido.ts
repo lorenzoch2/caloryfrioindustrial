@@ -84,7 +84,7 @@ export const preguntas: Punto[] = [
   },
   {
     titulo: '¿Atienden hogares o sólo empresas?',
-    detalle: 'Las dos cosas. Un split domiciliario y una sala de máquinas se trabajan con el mismo procedimiento: cambia la escala, no el método.',
+    detalle: 'Las dos. El procedimiento de trabajo es el mismo en un split domiciliario y en una sala de máquinas; varían la escala de la intervención y el plazo de ejecución.',
   },
   {
     titulo: '¿Qué incluye la visita técnica?',
@@ -92,7 +92,7 @@ export const preguntas: Punto[] = [
   },
   {
     titulo: '¿Trabajan con contrato o por trabajo puntual?',
-    detalle: 'Las dos formas. El contrato periódico conviene donde una parada cuesta producción; la atención por evento, para requerimientos puntuales.',
+    detalle: 'Las dos formas. El contrato periódico aplica a instalaciones donde una detención interrumpe la producción; la atención por evento, a requerimientos puntuales.',
   },
   {
     titulo: '¿En qué zona trabajan?',

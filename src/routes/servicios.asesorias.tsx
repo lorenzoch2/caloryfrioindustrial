@@ -9,7 +9,7 @@ const url = `${company.sitio.url}/servicios/asesorias`
 export const Route = createFileRoute('/servicios/asesorias')({
   head: () => ({
     meta: [
-      { title: `${servicio.tituloPagina} | ${company.nombreFantasia}` },
+      { title: `${servicio.tituloPagina} | ${company.nombreCorto}` },
       { name: 'description', content: servicio.metaDescription },
       { property: 'og:title', content: servicio.tituloPagina },
       { property: 'og:description', content: servicio.metaDescription },
