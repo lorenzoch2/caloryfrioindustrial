@@ -91,7 +91,19 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-CL">
+    /*
+      `suppressHydrationWarning` va en este elemento porque `scriptTema` lo
+      modifica antes de que React hidrate: le agrega `class="js"` y
+      `data-tema`. El servidor no puede renderizar ninguno de los dos —no sabe
+      si hay JavaScript ni qué tema eligió la persona—, así que la diferencia
+      es esperada y no un defecto.
+
+      Sin esto, React avisa del desajuste y **deja de parchar este subárbol**.
+      El atributo sólo cubre a este elemento y a su texto directo: los hijos se
+      siguen comparando igual que siempre, de modo que no esconde otros
+      desajustes.
+    */
+    <html lang="es-CL" suppressHydrationWarning>
       <head>
         <HeadContent />
         <script dangerouslySetInnerHTML={{ __html: scriptTema }} />

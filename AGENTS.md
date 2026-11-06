@@ -189,6 +189,17 @@ warm/cool duality read as a system rather than as two random colors.
   checked in development.
 - **The first `npm run dev` after cloning downloads Deno** (the edge-function emulator) and can fail
   once while it does. Re-run it; the second start works.
+- **`<html>` carries `suppressHydrationWarning`, and it has to stay.** The inline `scriptTema` in
+  `__root.tsx` adds `class="js"` and `data-tema` to that element before React hydrates. The server
+  cannot render either one — it does not know whether JavaScript is on, nor which theme the visitor
+  chose — so React reported an attribute mismatch and, worse, stopped patching that subtree. The
+  attribute covers only `<html>` and its direct text, so children are still compared normally.
+  Removing it brings the console error back on every page.
+- **If `npm run dev` prints the npm banner and then never binds the port**, delete
+  `node_modules/.vite` and start again. Seen on 2026-11-06: the process stayed alive, Vite never
+  printed its ready line and nothing was listening on 3000; after clearing the cache it started in
+  5,8 s. Binding explicitly with `--host 127.0.0.1` also helped, since `localhost` would not resolve
+  from the preview pane that session.
 - **Keep this repo out of OneDrive.** It lives at `D:\GitHub\caloryfrioindustrial`, alongside the
   other repositories. It used to sit inside the OneDrive-synced company folder, where OneDrive was
   syncing all ~28.000 files of `node_modules` one by one: a cold `npm run dev` took 128 s, and

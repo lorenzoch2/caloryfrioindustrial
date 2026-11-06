@@ -3,6 +3,15 @@ import { company, domicilioLinea } from '../lib/company'
 import { servicios } from '../lib/servicios'
 import { IconInstagram, IconMail, IconWhatsApp } from './icons'
 
+/*
+  Constante de compilación, definida en `vite.config.ts`. No se calcula en el
+  render: el servidor y el cliente tienen relojes en zonas distintas y en la
+  noche del 31 de diciembre producían un desajuste de hidratación. El porqué
+  está escrito junto a la definición.
+*/
+declare const __ANIO_COMPILACION__: number
+const ANIO = __ANIO_COMPILACION__
+
 export function SiteFooter() {
   return (
     <footer className="site-footer">
@@ -66,7 +75,7 @@ export function SiteFooter() {
 
       <div className="site-footer-legal">
         <span>
-          © {new Date().getFullYear()} {company.razonSocial} · R.U.T. {company.rut}
+          © {ANIO} {company.razonSocial} · R.U.T. {company.rut}
         </span>
         <span>Giro {company.codigoActividad} · {company.giro}</span>
       </div>
