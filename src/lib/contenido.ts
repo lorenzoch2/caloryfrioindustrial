@@ -76,6 +76,34 @@ export const equipamiento: Punto[] = [
   },
 ]
 
+/**
+ * Acreditaciones vigentes del equipo técnico.
+ *
+ * Se publican como capacidad de la empresa y sin nombres: el sitio no nombra
+ * personas —ver `company.ts`— y a un mandante le importa que la empresa tenga
+ * la competencia, no quién de sus técnicos la tiene. Los certificados se
+ * exhiben a solicitud, con su código.
+ *
+ * Fuente: `06 Equipo/<persona>/Certificaciones/`. **Cada acreditación de la
+ * Academia LG vence a los dos años de emitida.** Las vigentes hoy se emitieron
+ * entre abril y octubre de 2026; si alguna caduca sin renovarse, hay que
+ * sacarla de esta lista y no dejarla por inercia.
+ */
+export const acreditaciones: Punto[] = [
+  {
+    titulo: 'Instalación Multi V',
+    detalle: 'Montaje de unidades, líneas de refrigerante y puesta en marcha. Dos técnicos acreditados, uno de ellos en Multi V 5.',
+  },
+  {
+    titulo: 'Diseño y selección Multi V',
+    detalle: 'Dimensionamiento del sistema, selección de unidades y trazado de cañerías para el proyecto.',
+  },
+  {
+    titulo: 'Solución de problemas y servicio Multi V',
+    detalle: 'Diagnóstico de fallas y servicio sobre sistemas en operación.',
+  },
+]
+
 /** Lo que preguntan antes de contratar, respondido en una línea. */
 export const preguntas: Punto[] = [
   {
@@ -97,6 +125,14 @@ export const preguntas: Punto[] = [
   {
     titulo: '¿En qué zona trabajan?',
     detalle: 'Región Metropolitana de Santiago y alrededores. Para trabajos fuera de la región, se evalúa caso a caso.',
+  },
+  {
+    titulo: '¿Trabajan con sistemas VRF?',
+    detalle: 'Sí. El equipo técnico cuenta con acreditaciones de la Academia HVAC de LG Chile en instalación, diseño y selección, y solución de problemas y servicio de la línea Multi V. En el mercado se llama a veces VRV a esta tecnología: VRV es la marca registrada de otro fabricante y el término genérico es VRF, caudal de refrigerante variable.',
+  },
+  {
+    titulo: '¿Qué formas de pago aceptan?',
+    detalle: 'Transferencia, efectivo, y débito o crédito en terreno —incluidas las cuotas que ofrezca la tarjeta—, porque el técnico lleva la máquina. El medio de pago no cambia el precio.',
   },
   {
     titulo: '¿Emiten boleta y factura?',

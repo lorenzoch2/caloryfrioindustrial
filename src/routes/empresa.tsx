@@ -1,12 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { company, domicilioLinea } from '../lib/company'
-import { equipamiento } from '../lib/contenido'
+import { acreditaciones, equipamiento } from '../lib/contenido'
 import { CierreCTA, HeroPagina, RotuloSeccion, Seccion } from '../components/ui'
 
 const url = `${company.sitio.url}/empresa`
 const TITULO = 'La empresa · climatización y refrigeración'
 const DESCRIPCION =
-  'Empresa de climatización, refrigeración y ventilación en Santiago. Instalación, mantención, asesoría técnica e ITO y capacitación, con equipamiento propio.'
+  'Empresa de climatización, refrigeración y ventilación en Santiago. Instalación, mantención, asesoría técnica e ITO y capacitación, con equipo acreditado en sistemas VRF y equipamiento propio.'
 
 export const Route = createFileRoute('/empresa')({
   head: () => ({
@@ -67,6 +67,37 @@ function Empresa() {
           </div>
           <dl className="credencial-lista">
             {equipamiento.map(item => (
+              <div key={item.titulo}>
+                <dt className="credencial-titulo">{item.titulo}</dt>
+                <dd className="credencial-detalle">{item.detalle}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </Seccion>
+
+      {/* ── ACREDITACIONES ── */}
+      <Seccion tono="base">
+        <div className="split">
+          <div className="split-copy">
+            <RotuloSeccion
+              eyebrow="Acreditaciones"
+              titulo="Sistemas VRF"
+            />
+            <p className="parrafo">
+              Dos técnicos de la empresa están acreditados por la Academia HVAC de LG Chile, la
+              primera del país, instalada en la Universidad de Santiago. Entre ambos cubren los
+              tres módulos de la línea Multi V: instalación, diseño y selección, y solución de
+              problemas y servicio.
+            </p>
+            <p className="parrafo">
+              Esa cobertura es la que permite tomar un sistema VRF completo —dimensionarlo,
+              montarlo y después atenderlo— y no sólo instalar lo que otro proyectó. Los
+              certificados, con su código de acreditación, se exhiben a solicitud.
+            </p>
+          </div>
+          <dl className="credencial-lista">
+            {acreditaciones.map(item => (
               <div key={item.titulo}>
                 <dt className="credencial-titulo">{item.titulo}</dt>
                 <dd className="credencial-detalle">{item.detalle}</dd>

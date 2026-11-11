@@ -159,7 +159,8 @@ function Portada() {
             <p className="parrafo">
               Ejecutamos trabajos de climatización, refrigeración y ventilación. La empresa cuenta
               con más de treinta años de experiencia técnica y con equipamiento propio para
-              ejecutar en los plazos acordados.
+              ejecutar en los plazos acordados. Para sistemas VRF, dos de sus técnicos están
+              acreditados por la Academia HVAC de LG Chile.
             </p>
             <p className="parrafo">
               Cada servicio comienza con una visita a terreno y concluye con un informe que

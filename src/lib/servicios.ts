@@ -42,6 +42,7 @@ export const servicios: Servicio[] = [
     alcance: [
       { titulo: 'Instalación y puesta en marcha', detalle: 'Montaje de unidad interior y exterior, líneas de refrigerante, conexión eléctrica, vacío y puesta en marcha.' },
       { titulo: 'Recambio de equipos', detalle: 'Recuperación de refrigerante, desmontaje del equipo existente, traslado e instalación del nuevo.' },
+      { titulo: 'Sistemas VRF', detalle: 'Instalación, diseño y selección, y servicio de sistemas de caudal de refrigerante variable, con el equipo acreditado por la Academia HVAC de LG Chile en la línea Multi V.' },
       { titulo: 'Limpieza y sanitización', detalle: 'Evaporadores, condensadores, filtros y bandejas de condensado.' },
       { titulo: 'Medición de parámetros', detalle: 'Presiones de alta y baja, sobrecalentamiento, subenfriamiento y temperaturas de operación.' },
       { titulo: 'Detección y reparación de fugas', detalle: 'Prueba con nitrógeno, localización, reparación por soldadura y verificación de estanqueidad.' },

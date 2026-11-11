@@ -56,6 +56,7 @@ function Contacto() {
               <div><dt>Teléfono</dt><dd>{company.contacto.telefonoDisplay}</dd></div>
               <div><dt>Dirección</dt><dd>{domicilioLinea}</dd></div>
               <div><dt>Cobertura</dt><dd>{company.areaServicio}</dd></div>
+              <div><dt>Formas de pago</dt><dd>Transferencia, efectivo, débito y crédito con cuotas en terreno</dd></div>
               <div><dt>Razón social</dt><dd>{company.razonSocial}</dd></div>
               <div><dt>R.U.T.</dt><dd>{company.rut}</dd></div>
             </dl>
